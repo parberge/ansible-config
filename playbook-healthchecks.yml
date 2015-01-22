@@ -5,6 +5,7 @@
 
 # CentOS specific tasks
 - hosts: os_CentOS
+  gather_facts: False
   tasks:
   - name: ensure ssh daemon (CENTOS)
     service: name=sshd state=started
@@ -12,6 +13,7 @@
 
 # Ubuntu specific tasks
 - hosts: os_Ubuntu
+  gather_facts: False
   tasks:
   - name: ensure ssh daemon (DEBIAN)
     service: name=ssh state=started
