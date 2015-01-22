@@ -1,0 +1,18 @@
+---
+- hosts: all
+  tasks:
+    - group_by: key=os_{{ ansible_distribution }}
+
+# CentOS specific tasks
+- hosts: os_CentOS
+  tasks:
+  - name: ensure ssh daemon (CENTOS)
+    service: name=sshd state=started
+    #when: ansible_os_family == "RedHat"
+
+# Ubuntu specific tasks
+- hosts: os_Ubuntu
+  tasks:
+  - name: ensure ssh daemon (DEBIAN)
+    service: name=ssh state=started
+    #when: ansible_os_family == "Debian"
