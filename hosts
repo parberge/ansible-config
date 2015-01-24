@@ -8,5 +8,6 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
-192.168.7.7 ansible_connection=local
-192.168.7.8
+[home]
+peersrv ansible_connection=local
+peerhtpc
