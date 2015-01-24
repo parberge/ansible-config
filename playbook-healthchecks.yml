@@ -1,20 +1,33 @@
 ---
 - hosts: all
+  sudo: yes
   tasks:
     - group_by: key=os_{{ ansible_distribution }}
+      #changed_when: False
 
 # CentOS specific tasks
 - hosts: os_CentOS
+  sudo: yes
   gather_facts: False
+  vars:
+    - centos_packages:
+      - openssh-server
+      - ntp
+    - centos_services:
+      - sshd
+      - ntpd
+
   tasks:
-  - name: ensure ssh daemon (CENTOS)
-    service: name=sshd state=started
-    #when: ansible_os_family == "RedHat"
+  - name: Ensure packages are installed ( CENTOS / RHEL )
+    yum: name={{ item }}  state=installed
+    with_items: centos_packages
+
+  - name: Ensure services are running ( CENTOS / RHEL )
+    service: name={{ item }} state=started enabled=yes
+    with_items: centos_services
 
 # Ubuntu specific tasks
-- hosts: os_Ubuntu
-  gather_facts: False
-  tasks:
-  - name: ensure ssh daemon (DEBIAN)
-    service: name=ssh state=started
-    #when: ansible_os_family == "Debian"
+#- hosts: os_Ubuntu
+  #sudo: yes
+  #gather_facts: False
+  #tasks:
