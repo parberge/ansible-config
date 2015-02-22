@@ -1,0 +1,30 @@
+---
+# Gather facts and group by OS family
+- hosts: all
+  tasks:
+    - group_by: key=family_{{ ansible_os_family }}
+      changed_when: False
+
+# Get specific vars for OS family
+- hosts: all
+  gather_facts: False
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+
+# On RedHat family
+- hosts: family_RedHat
+  gather_facts: False
+  tasks:
+  - include: tasks/os/RedHat/upgrade_packages.yml
+
+# On Debian family
+#- hosts: family_Debian
+#  gather_facts: False
+#  tasks:
+#  - include: tasks/os/Debian/ntp_package.yml
+#
+## On all
+#- hosts: all
+#  gather_facts: False
+#  tasks:
+#  - include: tasks/ntp.yml

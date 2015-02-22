@@ -1,0 +1,7 @@
+---
+- hosts: fileserver
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+  roles:
+    - { role: common, tags: commont }
+    - { role: ddclient, tags: ddclient } 
