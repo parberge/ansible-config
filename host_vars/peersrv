@@ -1,2 +1,4 @@
 ---
 ansible_connection: local
+# auto upgrade check
+auto_upgrade: "yes"
