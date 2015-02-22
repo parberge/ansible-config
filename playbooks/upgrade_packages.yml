@@ -16,6 +16,7 @@
   gather_facts: False
   tasks:
   - include: tasks/os/RedHat/upgrade_packages.yml
+    when: auto_upgrade == "yes"
 
 # On Debian family
 #- hosts: family_Debian
