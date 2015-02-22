@@ -19,3 +19,7 @@ packages:
 - ddclient
 - yum-utils
 - yum-cron
+- git
+- ansible
+- httpd
+- htop
