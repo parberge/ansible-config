@@ -1,0 +1,10 @@
+---
+# Vars for OS family RedHat (RHEL, CENTOS etc)
+packages:
+- ntp
+- irssi
+- httpd
+- git
+- ansible
+- htop
+- tmux

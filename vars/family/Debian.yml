@@ -1,0 +1,4 @@
+---
+# Debian family specific variables
+ntp: ntp
+package_manager: apt
