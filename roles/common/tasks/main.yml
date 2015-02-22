@@ -1,0 +1,2 @@
+- include: "/etc/ansible/tasks/os/RedHat/packages.yml"
+  when: ansible_os_family == "RedHat"

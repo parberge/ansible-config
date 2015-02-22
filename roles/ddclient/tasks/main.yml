@@ -1,0 +1,16 @@
+---
+# tasks file for ddclient
+#
+- name: (Debian family) Install the ddclient packages 
+  apt: name=ddclient state=present
+  when: ansible_os_family == "Debian"
+
+- name: (RedHat family)Install the ddclient packages 
+  yum: name=ddclient state=present
+  when: ansible_os_family == "RedHat"
+
+- name: ddclient | Set ddclient config 
+  sudo: yes
+  template: src=ddclient.conf.j2 dest=/etc/ddclient.conf
+  notify: 
+    - restart ddclient
