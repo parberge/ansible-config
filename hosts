@@ -9,5 +9,8 @@
 #   - A hostname/ip can be a member of multiple groups
 
 [home]
-peersrv ansible_connection=local
 peerhtpc
+fileserver
+
+[fileserver]
+peersrv
