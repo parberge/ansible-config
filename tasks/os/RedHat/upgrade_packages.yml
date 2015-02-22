@@ -1,0 +1,11 @@
+---
+- name: Check connectivity to repo
+  sudo: yes
+  shell: yum repolist
+  register: repostatus
+  changed_when: false
+  failed_when: repostatus.rc != 0
+
+- name: Upgrade Packages
+  sudo: yes
+  yum: name=* state=latest

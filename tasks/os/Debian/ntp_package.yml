@@ -1,0 +1,3 @@
+---
+- name: Make sure ntp is installed
+  apt: name=ntp state=present
