@@ -1,0 +1,15 @@
+---
+# defaults file for ddclient
+#
+ddclient_daemon: 300
+ddclient_syslog: "yes"
+ddclient_mail_failure: root
+ddclient_pid: /var/run/ddclient/ddclient.pid
+ddclient_ssl: "yes"
+ddclient_use: web
+ddclient_web: loopia
+ddclient_protocol: dyndns2
+ddclient_script: /XDynDNSServer/XDynDNS.php
+ddclient_server: dns.loopia.se
+ddclient_login: peers.se
+ddclient_subdomain: peers.se,www.peers.se
