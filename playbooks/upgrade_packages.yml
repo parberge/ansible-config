@@ -1,12 +1,12 @@
 ---
 # Gather facts and group by OS family
-- hosts: all
+- hosts: auto
   tasks:
     - group_by: key=family_{{ ansible_os_family }}
       changed_when: False
 
 # Get specific vars for OS family
-- hosts: all
+- hosts: auto
   gather_facts: False
   vars_files:
     - "vars/family/{{ ansible_os_family }}.yml"

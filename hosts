@@ -8,8 +8,14 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
+[couchpotato_server]
+peerhtpc
+
 [mediaplayer]
 peerhtpc
 
 [fileserver]
+peersrv
+
+[auto]
 peersrv
