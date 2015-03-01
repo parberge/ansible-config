@@ -1,4 +1,0 @@
----
-- name: Make sure ntp is installed
-  sudo: yes
-  yum: name=ntp state=present

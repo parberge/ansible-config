@@ -1,6 +1,2 @@
 ---
 # Vars for OS family RedHat (RHEL, CENTOS etc)
-packages:
-- ntp
-- ansible
-- tmux

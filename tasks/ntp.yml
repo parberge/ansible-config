@@ -1,4 +1,0 @@
----
-- name: Check NTP is running
-  sudo: yes
-  service: name={{ ntp }} state=running
