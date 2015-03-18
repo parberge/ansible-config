@@ -1,0 +1,6 @@
+---
+- hosts: htpc
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+  roles:
+    - { role: common, tags: common }

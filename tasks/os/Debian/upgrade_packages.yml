@@ -1,0 +1,4 @@
+---
+  - name: Upgrade Packages
+    sudo: yes
+    apt: upgrade=safe update_cache=yes
