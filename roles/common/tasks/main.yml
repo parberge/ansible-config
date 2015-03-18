@@ -1,2 +1,6 @@
-- include: "/etc/ansible/tasks/os/RedHat/packages.yml"
-  when: ansible_os_family == "RedHat"
+---
+  - include: "/etc/ansible/tasks/os/RedHat/packages.yml"
+    when: ansible_os_family == "RedHat"
+
+  - include: "/etc/ansible/tasks/os/Debian/packages.yml"
+    when: ansible_os_family == "Debian"
