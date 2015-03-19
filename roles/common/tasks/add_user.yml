@@ -1,0 +1,9 @@
+---
+  - name: "Add users"
+    sudo: yes
+    user:
+        name={{ item }}
+        state=present
+        update_password=always
+        password={{ user_passwd }}
+    with_items: user
