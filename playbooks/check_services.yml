@@ -1,0 +1,9 @@
+---
+# Get specific vars for OS family
+- hosts: auto
+  gather_facts: False
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+
+  tasks:
+    - include: tasks/os/common/services.yml
