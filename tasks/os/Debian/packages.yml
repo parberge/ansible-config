@@ -1,8 +1,7 @@
 ---
-# Packages are defined in vars/family/RedHat.yml
 - name: Make sure packages are installed
   sudo: yes
-  apt: 
+  apt:
     name={{ item }}
     state=present
     update_cache=yes
