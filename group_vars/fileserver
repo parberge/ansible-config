@@ -15,11 +15,21 @@ ddclient_subdomain: peers.se,www.peers.se
 
 # Packages that should be installed
 packages:
-- irssi
-- ddclient
-- yum-utils
-- yum-cron
-- git
-- ansible
-- httpd
-- htop
+  - irssi
+  - ddclient
+  - yum-utils
+  - yum-cron
+  - git
+  - ansible
+  - httpd
+  - htop
+  - denyhosts
+
+
+services:
+  - denyhosts
+  - httpd
+  - couchpotato
+  - ddclient
+  - ntpd
+  - sickbeard
