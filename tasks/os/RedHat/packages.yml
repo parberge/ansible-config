@@ -1,6 +1,6 @@
 ---
 # Packages are defined in vars/family/RedHat.yml
-- name: Make sure packages are installed
+- name: Make sure packages are installed (RedHat family)
   sudo: yes
   yum: name={{ item }} state=present
   with_items: packages

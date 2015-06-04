@@ -1,5 +1,5 @@
 ---
-- name: Make sure packages are installed
+- name: "Make sure packages are installed (Debian family)"
   sudo: yes
   apt:
     name={{ item }}
