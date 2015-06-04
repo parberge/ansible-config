@@ -24,6 +24,8 @@ packages:
   - httpd
   - htop
   - denyhosts
+  - vnstat
+  - rpmconf
 
 
 services:
@@ -33,3 +35,4 @@ services:
   - ddclient
   - ntpd
   - sickbeard
+  - vnstatd
