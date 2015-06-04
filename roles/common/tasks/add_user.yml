@@ -1,9 +1,8 @@
 ---
-  - name: "Add users"
+  - name: "Add user"
     sudo: yes
     user:
-        name={{ item }}
+        name=peer
         state=present
         update_password=always
         password={{ user_passwd }}
-    with_items: user
