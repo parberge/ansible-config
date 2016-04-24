@@ -1,6 +1,6 @@
 ---
 - name: "Make sure packages are installed (Debian family)"
-  sudo: yes
+  become: yes
   apt:
     name={{ item }}
     state=present

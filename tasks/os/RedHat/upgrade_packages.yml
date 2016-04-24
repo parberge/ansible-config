@@ -1,6 +1,6 @@
 ---
 - name: Upgrade Packages
-  sudo: yes
+  become: yes
   yum: name=* state=latest
   register: packages
 

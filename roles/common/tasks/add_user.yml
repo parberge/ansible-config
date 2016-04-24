@@ -1,6 +1,6 @@
 ---
   - name: "Add user"
-    sudo: yes
+    become: yes
     user:
         name=peer
         state=present
