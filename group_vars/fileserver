@@ -26,6 +26,7 @@ packages:
   - denyhosts
   - vnstat
   - rpmconf
+  - fish
 
 
 services:
