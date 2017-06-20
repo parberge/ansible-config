@@ -5,4 +5,4 @@
   roles:
     - { role: common, tags: common }
     - { role: ddclient, tags: ddclient } 
-    - { role: couchpotato, tags: couchpotato }
+    - { role: monitoring_server, tags: monitoring_server }
