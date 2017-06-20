@@ -1,0 +1,9 @@
+---
+- include: install_influxdb.yml
+  tags: influxdb-install
+
+- include: configure_influxdb.yml
+  tags: influxdb-configure
+
+- include: install_grafana.yml
+  tags: grafana-install

@@ -1,0 +1,27 @@
+---
+- name: Install any necessary dependencies for influxdb [RedHat/CentOS]
+  yum: 
+    name: "{{ item }}" 
+    state: present
+  with_items:
+    - curl
+    - python-pip
+
+- name: Install python package dependencies for influxdb [RedHat/CentOS]
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - influxdb
+
+- name: Add InfluxData repository file [RHEL/CentOS]
+  template:
+    src: etc/yum.repos.d/influxdata.repo.j2
+    dest: /etc/yum.repos.d/influxdata.repo
+    force: yes
+    backup: yes
+
+- name: Install InfluxDB packages [RHEL/CentOS]
+  yum: 
+    name: influxdb
+    state: present
