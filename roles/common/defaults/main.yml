@@ -1,3 +1,5 @@
 ---
 user:
   - peer
+
+def_shell: '/bin/bash'
