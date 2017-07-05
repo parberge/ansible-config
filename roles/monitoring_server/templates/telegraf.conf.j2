@@ -1,0 +1,21 @@
+[global_tags]
+
+[agent]
+  interval = "10s"
+  round_interval = true
+  metric_batch_size = 1000
+  metric_buffer_limit = 10000
+  collection_jitter = "0s"
+  flush_interval = "10s"
+  flush_jitter = "0s"
+  debug = false
+  quiet = false
+  hostname = "{{ inventory_hostname }}"
+  omit_hostname = false
+  
+[[outputs.influxdb]]
+  urls = ["{{ telegraf_influxdb_url }}"] # required
+  database = "{{ telegraf_influxdb_db_name }}" # required
+  precision = "s"
+  write_consistency = "any"
+  timeout = "5s"

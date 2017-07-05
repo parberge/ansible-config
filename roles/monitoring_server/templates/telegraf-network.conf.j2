@@ -1,0 +1,18 @@
+[[inputs.net_response]]
+  protocol = "tcp"
+  address = "192.168.7.1:80"
+  timeout = "1s"
+
+[[inputs.dns_query]]
+  servers = ["192.168.7.1"]
+  domains = ["www.google.se"]
+  timeout = 10
+
+[[inputs.dns_query]]
+  servers = ["8.8.8.8"]
+  domains = ["peers.se"]
+  timeout = 10
+
+[[ inputs.ping]]
+  urls = [ "192.168.7.10", "192.168.7.11"]
+  count = 5
