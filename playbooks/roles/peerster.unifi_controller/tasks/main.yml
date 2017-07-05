@@ -52,6 +52,7 @@
     owner: '{{ unifi_user }}'
 
 - name: "Deploy config.properties.j2 template if not present"
+  become: yes
   template:
     src: system.properties.j2
     dest: '{{ unifi_install_destination }}/UniFi/data/system.properties'

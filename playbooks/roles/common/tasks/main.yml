@@ -1,10 +1,10 @@
 ---
 ## Install packages
-- include: "/etc/ansible/tasks/os/RedHat/packages.yml"
+- include: "tasks/os/RedHat/packages.yml"
   when: ansible_os_family == "RedHat"
   tag: package
 
-- include: "/etc/ansible/tasks/os/Debian/packages.yml"
+- include: "tasks/os/Debian/packages.yml"
   when: ansible_os_family == "Debian"
   tag: package
 

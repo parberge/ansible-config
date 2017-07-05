@@ -1,0 +1,4 @@
+---
+
+home_assistant_required_packages:
+    - "python34-pip"
