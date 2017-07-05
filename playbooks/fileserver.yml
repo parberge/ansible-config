@@ -6,3 +6,4 @@
     - { role: common, tags: common }
     - { role: ddclient, tags: ddclient } 
     - { role: monitoring_server, tags: monitoring_server }
+    - { role: peerster.unifi_controller, tags: unifi-controller }
