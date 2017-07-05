@@ -1,4 +1,7 @@
 ---
+- include: setup.yml
+  tags: monitoring_server_setup
+
 - include: install_influxdb.yml
   tags: influxdb-install
 
@@ -7,3 +10,6 @@
 
 - include: install_grafana.yml
   tags: grafana-install
+
+- include: telegraf.yml
+  tags: telegraf
