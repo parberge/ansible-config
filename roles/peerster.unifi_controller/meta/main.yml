@@ -1,0 +1,16 @@
+galaxy_info:
+  author: peerster
+  description: UniFi controller installer
+
+  license: BSD
+
+  min_ansible_version: 1.4
+
+  platforms:
+    - name: EL
+      versions:
+      - 7
+
+  galaxy_tags:
+    - unifi
+    - Ubiquiti
