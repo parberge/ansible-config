@@ -1,18 +1,21 @@
 ---
 # tasks file for telegraf-simple
 - name: install telegraf
+  become: yes
   yum:
     name: telegraf
     state: present
   notify: restart telegraf
 
 - name: configure telegraf
+  become: yes
   template:
     src: telegraf.conf.j2
     dest: /etc/telegraf/telegraf.conf
   notify: restart telegraf
 
 - name: deploy telegraf templates
+  become: yes
   template:
     src: "{{ item }}.j2"
     dest: "/etc/telegraf/telegraf.d/{{ item }}"
@@ -22,6 +25,7 @@
   notify: restart telegraf
 
 - name: start telegraf
+  become: yes
   service:
     name: telegraf
     state: started
