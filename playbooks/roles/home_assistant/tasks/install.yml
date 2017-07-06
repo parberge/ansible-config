@@ -1,7 +1,39 @@
+# vim:ft=ansible:
 ---
 
-- name: Install required packages
+- name: Install required RPM packages
+  become: yes
   package: 
     name: '{{ item }}'
     state: present
   with_items: "{{ home_assistant_required_packages }}"
+
+- name: Install required python packages
+  become: yes
+  pip:
+    executable: pip3.4
+    name: '{{ item }}'
+  with_items: '{{ home_assistant_required_python_packages }}'
+
+- name: Setup home assistant user
+  become: yes
+  user:
+   name: "{{ home_assistant_user }}"
+   system: yes
+   state: present
+
+- name: Setup directory for home assistant
+  become: yes
+  file:
+    path: '/home/{{ home_assistant_user }}/{{ home_assistant_dir }}'
+    state: directory
+    owner: '{{ home_assistant_user }}'
+    group: '{{ home_assistant_user }}'
+
+- name: Install home assistant
+  become: yes
+  pip:
+    name: homeassistant
+    state: present
+    virtualenv: '/home/{{ home_assistant_user }}/{{ home_assistant_dir }}'
+    virtualenv_python: python3
