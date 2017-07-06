@@ -1,4 +1,13 @@
 ---
 
 home_assistant_required_packages:
+    - "python34"
     - "python34-pip"
+
+home_assistant_required_python_packages:
+    #- "homeassistant"
+    - "virtualenv"
+
+
+home_assistant_user: "homeassistant"
+home_assistant_dir: "homeassistant"
