@@ -32,6 +32,7 @@
 
 - name: Install home assistant
   become: yes
+  become_user: '{{ home_assistant_user }}'
   pip:
     name: homeassistant
     state: present
