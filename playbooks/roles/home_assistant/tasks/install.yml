@@ -13,6 +13,7 @@
   pip:
     executable: pip3.4
     name: '{{ item }}'
+    state: latest
   with_items: '{{ home_assistant_required_python_packages }}'
 
 - name: Setup home assistant user
@@ -35,6 +36,22 @@
   become_user: '{{ home_assistant_user }}'
   pip:
     name: homeassistant
-    state: present
+    state: latest
     virtualenv: '/home/{{ home_assistant_user }}/{{ home_assistant_dir }}'
     virtualenv_python: python3
+
+- name: Deploy systemd config
+  become: yes
+  template:
+    src: home-assistant.service.j2
+    dest: '/etc/systemd/system/home-assistant.service'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+
+- name: Enable and start home assistant
+  become: yes
+  service:
+    name: 'home-assistant.service'
+    enabled: yes
+    state: started
