@@ -1,0 +1,14 @@
+- alias: 'Marantz auto on + source'
+  trigger:
+    platform: state
+    entity_id: media_player.kodi
+    to: 'on'
+  action:
+    - service: media_player.marantz_sr5007
+      data_template:
+        entity_id: media_player.marantz_sr5007
+        source: MEDIA PLAYER
+        #source: >
+        #  {% if trigger.entity_id == 'media_player.kodi' %}
+        #  MEDIA PLAYER
+        #  {% endif %}
