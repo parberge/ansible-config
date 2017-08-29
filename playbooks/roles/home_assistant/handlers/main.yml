@@ -1,0 +1,7 @@
+---
+
+- name: Restart homeassistant
+  become: yes
+  service:
+    name: home-assistant
+    state: restarted
