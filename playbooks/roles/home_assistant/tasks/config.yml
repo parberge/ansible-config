@@ -9,3 +9,6 @@
     group: "{{ home_assistant_user }}"
   with_items:
     - configuration.yaml
+    - automations.yaml
+    - binary_sensors.yaml
+  notify: Restart homeassistant
