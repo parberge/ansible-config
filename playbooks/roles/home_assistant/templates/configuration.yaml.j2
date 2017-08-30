@@ -50,10 +50,6 @@ logbook:
 # Track the sun
 sun:
 
-# Weather Prediction
-sensor:
-  platform: yr
-
 # Text to speech
 tts:
   platform: google
@@ -61,7 +57,24 @@ tts:
 # Enable wake on lan
 wake_on_lan:
 
+# Netatmo
+netatmo:
+  api_key: 59a6b173ea00a0771c8bbc5b
+  secret_key: {{ netatmo_api_secret }}
+  username: paer.berge@gmail.com
+  password: {{ netatmo_password }}
+  discovery: False
+
+# verisure
+verisure:
+  username: paer.berge@gmail.com
+  password: {{ verisure_password }}
+  #username: per@peers.se
+  #password: {{ verisure_password }}
+
 group: !include groups.yaml
 automation: !include automations.yaml
 media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
+sensor: !include sensors.yaml
+device_tracker: !include device_trackers.yaml
