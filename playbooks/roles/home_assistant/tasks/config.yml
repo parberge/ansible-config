@@ -22,5 +22,8 @@
     - binary_sensors.yaml
     - sensors.yaml
     - device_trackers.yaml
+    - groups.yaml
+    - known_devices.yaml
+    - switches.yaml
   notify: Restart homeassistant
   tags: hass_deploy_cfg
