@@ -1,0 +1,47 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - lock.ytterdorren
+    - group.climate_basement
+    - group.climate_top_floor
+    - group.basement
+    - group.device_tracker
+
+basement:
+  name: Källaren
+  view: yes
+  entities:
+    - group.basement_media
+    - group.climate_basement
+    - automation.marantz_auto_on
+    - automation.marantz_auto_off
+
+basement_media:
+  name: Mediaspelare
+  entities:
+    - media_player.kodi
+    - binary_sensor.ps4
+    - media_player.marantz_sr5007
+    - media_player.kallaren
+
+climate_top_floor:
+  name: Klimat på övervåningen
+  entities:
+    - sensor.netatmo_overvaningen_temperature
+    - sensor.netatmo_overvaningen_humidity
+    - sensor.netatmo_overvaningen_co2
+    - sensor.netatmo_overvaningen_noise
+
+climate_basement:
+  name: Klimat i källaren
+  entities:
+    - sensor.netatmo_kallaren_temperature
+    - sensor.netatmo_kallaren_humidity
+    - sensor.netatmo_kallaren_co2
+
+device_tracker:
+  name: Människor
+  entities:
+    - device_tracker.honor_8
+    - device_tracker.nexus_6p
