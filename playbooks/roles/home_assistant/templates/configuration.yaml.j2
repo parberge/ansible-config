@@ -11,9 +11,6 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Stockholm
 
-# Show links to resources in log and frontend
-#introduction:
-
 # Enables the frontend
 frontend:
 
@@ -67,10 +64,20 @@ netatmo:
 
 # verisure
 verisure:
-  username: paer.berge@gmail.com
+  username: per@peers.se
   password: {{ verisure_password }}
-  #username: per@peers.se
-  #password: {{ verisure_password }}
+  alarm: 0
+  hygrometers: 0
+  smartplugs: 0
+  thermometers: 0
+  mouse: 0
+  door_window: 0
+  code_digits: 6
+
+logger:
+  default: warning
+  logs:
+    homeassistant.components.lock: debug
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -78,3 +85,4 @@ media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
 device_tracker: !include device_trackers.yaml
+switch: !include switches.yaml
