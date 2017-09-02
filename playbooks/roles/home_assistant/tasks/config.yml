@@ -1,5 +1,13 @@
 ---
 
+- name: "Generate a cert for home assistant"
+  become: yes
+  become_user: '{{ home_assistant_user }}'
+  command: "openssl req -new -x509 -sha256 -newkey rsa:4096 -nodes -subj /C=SE/CN=home.peers.se -keyout privkey.pem -days 730 -out fullchain.pem"
+  args:
+    chdir: '/home/{{ home_assistant_user }}/.homeassistant/'
+    creates: '/home/{{ home_assistant_user }}/./homeassistant/fullchain.pem'
+
 - name: "Copy ps4 sensor script"
   become: yes
   copy:
@@ -25,5 +33,6 @@
     - groups.yaml
     - known_devices.yaml
     - switches.yaml
+    - notifiers.yaml
   notify: Restart homeassistant
   tags: hass_deploy_cfg
