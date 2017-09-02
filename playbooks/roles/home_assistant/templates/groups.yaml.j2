@@ -5,6 +5,7 @@ default_view:
     - lock.ytterdorren
     - group.climate_basement
     - group.climate_top_floor
+    - group.climate_outside
     - group.basement
     - group.device_tracker
 
@@ -43,8 +44,8 @@ climate_basement:
 climate_outside:
   name: Klimat utomhus
   entities:
-    - sensor.netatmo_kallaren_temperature
-    - sensor.netatmo_kallaren_humidity
+    - sensor.netatmo_utomhus_temperature
+    - sensor.netatmo_utomhus_humidity
 
 device_tracker:
   name: Människor
