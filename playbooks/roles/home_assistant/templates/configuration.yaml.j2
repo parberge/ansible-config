@@ -19,9 +19,11 @@ config:
 
 http:
   # Uncomment this to add a password (recommended!)
-  # api_password: PASSWORD
+  api_password: {{ hass_password }}
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
+  ssl_certificate: {{ home_assistant_cfg_dir }}/fullchain.pem
+  ssl_key: {{ home_assistant_cfg_dir }}/privkey.pem
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -76,8 +78,6 @@ verisure:
 
 logger:
   default: warning
-  logs:
-    homeassistant.components.lock: debug
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -86,3 +86,4 @@ binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
 device_tracker: !include device_trackers.yaml
 switch: !include switches.yaml
+notify: !include notifiers.yaml
