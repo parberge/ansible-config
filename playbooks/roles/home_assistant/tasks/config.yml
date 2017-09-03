@@ -34,5 +34,6 @@
     - known_devices.yaml
     - switches.yaml
     - notifiers.yaml
+    - media_players.yaml
   notify: Restart homeassistant
   tags: hass_deploy_cfg
