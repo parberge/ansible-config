@@ -4,7 +4,8 @@
     - "vars/family/{{ ansible_os_family }}.yml"
   roles:
     - { role: common, tags: common }
-    - { role: ddclient, tags: ddclient } 
+    - { role: ddclient, tags: ddclient }
+    - { role: webserver, tags: webserver }
     - { role: monitoring_server, tags: monitoring_server }
     - { role: peerster.unifi_controller, tags: unifi-controller }
     - { role: home_assistant, tags: home_assistant }
