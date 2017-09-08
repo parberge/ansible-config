@@ -2,12 +2,15 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
+    - group.all_netatmo_sensors
     - lock.ytterdorren
-    - group.climate_basement
-    - group.climate_top_floor
-    - group.climate_outside
-    - group.basement
     - group.device_tracker
+
+topfloor:
+  name: Övervåningen
+  view: yes
+  entities:
+    - group.netatmo_topfloor
 
 mainfloor:
   name: bottenvåningen
@@ -21,7 +24,6 @@ basement:
   view: yes
   entities:
     - group.basement_media
-    - group.climate_basement
     - automation.marantz_auto_on
     - automation.marantz_auto_off
 
@@ -33,29 +35,36 @@ basement_media:
     - media_player.marantz_sr5007
     - media_player.kallaren
 
-climate_top_floor:
-  name: Klimat på övervåningen
+device_tracker:
+  name: Enheter
+  entities:
+    - device_tracker.honor_8
+    - device_tracker.nexus_6p
+
+all_netatmo_sensors:
+  name: Klimat
+  entities:
+    - sensor.netatmo_overvaningen_temperature
+    - sensor.netatmo_overvaningen_humidity
+    - sensor.netatmo_overvaningen_co2
+    - sensor.netatmo_overvaningen_noise
+    - sensor.netatmo_kallaren_temperature
+    - sensor.netatmo_kallaren_humidity
+    - sensor.netatmo_kallaren_co2
+    - sensor.netatmo_utomhus_temperature
+    - sensor.netatmo_utomhus_humidity
+
+netatmo_topfloor:
+  name: Klimat övervåningen
   entities:
     - sensor.netatmo_overvaningen_temperature
     - sensor.netatmo_overvaningen_humidity
     - sensor.netatmo_overvaningen_co2
     - sensor.netatmo_overvaningen_noise
 
-climate_basement:
-  name: Klimat i källaren
+netatmo_basement:
+  name: Klimat källaren
   entities:
     - sensor.netatmo_kallaren_temperature
     - sensor.netatmo_kallaren_humidity
     - sensor.netatmo_kallaren_co2
-
-climate_outside:
-  name: Klimat utomhus
-  entities:
-    - sensor.netatmo_utomhus_temperature
-    - sensor.netatmo_utomhus_humidity
-
-device_tracker:
-  name: Människor
-  entities:
-    - device_tracker.honor_8
-    - device_tracker.nexus_6p
