@@ -35,7 +35,7 @@ http {
     server {
         listen       80 default_server;
         listen       [::]:80 default_server;
-        server_name  _;
+        server_name  peers.se peersrv 192.168.7.7;
         root         /var/www/html;
 
         # Load configuration files for the default server block.
@@ -57,7 +57,18 @@ http {
             proxy_set_header Host      $host;
             proxy_set_header X-Real-IP $remote_addr;
         }
-    }
+    
+    listen 443 ssl; # managed by Certbot
+ssl_certificate /etc/letsencrypt/live/peers.se/fullchain.pem; # managed by Certbot
+ssl_certificate_key /etc/letsencrypt/live/peers.se/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+
+
+    if ($scheme != "https") {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+}
     
 # Settings for a TLS enabled server.
 #
