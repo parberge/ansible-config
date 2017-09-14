@@ -70,3 +70,26 @@
     service: notify.pushover
     data:
       message: 'Update for Home Assistant is available.'
+
+- alias: 'Forgot to lock'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.nexus_6p
+      from: 'home'
+      to: 'not_home'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: lock.ytterdorren
+        state: 'unlocked'
+      - condition: state
+        entity_id: device_tracker.honor_8
+        state: 'not_home'
+  action:
+    - service: notify.html5
+      data:
+        message: 'Du gick precis hemifrån men dörren är inte låst och Malena är inte hemma'
+        target: "Pär"
+    - service: script.lock_door
+      entity_id: lock.ytterdorren
