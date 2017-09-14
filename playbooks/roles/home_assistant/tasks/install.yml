@@ -42,6 +42,7 @@
   with_items:
     - homeassistant
     - websocket-client
+    - pywebpush
 
 - name: Deploy systemd config
   become: yes

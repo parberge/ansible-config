@@ -2,3 +2,8 @@
   platform: pushover
   api_key: {{ hass_pushover_api_key }}
   user_key: {{ pushover_user_key }}
+
+- name: html5
+  platform: html5
+  gcm_api_key: {{ google_server_key }}
+  gcm_sender_id: {{ google_sender_id }}
