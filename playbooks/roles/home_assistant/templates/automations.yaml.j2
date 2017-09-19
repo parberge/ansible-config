@@ -48,15 +48,15 @@
   condition:
     condition: and
     conditions:
-     - condition: state
-       entity_id: media_player.kodi
-       state: 'off'
-     - condition: state
-       entity_id: media_player.kallaren
-       state: 'off'
-     - condition: state
-       entity_id: binary_sensor.ps4
-       state: 'off'
+      - condition: state
+        entity_id: media_player.kodi
+        state: 'off'
+      - condition: state
+        entity_id: media_player.kallaren
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.ps4
+        state: 'off'
 
   action:
     - service: homeassistant.turn_off
@@ -91,5 +91,55 @@
       data:
         message: 'Du gick precis hemifrån men dörren är inte låst och Malena är inte hemma'
         target: "Pär"
+        data:
+          tag: 'forgot-lock'
+          actions:
+            - action: 'lock_door'
+              title: 'Lås dörren'
+
+
+- alias: 'lock notify action'
+  trigger:
+    - platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: lock_door
+  action:
     - service: script.lock_door
       entity_id: lock.ytterdorren
+
+- alias: "Pausa kodi när någon låser upp dörren"
+  trigger:
+    - platform: state
+      entity_id: lock.ytterdorren
+      from: 'locked'
+      to: 'unlocked'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.kodi
+        state: 'playing'
+  action:
+    - service: media_player.media_play_pause
+      entity_id: media_player.kodi
+
+- alias: "Notifiera ifall dörren är upplåst när kodi spelar"
+  trigger:
+    - platform: state
+      entity_id: media_player.kodi
+      to: 'playing'
+  condition:
+    condition: state
+    entity_id: lock.ytterdorren
+    state: 'unlocked' 
+  action:
+    - service: notify.html5
+      data:
+        message: 'Dörren är upplåst. Du kanske vill låsa när du ska sitta i källaren'
+        target: "Pär"
+        data:
+          tag: 'forgot-lock'
+          actions:
+            - action: 'lock_door'
+              title: 'Lås dörren'
