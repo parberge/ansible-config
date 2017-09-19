@@ -1,7 +1,0 @@
----
-unifi_zip_destination: '/tmp/unifi.zip'
-unifi_install_destination: '/opt'
-unifi_download_url: 'https://www.ubnt.com/downloads/unifi/5.4.16/UniFi.unix.zip'
-unifi_user: unifi
-mongod_path: '/usr/bin/mongod'
-unifi_service_port: 8000
