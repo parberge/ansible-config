@@ -3,6 +3,7 @@
   tags: monitoring_server_setup
 
 - include: install_influxdb.yml
+  become: yes
   tags: influxdb-install
 
 - include: configure_influxdb.yml
