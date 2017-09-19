@@ -9,3 +9,4 @@
     - { role: monitoring_server, tags: monitoring_server }
     - { role: peerster.unifi_controller, tags: unifi-controller }
     - { role: home_assistant, tags: home_assistant }
+    - { role: bertvv.mariadb, tags: mariadb, become: yes }
