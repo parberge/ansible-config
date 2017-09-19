@@ -22,6 +22,7 @@
   with_items:
     - telegraf-system.conf
     - telegraf-network.conf
+    - telegraf-unifi.conf
   notify: restart telegraf
 
 - name: start telegraf
