@@ -123,6 +123,14 @@
   action:
     - service: media_player.media_play_pause
       entity_id: media_player.kodi
+    - delay:
+        seconds: 5
+    - service: notify.kodi
+      data:
+        message: "Pausar för dörren låstes upp"
+        data:
+          icon: "warning"
+          displaytime: 10000
 
 - alias: "Notifiera ifall dörren är upplåst när kodi spelar"
   trigger:
