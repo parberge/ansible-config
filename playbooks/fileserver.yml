@@ -1,5 +1,6 @@
 ---
 - hosts: fileserver
+  remote_user: peer
   vars_files:
     - "vars/family/{{ ansible_os_family }}.yml"
   roles:
