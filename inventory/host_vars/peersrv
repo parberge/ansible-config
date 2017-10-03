@@ -1,7 +1,7 @@
 ---
 ansible_host: 192.168.7.7
 ansible_port: 11000
-def_shell: '/usr/bin/fish'
+def_shell: '/usr/bin/bash'
 
 mariadb_users:
   - name: kodi
