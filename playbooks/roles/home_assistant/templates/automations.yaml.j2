@@ -62,14 +62,15 @@
     - service: homeassistant.turn_off
       entity_id: media_player.marantz_sr5007
 
-- alias: 'Update Available Notifications'
+- alias: 'Uppdatering av home assistant finns'
   trigger:
     platform: state
     entity_id: updater.updater
   action:
-    service: notify.pushover
-    data:
-      message: 'Update for Home Assistant is available.'
+    service: notify.html5
+    data_template:
+      title: 'Ny version av HA finns'
+      target: "Pär"
 
 - alias: 'Forgot to lock'
   trigger:
@@ -151,3 +152,19 @@
           actions:
             - action: 'lock_door'
               title: 'Lås dörren'
+
+- alias: "Släck lampan för ytterdörren när solen går upp"
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: light.turn_off
+    entity_id: light.lampa_ytterdorren
+
+- alias: "Tänd lampan för ytterdörren när solen går ned"
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: light.turn_on
+    entity_id: light.lampa_ytterdorren
