@@ -4,7 +4,7 @@ default_view:
   entities:
     - group.all_netatmo_sensors
     - group.all_automations
-    - switch.yale_lock
+    - group.front_door
     - group.device_tracker
 
 topfloor:
@@ -19,6 +19,7 @@ mainfloor:
   entities:
     - media_player.vardagsrummet
     - media_player.samsung_tv
+    - group.front_door
 
 basement:
   name: Källaren
@@ -36,6 +37,13 @@ basement_media:
     - binary_sensor.ps4
     - media_player.marantz_sr5007
     - media_player.kallaren
+
+front_door:
+  name: Ytterdörren
+  control: hidden
+  entities:
+    - switch.yale_lock
+    - light.lampa_ytterdorren
 
 device_tracker:
   name: Enheter
