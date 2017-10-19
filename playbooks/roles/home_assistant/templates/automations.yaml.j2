@@ -25,8 +25,10 @@
           CBL/SAT
           {% elif trigger.entity_id == 'binary_sensor.ps4' %}
           GAME
-          {% endif %}
-          {% endraw %}
+          {% endif %}{% endraw %}
+
+    - service: switch.turn_on
+      entity_id: switch.projector
 
 - alias: 'Marantz auto off'
   trigger:
@@ -61,6 +63,8 @@
   action:
     - service: homeassistant.turn_off
       entity_id: media_player.marantz_sr5007
+    - service: switch.turn_off
+      entity_id: switch.projector
 
 - alias: 'Uppdatering av home assistant finns'
   trigger:
