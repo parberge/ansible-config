@@ -79,9 +79,12 @@ verisure:
   code_digits: 6
 
 logger:
-  default: warning
+  default: info
 
-group: !include groups.yaml
+rfxtrx:
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
+
+group: !include_dir_merge_named group/
 automation: !include automations.yaml
 media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml

@@ -1,10 +1,8 @@
-#- platform: command_line
-#  name: kodi
-#  command: "(ping -c2 -W2 -w4 peerhtpc > /dev/null 2>&1 && echo ON) || echo OFF"
-#  device_class: connectivity
-#  scan_interval: 5
 - platform: command_line
   name: ps4
   command: /home/{{ home_assistant_user }}/ps4_sensor.py
   device_class: connectivity
   scan_interval: 5
+
+- platform: rfxtrx
+  automatic_add: True
