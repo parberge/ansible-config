@@ -17,26 +17,39 @@
     group: "{{ home_assistant_user }}"
     mode: u+x
 
-- name: "Deploy home assistant templates"
+- name: "Create config dirs"
   become: yes
-  template:
-    src: "{{ item }}.j2"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item }}"
+  file:
+    state: directory
+    path: "/home/{{ home_assistant_user }}/.homeassistant/{{ item }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
   with_items:
-    - configuration.yaml
-    - automations.yaml
-    - binary_sensors.yaml
-    - sensors.yaml
-    - device_trackers.yaml
-    - groups.yaml
-    - known_devices.yaml
-    - switches.yaml
-    - notifiers.yaml
-    - media_players.yaml
-    - scripts.yaml
-    - customizations.yaml
-    - lights.yaml
+    - group
+
+- name: "Deploy home assistant templates"
+  become: yes
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    owner: "{{ home_assistant_user }}"
+    group: "{{ home_assistant_user }}"
+    block_start_string: "{{ item.block_start | default('{%') }}"
+    block_end_string: "{{ item.block_end | default('%}') }}"
+  with_items:
+    - { 'name': 'automations.yaml', 'block_start': '<<', 'block_end': '>>' }
+    - { 'name': 'configuration.yaml' }
+    - { 'name': 'binary_sensors.yaml' }
+    - { 'name': 'sensors.yaml' }
+    - { 'name': 'device_trackers.yaml' }
+    - { 'name': 'group/all.yaml' }
+    - { 'name': 'group/home.yaml' }
+    - { 'name': 'known_devices.yaml' }
+    - { 'name': 'switches.yaml' }
+    - { 'name': 'notifiers.yaml' }
+    - { 'name': 'media_players.yaml' }
+    - { 'name': 'scripts.yaml' }
+    - { 'name': 'customizations.yaml' }
+    - { 'name': 'lights.yaml' }
   notify: Restart homeassistant
   tags: hass_deploy_cfg

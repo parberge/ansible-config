@@ -18,15 +18,13 @@
       data_template:
         entity_id: media_player.marantz_sr5007
         source: >
-          {% raw %}
           {% if trigger.entity_id == 'media_player.kodi' %}
           MEDIA PLAYER
           {% elif trigger.entity_id == 'media_player.kallaren' %}
           CBL/SAT
           {% elif trigger.entity_id == 'binary_sensor.ps4' %}
           GAME
-          {% endif %}{% endraw %}
-
+          {% endif %}
     - service: switch.turn_on
       entity_id: switch.projector
 
@@ -59,7 +57,6 @@
       - condition: state
         entity_id: binary_sensor.ps4
         state: 'off'
-
   action:
     - service: homeassistant.turn_off
       entity_id: media_player.marantz_sr5007
@@ -72,8 +69,8 @@
     entity_id: updater.updater
   action:
     service: notify.html5
-    data_template:
-      title: 'Ny version av HA finns'
+    data:
+      message: 'Ny version av HA finns'
       target: "Pär"
 
 - alias: 'Forgot to lock'
@@ -101,7 +98,6 @@
           actions:
             - action: 'lock_door'
               title: 'Lås dörren'
-
 
 - alias: 'lock notify action'
   trigger:
