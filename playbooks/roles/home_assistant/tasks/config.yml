@@ -42,7 +42,6 @@
     - { 'name': 'binary_sensors.yaml' }
     - { 'name': 'sensors.yaml' }
     - { 'name': 'device_trackers.yaml' }
-    - { 'name': 'group/all.yaml' }
     - { 'name': 'group/home.yaml' }
     - { 'name': 'group/topfloor.yaml' }
     - { 'name': 'group/mainfloor.yaml' }
