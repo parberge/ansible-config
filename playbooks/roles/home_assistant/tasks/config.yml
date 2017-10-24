@@ -45,6 +45,8 @@
     - { 'name': 'group/all.yaml' }
     - { 'name': 'group/home.yaml' }
     - { 'name': 'group/topfloor.yaml' }
+    - { 'name': 'group/mainfloor.yaml' }
+    - { 'name': 'group/basement.yaml' }
     - { 'name': 'known_devices.yaml' }
     - { 'name': 'switches.yaml' }
     - { 'name': 'notifiers.yaml' }

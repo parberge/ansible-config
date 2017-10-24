@@ -1,0 +1,15 @@
+mainfloor:
+  name: bottenvåningen
+  view: yes
+  entities:
+    - media_player.vardagsrummet
+    - media_player.samsung_tv
+    - group.front_door
+
+front_door:
+  name: Ytterdörren
+  control: hidden
+  icon: mdi:glassdoor
+  entities:
+    - switch.yale_lock
+    - light.lampa_ytterdorren
