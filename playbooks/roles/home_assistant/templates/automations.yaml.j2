@@ -169,14 +169,14 @@
     service: light.turn_on
     entity_id: light.lampa_ytterdorren
 
-- alias: "Någon tryckte på ringklockan"
+
+- alias: "Brandlarmet notifikation"
   trigger:
-    - platform: state
-      entity_id: binary_sensor.ringklockan
-      from: 'off'
-      to: 'on'
+    - platform: event
+      event_type: signal_received
+      event_data: {"entity_id": "sensor.brandvarnare_bottenvaning_sensor_status"}
   action:
     - service: notify.html5
       data:
-        message: 'Någon ringer på ringklockan'
+        message: 'TEST - Brandlarmet utlöst'
         target: "Pär"
