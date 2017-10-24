@@ -13,3 +13,13 @@
       - humidity
       - co2
       - noise
+
+- platform: rfxtrx
+  automatic_add: True
+  devices:
+    082003009c92000660:
+      name: Brandvarnare bottenvåning
+      fire_event: True
+
+- platform: cert_expiry
+  host: peers.se
