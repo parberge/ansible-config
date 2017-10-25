@@ -73,7 +73,7 @@
       message: 'Ny version av HA finns'
       target: "Pär"
 
-- alias: 'Forgot to lock'
+- alias: 'Glömde låsa dörren notis'
   trigger:
     - platform: state
       entity_id: device_tracker.nexus_6p
@@ -91,7 +91,7 @@
   action:
     - service: notify.html5
       data:
-        message: 'Du gick precis hemifrån men dörren är inte låst och Malena är inte hemma'
+        message: 'Dörren är inte låst och ingen är hemma'
         target: "Pär"
         data:
           tag: 'forgot-lock'
