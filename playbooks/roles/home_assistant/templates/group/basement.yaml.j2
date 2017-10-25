@@ -2,19 +2,20 @@ basement:
   name: Källaren
   view: yes
   entities:
-    - group.basement_media
+    - group.home_theatre
     - automation.marantz_auto_on
     - automation.marantz_auto_off
     - group.netatmo_basement
     - switch.projector
 
-basement_media:
-  name: Mediaspelare
+home_theatre:
+  name: Biorummet
   entities:
     - media_player.kodi
     - binary_sensor.ps4
     - media_player.marantz_sr5007
     - media_player.kallaren
+    - switch.projector
 
 netatmo_basement:
   name: Klimat källaren
