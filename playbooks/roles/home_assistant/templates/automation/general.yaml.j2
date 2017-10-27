@@ -174,9 +174,8 @@
   trigger:
     - platform: event
       event_type: signal_received
-      event_data: {"entity_id": "sensor.brandvarnare_bottenvaning_sensor_status"}
+      event_data: {"entity_id": "sensor.brandvarnare_2_sensor_status"}
   action:
     - service: notify.html5
       data:
-        message: 'TEST - Brandlarmet utlöst'
-        target: "Pär"
+        message: 'Brandlarmet utlöst!'

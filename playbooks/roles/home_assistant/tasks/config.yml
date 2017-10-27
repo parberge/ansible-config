@@ -26,6 +26,7 @@
     group: "{{ home_assistant_user }}"
   with_items:
     - group
+    - automation
 
 - name: "Deploy home assistant templates"
   become: yes
@@ -36,10 +37,12 @@
     group: "{{ home_assistant_user }}"
     block_start_string: "{{ item.block_start | default('{%') }}"
     block_end_string: "{{ item.block_end | default('%}') }}"
+    variable_start_string: "{{ item.variable_start | default('{{') }}"
+    variable_end_string: "{{ item.variable_end | default('}}') }}"
   with_items:
-    - { 'name': 'automations.yaml', 'block_start': '<<', 'block_end': '>>' }
+    - { 'name': 'automation/general.yaml', 'block_start': '<<', 'block_end': '>>' }
     - { 'name': 'configuration.yaml' }
-    - { 'name': 'binary_sensors.yaml' }
+    - { 'name': 'binary_sensors.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'sensors.yaml' }
     - { 'name': 'device_trackers.yaml' }
     - { 'name': 'group/home.yaml' }
