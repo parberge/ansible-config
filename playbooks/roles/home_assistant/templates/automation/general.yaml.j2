@@ -99,6 +99,23 @@
             - action: 'lock_door'
               title: 'Lås dörren'
 
+- alias: 'Välkommen hem notis'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.nexus_6p
+      from: 'not_home'
+      to: 'home'
+  action:
+    - service: notify.html5
+      data:
+        message: 'Välkommen hem'
+        target: "Pär"
+        data:
+          tag: 'unlock-doork'
+          actions:
+            - action: 'unlock_door'
+              title: 'Lås upp dörren'
+
 - alias: 'lock notify action'
   trigger:
     - platform: event
@@ -107,6 +124,16 @@
         action: lock_door
   action:
     - service: script.lock_door
+      entity_id: lock.ytterdorren
+
+- alias: 'Lås upp notis action'
+  trigger:
+    - platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: unlock_door 
+  action:
+    - service: script.unlock_door
       entity_id: lock.ytterdorren
 
 - alias: "Pausa kodi när någon låser upp dörren"

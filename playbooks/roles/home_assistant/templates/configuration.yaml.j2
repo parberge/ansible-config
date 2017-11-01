@@ -23,7 +23,7 @@ http:
   # Uncomment this to add a password (recommended!)
   api_password: {{ hass_password }}
   # Uncomment this if you are using SSL or running in Docker etc
-  # base_url: example.duckdns.org:8123
+  base_url: peers.se:443
   ssl_certificate: {{ home_assistant_cfg_dir }}/fullchain.pem
   ssl_key: {{ home_assistant_cfg_dir }}/privkey.pem
 
@@ -85,9 +85,10 @@ logger:
 
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
+  debug: True
 
 group: !include_dir_merge_named group/
-automation: !include automations.yaml
+automation: !include_dir_merge_list automation/
 media_player: !include media_players.yaml
 binary_sensor: !include binary_sensors.yaml
 sensor: !include sensors.yaml
