@@ -2,9 +2,15 @@ mainfloor:
   name: bottenvåningen
   view: yes
   entities:
-    - media_player.vardagsrummet
-    - media_player.samsung_tv
+    - group.mainfloor_livingroom
     - group.front_door
+
+mainfloor_livingroom:
+  name: Vardagsrummet
+  entities:
+    - media_player.vardagsrummet
+    - binary_sensor.samsung_tv
+    #- media_player.samsung_tv
 
 front_door:
   name: Ytterdörren
