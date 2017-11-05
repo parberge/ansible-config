@@ -8,3 +8,5 @@ mariadb_users:
     password: kodi
     priv: '*.*:ALL,GRANT'
     host: '192.168.7.8'
+
+hass_influxdb_enabled: True
