@@ -15,3 +15,7 @@ home_assistant_required_python_packages:
 home_assistant_user: "homeassistant"
 home_assistant_dir: "homeassistant"
 home_assistant_cfg_dir: "/home/{{ home_assistant_user }}/.homeassistant/"
+
+# If you want to log states in influxdb
+home_assistant_influxdb_host: localhost
+hass_influxdb_enabled: False
