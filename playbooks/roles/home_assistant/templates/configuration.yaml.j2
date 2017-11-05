@@ -87,6 +87,32 @@ rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
   debug: True
 
+influxdb:
+  default_measurement: state
+  component_config_glob:
+    'sensor.*temperature':
+      override_measurement: 'temperature'
+    'sensor.*humidity':
+      override_measurement: 'humidity'
+    'sensor.*co2':
+      override_measurement: 'co2'
+    'sensor.*noise':
+      override_measurement: 'noise_level'
+  include:
+    entities:
+      - sensor.netatmo_utomhus_humidity
+      - sensor.netatmo_utomhus_temperature
+      - sensor.netatmo_badrum_kallare_temperature
+      - sensor.netatmo_badrum_kallare_humidity
+      - sensor.netatmo_badrum_kallare_co2
+      - sensor.netatmo_barnrummet_temperature
+      - sensor.netatmo_barnrummet_humidity
+      - sensor.netatmo_barnrummet_co2
+      - sensor.netatmo_barnrummet_noise
+
+  tags_attributes:
+    - friendly_name
+
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
 media_player: !include media_players.yaml
