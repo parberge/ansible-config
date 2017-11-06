@@ -109,9 +109,17 @@ influxdb:
       - sensor.netatmo_barnrummet_humidity
       - sensor.netatmo_barnrummet_co2
       - sensor.netatmo_barnrummet_noise
+      - binary_sensor.samsung_tv
+      - media_player.vardagsrummet
 
   tags_attributes:
     - friendly_name
+
+panel_iframe:
+  grafana:
+    title: 'Statistik'
+    icon: mdi:elevation-rise
+    url: 'http://192.168.7.7:3000/dashboard/db/home-assistant?orgId=1&theme=light'
 
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
