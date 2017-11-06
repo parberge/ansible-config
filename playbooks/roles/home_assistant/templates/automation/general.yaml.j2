@@ -180,21 +180,25 @@
             - action: 'lock_door'
               title: 'Lås dörren'
 
-- alias: "Släck lampan för ytterdörren när solen går upp"
+- alias: "Släck lampor ute när solen går upp"
   trigger:
     platform: sun
     event: sunrise
   action:
-    service: light.turn_off
-    entity_id: light.lampa_ytterdorren
+    - service: light.turn_off
+      entity_id: light.lampa_ytterdorren
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_1
 
-- alias: "Tänd lampan för ytterdörren när solen går ned"
+- alias: "Tänd lampor ute när solen går ned"
   trigger:
     platform: sun
     event: sunset
   action:
-    service: light.turn_on
-    entity_id: light.lampa_ytterdorren
+    - service: light.turn_on
+      entity_id: light.lampa_ytterdorren
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_1
 
 
 - alias: "Brandlarmet notifikation"
