@@ -4,6 +4,7 @@ mainfloor:
   entities:
     - group.mainfloor_livingroom
     - group.front_door
+    - group.main_floor_outside_lights
 
 mainfloor_livingroom:
   name: Vardagsrummet
@@ -19,3 +20,10 @@ front_door:
   entities:
     - switch.yale_lock
     - light.lampa_ytterdorren
+
+main_floor_outside_lights:
+  name: Belysning utomhus
+  icon: mdi:lightbulb
+  entities:
+    - light.lampa_ytterdorren
+    - switch.strombrytare_1
