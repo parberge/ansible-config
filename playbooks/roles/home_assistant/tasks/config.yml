@@ -54,5 +54,11 @@
     - { 'name': 'scripts.yaml' }
     - { 'name': 'customizations.yaml' }
     - { 'name': 'lights.yaml' }
-  notify: Restart homeassistant
   tags: hass_deploy_cfg
+
+- name: Restart homeassistant
+  become: yes
+  service:
+    name: home-assistant
+    state: restarted
+  when: hass_restart_service is defined
