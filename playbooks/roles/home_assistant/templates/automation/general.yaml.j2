@@ -189,6 +189,8 @@
       entity_id: light.lampa_ytterdorren
     - service: switch.turn_off
       entity_id: switch.strombrytare_1
+    - service: switch.turn_off
+      entity_id: switch.strombrytare_2
 
 - alias: "Tänd lampor ute när solen går ned"
   trigger:
@@ -199,7 +201,8 @@
       entity_id: light.lampa_ytterdorren
     - service: switch.turn_on
       entity_id: switch.strombrytare_1
-
+    - service: switch.turn_on
+      entity_id: switch.strombrytare_2
 
 - alias: "Brandlarmet notifikation"
   trigger:
