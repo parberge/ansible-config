@@ -1,7 +1,7 @@
 - platform: kodi
   host: peerhtpc
   username: peer
-  password: 7
+  password: !secret kodi_password
   turn_on_action:
     service: wake_on_lan.send_magic_packet
     data:

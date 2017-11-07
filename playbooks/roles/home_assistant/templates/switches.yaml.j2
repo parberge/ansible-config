@@ -9,9 +9,7 @@
 - platform: template
   switches:
     yale_lock:
-{% raw %}
         value_template: "{{ is_state('lock.ytterdorren', 'locked') }}"
-{% endraw %}
         turn_on:
           service: script.lock_door
           entity_id: lock.ytterdorren
