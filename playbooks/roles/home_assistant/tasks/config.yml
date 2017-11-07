@@ -48,7 +48,7 @@
     - { 'name': 'group/mainfloor.yaml' }
     - { 'name': 'group/basement.yaml' }
     - { 'name': 'known_devices.yaml' }
-    - { 'name': 'switches.yaml' }
+    - { 'name': 'switches.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'notifiers.yaml' }
     - { 'name': 'media_players.yaml' }
     - { 'name': 'scripts.yaml' }
