@@ -41,7 +41,7 @@
     - { 'name': 'automation/general.yaml', 'block_start': '<<', 'block_end': '>>' }
     - { 'name': 'configuration.yaml' }
     - { 'name': 'binary_sensors.yaml', 'variable_start': '<<', 'variable_end': '>>' }
-    - { 'name': 'sensors.yaml' }
+    - { 'name': 'sensors.yaml', 'variable_start': '<<', 'variable_end': '>>'  }
     - { 'name': 'device_trackers.yaml' }
     - { 'name': 'group/home.yaml' }
     - { 'name': 'group/topfloor.yaml' }
@@ -54,6 +54,7 @@
     - { 'name': 'scripts.yaml' }
     - { 'name': 'customizations.yaml' }
     - { 'name': 'lights.yaml' }
+    - { 'name': 'secrets.yaml' }
   tags: hass_deploy_cfg
 
 - name: Restart homeassistant
