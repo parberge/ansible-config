@@ -15,7 +15,6 @@
       - noise
 
 - platform: rfxtrx
-  #automatic_add: True
   devices:
     0820031eb5a3000670:
       name: brandvarnare_2
@@ -25,7 +24,7 @@
   host: peers.se
 
 - platform: wunderground
-  api_key: << wunderground_api_key >>
+  api_key: !secret wunderground_api_key
   monitored_conditions:
     - temp_high_record_c
     - temp_high_1d_c
