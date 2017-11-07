@@ -21,7 +21,7 @@ config:
 
 http:
   # Uncomment this to add a password (recommended!)
-  api_password: {{ hass_password }}
+  api_password: !secret api_password
   # Uncomment this if you are using SSL or running in Docker etc
   base_url: peers.se:443
   ssl_certificate: {{ home_assistant_cfg_dir }}/fullchain.pem
@@ -63,9 +63,9 @@ wake_on_lan:
 # Netatmo
 netatmo:
   api_key: 59a6b173ea00a0771c8bbc5b
-  secret_key: {{ netatmo_api_secret }}
+  secret_key: !secret netatmo_api_secret
   username: paer.berge@gmail.com
-  password: {{ netatmo_password }}
+  password: !secret netatmo_password
   discovery: False
 
 # verisure
