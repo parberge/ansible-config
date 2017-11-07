@@ -41,7 +41,7 @@
     - { 'name': 'automation/general.yaml', 'block_start': '<<', 'block_end': '>>' }
     - { 'name': 'configuration.yaml' }
     - { 'name': 'binary_sensors.yaml', 'variable_start': '<<', 'variable_end': '>>' }
-    - { 'name': 'sensors.yaml', 'variable_start': '<<', 'variable_end': '>>'  }
+    - { 'name': 'sensors.yaml' }
     - { 'name': 'device_trackers.yaml' }
     - { 'name': 'group/home.yaml' }
     - { 'name': 'group/topfloor.yaml' }
