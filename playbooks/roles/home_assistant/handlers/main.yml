@@ -18,6 +18,7 @@
   service:
     name: home-assistant
     state: restarted
+  when: skip_hass_restart is not defined
 
 - name: Reload group config
   uri:
