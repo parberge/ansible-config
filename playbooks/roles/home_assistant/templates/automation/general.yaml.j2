@@ -63,59 +63,6 @@
     - service: switch.turn_off
       entity_id: switch.projector
 
-- alias: 'Uppdatering av home assistant finns'
-  trigger:
-    platform: state
-    entity_id: updater.updater
-  action:
-    service: notify.html5
-    data:
-      message: 'Ny version av HA finns'
-      target: "Pär"
-
-- alias: 'Glömde låsa dörren notis'
-  trigger:
-    - platform: state
-      entity_id: device_tracker.nexus_6p
-      from: 'home'
-      to: 'not_home'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: lock.ytterdorren
-        state: 'unlocked'
-      - condition: state
-        entity_id: device_tracker.honor_8
-        state: 'not_home'
-  action:
-    - service: notify.html5
-      data:
-        message: 'Dörren är inte låst och ingen är hemma'
-        target: "Pär"
-        data:
-          tag: 'forgot-lock'
-          actions:
-            - action: 'lock_door'
-              title: 'Lås dörren'
-
-- alias: 'Välkommen hem notis'
-  trigger:
-    - platform: state
-      entity_id: device_tracker.nexus_6p
-      from: 'not_home'
-      to: 'home'
-  action:
-    - service: notify.html5
-      data:
-        message: 'Välkommen hem'
-        target: "Pär"
-        data:
-          tag: 'unlock-doork'
-          actions:
-            - action: 'unlock_door'
-              title: 'Lås upp dörren'
-
 - alias: 'lock notify action'
   trigger:
     - platform: event
@@ -160,26 +107,6 @@
           icon: "warning"
           displaytime: 10000
 
-- alias: "Notifiera ifall dörren är upplåst när kodi spelar"
-  trigger:
-    - platform: state
-      entity_id: media_player.kodi
-      to: 'playing'
-  condition:
-    condition: state
-    entity_id: lock.ytterdorren
-    state: 'unlocked' 
-  action:
-    - service: notify.html5
-      data:
-        message: 'Dörren är upplåst. Du kanske vill låsa när du ska sitta i källaren'
-        target: "Pär"
-        data:
-          tag: 'forgot-lock'
-          actions:
-            - action: 'lock_door'
-              title: 'Lås dörren'
-
 - alias: "Släck lampor ute när solen går upp"
   trigger:
     platform: sun
@@ -203,13 +130,3 @@
       entity_id: switch.strombrytare_1
     - service: switch.turn_on
       entity_id: switch.strombrytare_2
-
-- alias: "Brandlarmet notifikation"
-  trigger:
-    - platform: event
-      event_type: signal_received
-      event_data: {"entity_id": "sensor.brandvarnare_2_sensor_status"}
-  action:
-    - service: notify.html5
-      data:
-        message: 'Brandlarmet utlöst!'
