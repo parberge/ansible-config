@@ -26,7 +26,28 @@
       state: present
   when: hass_influxdb_enabled
 
-- name: "Deploy home assistant templates"
+- name: "Deploy home assistant group templates"
+  become: yes
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    owner: "{{ home_assistant_user }}"
+    group: "{{ home_assistant_user }}"
+    block_start_string: "{{ item.block_start | default('{%') }}"
+    block_end_string: "{{ item.block_end | default('%}') }}"
+    variable_start_string: "{{ item.variable_start | default('{{') }}"
+    variable_end_string: "{{ item.variable_end | default('}}') }}"
+  with_items:
+    - { 'name': 'group/home.yaml' }
+    - { 'name': 'group/topfloor.yaml' }
+    - { 'name': 'group/mainfloor.yaml' }
+    - { 'name': 'group/basement.yaml' }
+  tags: hass_deploy_cfg
+  notify:
+    - Check homeassistant config
+    - Reload group config
+
+- name: "Deploy home assistant automation templates"
   become: yes
   template:
     src: "{{ item.name }}.j2"
@@ -39,14 +60,28 @@
     variable_end_string: "{{ item.variable_end | default('}}') }}"
   with_items:
     - { 'name': 'automation/general.yaml', 'block_start': '<<', 'block_end': '>>' }
+    - { 'name': 'automation/notifies.yaml' }
+  tags: hass_deploy_cfg
+  notify:
+    - Check homeassistant config
+    - Reload automation config
+
+- name: "Deploy home assistant templates"
+  become: yes
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    owner: "{{ home_assistant_user }}"
+    group: "{{ home_assistant_user }}"
+    block_start_string: "{{ item.block_start | default('{%') }}"
+    block_end_string: "{{ item.block_end | default('%}') }}"
+    variable_start_string: "{{ item.variable_start | default('{{') }}"
+    variable_end_string: "{{ item.variable_end | default('}}') }}"
+  with_items:
     - { 'name': 'configuration.yaml' }
     - { 'name': 'binary_sensors.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'sensors.yaml' }
     - { 'name': 'device_trackers.yaml' }
-    - { 'name': 'group/home.yaml' }
-    - { 'name': 'group/topfloor.yaml' }
-    - { 'name': 'group/mainfloor.yaml' }
-    - { 'name': 'group/basement.yaml' }
     - { 'name': 'known_devices.yaml' }
     - { 'name': 'switches.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'notifiers.yaml' }
@@ -56,6 +91,7 @@
     - { 'name': 'lights.yaml' }
     - { 'name': 'secrets.yaml' }
   tags: hass_deploy_cfg
+  notify: Check homeassistant config
 
 - name: Restart homeassistant
   become: yes
