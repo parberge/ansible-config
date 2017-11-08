@@ -11,7 +11,6 @@ default_view:
     - switch.strombrytare_1
     - switch.strombrytare_2
     - group.weather_overview
-    - sun.sun
 
 device_tracker:
   name: Enheter
@@ -20,7 +19,7 @@ device_tracker:
     - device_tracker.nexus_6p
 
 all_netatmo_sensors:
-  name: Klimat
+  name: Klimat inomhus
   entities:
     - sensor.netatmo_barnrummet_temperature
     - sensor.netatmo_barnrummet_humidity
@@ -29,16 +28,15 @@ all_netatmo_sensors:
     - sensor.netatmo_badrum_kallare_temperature
     - sensor.netatmo_badrum_kallare_humidity
     - sensor.netatmo_badrum_kallare_co2
-    - sensor.netatmo_utomhus_temperature
-    - sensor.netatmo_utomhus_humidity
 
 weather_overview:
   name: Väder översikt
   entities:
+    - sensor.netatmo_utomhus_temperature
+    - sensor.netatmo_utomhus_humidity
     - sensor.pws_weather_1d_metric
     - sensor.pws_temp_high_record_c
     - sensor.pws_temp_high_1d_c
-    - sensor.pws_temp_c
     - sensor.pws_temp_low_1d_c
     - sensor.pws_temp_low_record_c
     - sensor.pws_precip_1d
@@ -47,3 +45,4 @@ weather_overview:
     - sensor.pws_wind_1d_kph
     - sensor.pws_alerts
     - sensor.pws_uv
+    - sun.sun
