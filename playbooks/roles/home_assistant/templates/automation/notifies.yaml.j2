@@ -81,3 +81,18 @@
       data:
         message: 'Brandlarmet utlöst!'
 
+- alias: "Glömt klockan notis"
+  trigger:
+    - platform: state
+      entity_id: device_tracker.huawei_watch_2
+      to: 'home'
+  condition:
+    condition: state
+    entity_id: device_tracker.nexus_6p
+    state: 'not_home'
+  action:
+    service: notify.html5
+    data:
+      message: 'Du glömde klockan"'
+      target: "Pär"
+
