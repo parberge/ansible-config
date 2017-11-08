@@ -91,11 +91,6 @@
     - { 'name': 'lights.yaml' }
     - { 'name': 'secrets.yaml' }
   tags: hass_deploy_cfg
-  notify: Check homeassistant config
-
-- name: Restart homeassistant
-  become: yes
-  service:
-    name: home-assistant
-    state: restarted
-  when: hass_restart_service is defined
+  notify:
+    - Check homeassistant config
+    - Restart homeassistant
