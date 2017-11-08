@@ -1,7 +1,36 @@
 ---
 
+- name: Check homeassistant config
+  become: yes
+  become_user: '{{ home_assistant_user }}'
+  command: '/home/{{ home_assistant_user }}/{{ home_assistant_dir }}/bin/hass --script check_config'
+  register: hass_config_check
+  notify: Assert config
+
+- name: Assert config
+  assert:
+    that:
+      - "'ERROR' not in hass_config_check.stdout"
+    msg: "Config check reported error"
+
 - name: Restart homeassistant
   become: yes
   service:
     name: home-assistant
     state: restarted
+
+- name: Reload group config
+  uri:
+    url: https://peers.se/api/services/group/reload
+    method: POST
+    headers:
+      x-ha-access: "{{ hass_password }}"
+      Content-Type: application/json
+
+- name: Reload automation config
+  uri:
+    url: https://peers.se/api/services/automation/reload
+    method: POST
+    headers:
+      x-ha-access: "{{ hass_password }}"
+      Content-Type: application/json
