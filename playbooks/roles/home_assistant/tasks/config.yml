@@ -66,6 +66,42 @@
     - Check homeassistant config
     - Reload automation config
 
+- name: "Deploy home assistant customizations templates"
+  become: yes
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    owner: "{{ home_assistant_user }}"
+    group: "{{ home_assistant_user }}"
+    block_start_string: "{{ item.block_start | default('{%') }}"
+    block_end_string: "{{ item.block_end | default('%}') }}"
+    variable_start_string: "{{ item.variable_start | default('{{') }}"
+    variable_end_string: "{{ item.variable_end | default('}}') }}"
+  with_items:
+    - { 'name': 'customizations.yaml' }
+  tags: hass_deploy_cfg
+  notify:
+    - Check homeassistant config
+    - Reload core config
+
+- name: "Deploy home assistant script templates"
+  become: yes
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    owner: "{{ home_assistant_user }}"
+    group: "{{ home_assistant_user }}"
+    block_start_string: "{{ item.block_start | default('{%') }}"
+    block_end_string: "{{ item.block_end | default('%}') }}"
+    variable_start_string: "{{ item.variable_start | default('{{') }}"
+    variable_end_string: "{{ item.variable_end | default('}}') }}"
+  with_items:
+    - { 'name': 'scripts.yaml' }
+  tags: hass_deploy_cfg
+  notify:
+    - Check homeassistant config
+    - Reload script config
+
 - name: "Deploy home assistant templates"
   become: yes
   template:
@@ -86,8 +122,6 @@
     - { 'name': 'switches.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'notifiers.yaml' }
     - { 'name': 'media_players.yaml' }
-    - { 'name': 'scripts.yaml' }
-    - { 'name': 'customizations.yaml' }
     - { 'name': 'lights.yaml' }
     - { 'name': 'secrets.yaml' }
   tags: hass_deploy_cfg
