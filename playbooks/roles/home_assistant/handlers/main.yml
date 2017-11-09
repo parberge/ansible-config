@@ -35,3 +35,19 @@
     headers:
       x-ha-access: "{{ hass_password }}"
       Content-Type: application/json
+
+- name: Reload core config
+  uri:
+    url: https://peers.se/api/services/homeassistant/reload_core_config
+    method: POST
+    headers:
+      x-ha-access: "{{ hass_password }}"
+      Content-Type: application/json
+
+- name: Reload script config
+  uri:
+    url: https://peers.se/api/services/script/reload
+    method: POST
+    headers:
+      x-ha-access: "{{ hass_password }}"
+      Content-Type: application/json
