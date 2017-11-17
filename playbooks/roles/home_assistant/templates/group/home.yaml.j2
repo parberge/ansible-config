@@ -2,15 +2,18 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
-    - group.all_netatmo_sensors
     - group.all_automations
     - group.front_door
     - group.device_tracker
     - sensor.ssl_certificate_expiry
     - binary_sensor.brandlarmet
-    - switch.strombrytare_1
-    - switch.strombrytare_2
     - group.weather_overview
+    - group.temp
+    - group.humidity
+    - group.co2
+    - sensor.netatmo_barnrummet_noise
+    - group.lights
+    - camera.kallaringang
 
 device_tracker:
   name: Enheter
@@ -18,22 +21,39 @@ device_tracker:
     - device_tracker.honor_8
     - device_tracker.nexus_6p
 
-all_netatmo_sensors:
-  name: Klimat inomhus
+humidity:
+  name: Luftfuktighet
+  entities:
+    - sensor.netatmo_barnrummet_humidity
+    - sensor.netatmo_badrum_kallare_humidity
+    - sensor.netatmo_utomhus_humidity
+
+temp:
+  name: Temperaturer
   entities:
     - sensor.netatmo_barnrummet_temperature
-    - sensor.netatmo_barnrummet_humidity
-    - sensor.netatmo_barnrummet_co2
-    - sensor.netatmo_barnrummet_noise
     - sensor.netatmo_badrum_kallare_temperature
-    - sensor.netatmo_badrum_kallare_humidity
+    - sensor.netatmo_utomhus_temperature
+
+co2:
+  name: Koldioxid
+  entities:
+    - sensor.netatmo_barnrummet_co2
     - sensor.netatmo_badrum_kallare_co2
+
+lights:
+  name: Belysning
+  entities:
+    - switch.strombrytare_1
+    - switch.strombrytare_2
+    - switch.strombrytare_3
+    - light.lampa_ytterdorren
+    - light.dimmer_1_level
+
 
 weather_overview:
   name: Väder översikt
   entities:
-    - sensor.netatmo_utomhus_temperature
-    - sensor.netatmo_utomhus_humidity
     - sensor.pws_weather_1d_metric
     - sensor.pws_temp_high_record_c
     - sensor.pws_temp_high_1d_c
