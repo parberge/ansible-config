@@ -61,6 +61,7 @@
   with_items:
     - { 'name': 'automation/general.yaml', 'block_start': '<<', 'block_end': '>>' }
     - { 'name': 'automation/notifies.yaml' }
+    - { 'name': 'automation/basement.yaml', 'block_start': '<<', 'block_end': '>>' }
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -102,6 +103,16 @@
     - Check homeassistant config
     - Reload script config
 
+- name: "Deploy home assistant known devices templates"
+  become: yes
+  template:
+    src: "{{ item.name }}.j2"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    owner: "{{ home_assistant_user }}"
+    group: "{{ home_assistant_user }}"
+  with_items:
+    - { 'name': 'known_devices.yaml' }
+
 - name: "Deploy home assistant templates"
   become: yes
   template:
@@ -118,7 +129,6 @@
     - { 'name': 'binary_sensors.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'sensors.yaml' }
     - { 'name': 'device_trackers.yaml' }
-    - { 'name': 'known_devices.yaml' }
     - { 'name': 'switches.yaml', 'variable_start': '<<', 'variable_end': '>>' }
     - { 'name': 'notifiers.yaml' }
     - { 'name': 'media_players.yaml' }
