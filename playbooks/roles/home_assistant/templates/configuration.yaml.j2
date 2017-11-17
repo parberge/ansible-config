@@ -70,6 +70,7 @@ logger:
   default: warning
   logs:
     homeassistant.components.rfxtrx: debug
+    homeassistant.components.mqtt: debug
 
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
@@ -108,6 +109,17 @@ panel_iframe:
     title: 'Statistik'
     icon: mdi:elevation-rise
     url: 'http://192.168.7.7:3000/dashboard/db/home-assistant?orgId=1&theme=light'
+
+zwave:
+  usb_path: /dev/serial/by-id/usb-0658_0200-if00
+
+camera:
+  - platform: mjpeg
+    name: 'Källaringång'
+    mjpeg_url: http://192.168.7.20/video.cgi
+    still_image_url: http://192.168.7.20/image.jpg
+    username: admin
+    password: !secret basement_cam_pass
 
 group: !include_dir_merge_named group/
 automation: !include_dir_merge_list automation/
