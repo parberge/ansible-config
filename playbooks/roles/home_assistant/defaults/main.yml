@@ -7,6 +7,7 @@ home_assistant_required_packages:
     - "libffi-devel"
     - "python-devel"
     - "openssl-devel"
+    - "systemd-devel"
 
 home_assistant_required_python_packages:
     - "virtualenv"
