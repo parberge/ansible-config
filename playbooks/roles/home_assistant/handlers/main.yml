@@ -19,6 +19,7 @@
     name: home-assistant
     state: restarted
   when: skip_hass_restart is not defined
+  register: hass_is_restarting
 
 - name: Reload group config
   uri:
@@ -27,6 +28,7 @@
     headers:
       x-ha-access: "{{ hass_password }}"
       Content-Type: application/json
+  when: hass_is_restarting is not defined
 
 - name: Reload automation config
   uri:
@@ -35,6 +37,7 @@
     headers:
       x-ha-access: "{{ hass_password }}"
       Content-Type: application/json
+  when: hass_is_restarting is not defined
 
 - name: Reload core config
   uri:
@@ -43,6 +46,7 @@
     headers:
       x-ha-access: "{{ hass_password }}"
       Content-Type: application/json
+  when: hass_is_restarting is not defined
 
 - name: Reload script config
   uri:
@@ -51,3 +55,4 @@
     headers:
       x-ha-access: "{{ hass_password }}"
       Content-Type: application/json
+  when: hass_is_restarting is not defined
