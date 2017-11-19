@@ -23,7 +23,7 @@
 
 - name: Reload group config
   uri:
-    url: https://peers.se/api/services/group/reload
+    url: "{{ hass_url }}/api/services/group/reload"
     method: POST
     headers:
       x-ha-access: "{{ hass_password }}"
@@ -32,7 +32,7 @@
 
 - name: Reload automation config
   uri:
-    url: https://peers.se/api/services/automation/reload
+    url: "{{ hass_url }}/api/services/automation/reload"
     method: POST
     headers:
       x-ha-access: "{{ hass_password }}"
@@ -41,7 +41,7 @@
 
 - name: Reload core config
   uri:
-    url: https://peers.se/api/services/homeassistant/reload_core_config
+    url: "{{ hass_url }}/api/services/homeassistant/reload_core_config"
     method: POST
     headers:
       x-ha-access: "{{ hass_password }}"
@@ -50,7 +50,7 @@
 
 - name: Reload script config
   uri:
-    url: https://peers.se/api/services/script/reload
+    url: "{{ hass_url }}/api/services/script/reload"
     method: POST
     headers:
       x-ha-access: "{{ hass_password }}"
