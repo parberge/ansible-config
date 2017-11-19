@@ -1,64 +1,22 @@
 #!/usr/bin/env python3
+import sys
 import socket
 import logging
 
-#logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
-host = 'ps4'
-
-class Device:
-    def __init__(self, name, host, on_active=None):
-        self.name = name
-        self.host = host
-        # Callable to call when state turns True
-        self.on_active = on_active
-        log.info('%s: on_active: %s', self, self.on_active)
-        self.state = None
-
-    def __repr__(self):
-        return '{}@{}:{}'.format(self.name, self.host, self.port)
-
-    def is_reachable(self):
-        """
-        Implementing ICMP Ping seemed like too much work so we'll require a port for now
-        """
-        up = False
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
-        try:
-            s.connect((self.host, self.port))
-            up = True
-        except socket.error as e:
-            pass
-        finally:
-            s.close()
-
-        log.debug('%s is_reachable: %s', self, up)
-        return up
-
-
-class SourceDevice(Device):
-    """
-    Device to poll for state with is_active.
-    """
-    def is_active(self):
-        """
-        Default implementation of is_active is to just call is_reachable
-        """
-        res = self.is_reachable()
-        log.debug('%s is_active: %s', self, res)
-        self.state = res
-        return res
-
-class PS4(SourceDevice):
+class PS4:
     #DDP_VERSION = '00010010'
     ddp_version = '00020020'
     port = 987
 
-    def __init__(self, *args, **kwargs):
-        super(self.__class__, self).__init__(*args, **kwargs)
+    def __init__(self, host):
+        self.host = host
+        self.state = None
         self.latest_response = ''
+    
+    def __repr__(self):
+        return '{}@{}:{}'.format(self.__class__.__name__, self.host, self.port)
 
     def is_reachable(self):
         up = bool(self.query_ps4())
@@ -81,7 +39,7 @@ class PS4(SourceDevice):
         "HTTP/1.1 200 Ok"
         """
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.settimeout(4)
+        s.settimeout(1)
         msg = (
             'SRCH * HTTP/1.1\n'
             'device-discovery-protocol-version:{}'.format(
@@ -105,9 +63,17 @@ class PS4(SourceDevice):
         self.latest_response = str(res_msg)
         return self.latest_response
 
-ps4 = PS4('ps4', host)
 
-if ps4.is_active():
-    print('ON')
-else:
-    print('OFF')
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print('{} <host/IP of PS4>'.format(__file__))
+        sys.exit(1)
+    host = sys.argv[1]
+    
+    ps4 = PS4(host)
+    
+    if ps4.is_active():
+        print('ON')
+    else:
+        print('OFF')
+
