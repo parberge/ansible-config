@@ -22,7 +22,7 @@
 - name: Create home assistant DB in influxdb
   influxdb_database:
       hostname: "{{ home_assistant_influxdb_host }}"
-      database_name: "home_assistant"
+      database_name: "{{ hass_influxdb_database }}"
       state: present
   when: hass_influxdb_enabled
 
@@ -71,8 +71,7 @@
     block_end_string: "{{ item.block_end | default('%}') }}"
     variable_start_string: "{{ item.variable_start | default('{{') }}"
     variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items:
-    - { 'name': 'customizations.yaml' }
+  with_items: "{{ hass_customization_templates }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -89,8 +88,7 @@
     block_end_string: "{{ item.block_end | default('%}') }}"
     variable_start_string: "{{ item.variable_start | default('{{') }}"
     variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items:
-    - { 'name': 'scripts.yaml' }
+  with_items: "{{ hass_script_templates }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
