@@ -70,8 +70,9 @@ logger:
   default: warning
   logs:
     homeassistant.components.rfxtrx: debug
-    homeassistant.components.mqtt: debug
 
+mqtt:
+  broker: localhost
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
   debug: True
@@ -99,6 +100,7 @@ influxdb:
       - sensor.netatmo_barnrummet_co2
       - sensor.netatmo_barnrummet_noise
       - binary_sensor.samsung_tv
+      - binary_sensor.basement_entry
       - media_player.vardagsrummet
 
   tags_attributes:
