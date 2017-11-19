@@ -1,6 +1,6 @@
 - platform: command_line
   name: ps4
-  command: /home/<< home_assistant_user >>/ps4_sensor.py
+  command: /home/<< home_assistant_user >>/ps4_sensor.py ps4
   device_class: connectivity
   scan_interval: 5
 
@@ -18,3 +18,8 @@
         device_class: smoke
         delay_off:
           seconds: 30
+
+- platform: mqtt
+  name: basement_entry
+  state_topic: "emqtt/noreplypeers.se"
+  device_class: motion
