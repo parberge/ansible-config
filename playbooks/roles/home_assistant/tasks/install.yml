@@ -1,6 +1,5 @@
 # vim:ft=ansible:
 ---
-
 - name: Install required RPM packages
   become: yes
   package: 
@@ -11,7 +10,7 @@
 - name: Install required python packages
   become: yes
   pip:
-    executable: pip3.4
+    executable: pip3
     name: '{{ item }}'
     state: latest
   with_items: '{{ home_assistant_required_python_packages }}'
