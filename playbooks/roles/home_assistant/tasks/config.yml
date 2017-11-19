@@ -37,11 +37,11 @@
     block_end_string: "{{ item.block_end | default('%}') }}"
     variable_start_string: "{{ item.variable_start | default('{{') }}"
     variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items:
-    - { 'name': 'group/home.yaml' }
-    - { 'name': 'group/topfloor.yaml' }
-    - { 'name': 'group/mainfloor.yaml' }
-    - { 'name': 'group/basement.yaml' }
+  with_items: "{{ hass_group_templates }}"
+  #- { 'name': 'group/home.yaml' }
+  #  - { 'name': 'group/topfloor.yaml' }
+  #  - { 'name': 'group/mainfloor.yaml' }
+  #  - { 'name': 'group/basement.yaml' }
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -61,6 +61,7 @@
   with_items:
     - { 'name': 'automation/general.yaml', 'block_start': '<<', 'block_end': '>>' }
     - { 'name': 'automation/notifies.yaml' }
+    - { 'name': 'automation/security.yaml' }
     - { 'name': 'automation/basement.yaml', 'block_start': '<<', 'block_end': '>>' }
   tags: hass_deploy_cfg
   notify:
