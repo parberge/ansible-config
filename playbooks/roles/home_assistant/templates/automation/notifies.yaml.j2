@@ -40,13 +40,19 @@
       entity_id: device_tracker.nexus_6p
       from: 'not_home'
       to: 'home'
+  condition:
+    condition: state
+    entity_id: device_tracker.nexus_6p
+    state: 'not_home'
+    for:
+      minutes: 10
   action:
     - service: notify.html5
       data:
         message: 'Välkommen hem'
         target: "Pär"
         data:
-          tag: 'unlock-doork'
+          tag: 'unlock-door'
           actions:
             - action: 'unlock_door'
               title: 'Lås upp dörren'
@@ -96,3 +102,47 @@
       message: 'Du glömde klockan'
       target: "Pär"
 
+- alias: "Rörelse i källaren"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.basement_entry
+      to: 'on'
+      from: 'off'
+  action:
+    service: notify.html5
+    data:
+      message: 'Rörelse upptäckt i källaringången'
+      target: "Pär"
+
+- alias: "Ny enhet hittad notis"
+  trigger:
+    platform: event
+    event_type: device_tracker_new_device
+  action:
+    - service: notify.html5
+      data:
+        message: 'Ny enhet spåras'
+        target: "Pär"
+
+- alias: "Kom ihåg matlåda notis"
+  trigger:
+    platform: state
+    entity_id: device_tracker.honor_8
+    from: 'home'
+    to: 'not home'
+  condition:
+    condition: time
+    after: '07:00:00'
+    before: '09:00:00'
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    - service: notify.html5
+      data:
+        title: 'Matlåda'
+        message: 'Du har väl inte glömt matlåda?'
+        target: "Malena"
