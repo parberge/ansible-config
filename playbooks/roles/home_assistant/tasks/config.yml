@@ -1,3 +1,4 @@
+# vim:ft=ansible:
 ---
 - name: "Copy ps4 sensor script"
   become: yes
@@ -29,15 +30,15 @@
 - name: "Deploy home assistant group templates"
   become: yes
   template:
-    src: "{{ item.name }}.j2"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    src: "{{ hass_group_templates.src_path }}/{{ item.name }}"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/group/{{ item.name }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('{%') }}"
-    block_end_string: "{{ item.block_end | default('%}') }}"
-    variable_start_string: "{{ item.variable_start | default('{{') }}"
-    variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items: "{{ hass_group_templates }}"
+    block_start_string: "{{ item.block_start | default('<%') }}"
+    block_end_string: "{{ item.block_end | default('%>') }}"
+    variable_start_string: "{{ item.variable_start | default('<<') }}"
+    variable_end_string: "{{ item.variable_end | default('>>') }}"
+  with_items: "{{ hass_group_templates.names }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -46,15 +47,15 @@
 - name: "Deploy home assistant automation templates"
   become: yes
   template:
-    src: "{{ item.name }}.j2"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    src: "{{ hass_automation_templates.src_path }}/{{ item.name }}"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/automation/{{ item.name }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('{%') }}"
-    block_end_string: "{{ item.block_end | default('%}') }}"
-    variable_start_string: "{{ item.variable_start | default('{{') }}"
-    variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items: "{{ hass_automation_templates }}"
+    block_start_string: "{{ item.block_start | default('<%') }}"
+    block_end_string: "{{ item.block_end | default('%>') }}"
+    variable_start_string: "{{ item.variable_start | default('<<') }}"
+    variable_end_string: "{{ item.variable_end | default('>>') }}"
+  with_items: "{{ hass_automation_templates.names }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -63,15 +64,15 @@
 - name: "Deploy home assistant customizations templates"
   become: yes
   template:
-    src: "{{ item.name }}.j2"
+    src: "{{ hass_customization_templates.src_path }}/{{ item.name }}"
     dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('{%') }}"
-    block_end_string: "{{ item.block_end | default('%}') }}"
-    variable_start_string: "{{ item.variable_start | default('{{') }}"
-    variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items: "{{ hass_customization_templates }}"
+    block_start_string: "{{ item.block_start | default('<%') }}"
+    block_end_string: "{{ item.block_end | default('%>') }}"
+    variable_start_string: "{{ item.variable_start | default('<<') }}"
+    variable_end_string: "{{ item.variable_end | default('>>') }}"
+  with_items: "{{ hass_customization_templates.names }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -80,15 +81,15 @@
 - name: "Deploy home assistant script templates"
   become: yes
   template:
-    src: "{{ item.name }}.j2"
+    src: "{{ hass_script_templates.src_path }}/{{ item.name }}"
     dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('{%') }}"
-    block_end_string: "{{ item.block_end | default('%}') }}"
-    variable_start_string: "{{ item.variable_start | default('{{') }}"
-    variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items: "{{ hass_script_templates }}"
+    block_start_string: "{{ item.block_start | default('<%') }}"
+    block_end_string: "{{ item.block_end | default('%>') }}"
+    variable_start_string: "{{ item.variable_start | default('<<') }}"
+    variable_end_string: "{{ item.variable_end | default('>>') }}"
+  with_items: "{{ hass_script_templates.names }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
@@ -97,16 +98,25 @@
 - name: "Deploy home assistant config templates"
   become: yes
   template:
-    src: "{{ item.name }}.j2"
+    src: "{{ hass_config_templates.src_path }}/{{ item.name }}"
     dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('{%') }}"
-    block_end_string: "{{ item.block_end | default('%}') }}"
-    variable_start_string: "{{ item.variable_start | default('{{') }}"
-    variable_end_string: "{{ item.variable_end | default('}}') }}"
-  with_items: "{{ hass_config_templates }}"
+    block_start_string: "{{ item.block_start | default('<%') }}"
+    block_end_string: "{{ item.block_end | default('%>') }}"
+    variable_start_string: "{{ item.variable_start | default('<<') }}"
+    variable_end_string: "{{ item.variable_end | default('>>') }}"
+  with_items: "{{ hass_config_templates.names }}"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
     - Restart homeassistant
+
+- name: "Deploy home assistant secrets template"
+  become: yes
+  template:
+    src: secrets.yaml.j2
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/secrets.yaml"
+  tags: hass_deploy_cfg
+  notify:
+    - Check homeassistant config
