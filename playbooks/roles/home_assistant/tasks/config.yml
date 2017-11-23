@@ -115,8 +115,9 @@
 - name: "Deploy home assistant secrets template"
   become: yes
   template:
-    src: secrets.yaml.j2
+    src: "{{ home_assistant_secrets_file }}"
     dest: "/home/{{ home_assistant_user }}/.homeassistant/secrets.yaml"
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
+  when: home_assistant_secrets_file is defined
