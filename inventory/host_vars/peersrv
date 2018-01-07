@@ -1,0 +1,62 @@
+# vim:ft=ansible:
+---
+ansible_host: 192.168.7.7
+ansible_port: 11000
+def_shell: '/usr/bin/bash'
+
+ddclient_subdomain: 'peers.se,www.peers.se,ha.peers.se,graph.peers.se'
+
+mariadb_users:
+  - name: kodi
+    password: kodi
+    priv: '*.*:ALL,GRANT'
+    host: '192.168.7.8'
+
+hass_influxdb_enabled: True
+hass_url: https://ha.peers.se
+
+hass_config_dir: '/home/peer/home-assistant-config'
+
+hass_group_templates:
+  src_path: '{{ hass_config_dir }}/group'
+  names:
+    - name: 'home.yaml'
+    - name: 'topfloor.yaml'
+    - name: 'mainfloor.yaml'
+    - name: 'basement.yaml'
+
+hass_automation_templates:
+  src_path: '{{ hass_config_dir }}/automation'
+  names:
+    - name: 'general.yaml'
+    - name: 'notifies.yaml'
+    - name: 'basement.yaml'
+    - name: 'mainfloor.yaml'
+
+hass_customization_templates:
+  src_path: '{{ hass_config_dir }}'
+  names:
+    - name: 'customizations.yaml'
+
+hass_script_templates:
+  src_path: '{{ hass_config_dir }}'
+  names:
+    - name: 'scripts.yaml'
+
+hass_config_templates:
+  src_path: '{{ hass_config_dir }}'
+  names:
+    - name: 'configuration.yaml'
+    - name: 'binary_sensors.yaml'
+    - name: 'sensors.yaml'
+    - name: 'device_trackers.yaml'
+    - name: 'switches.yaml'
+    - name: 'notifiers.yaml'
+    - name: 'media_players.yaml'
+    - name: 'lights.yaml'
+    - name: 'influxdb.yaml'
+    - name: 'scripts.yaml'
+
+home_assistant_secrets_file: '~/secrets.yaml.j2'
+docker_install_compose: False
+

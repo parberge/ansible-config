@@ -1,0 +1,48 @@
+[[inputs.cpu]]
+  percpu = true
+  totalcpu = true
+  fielddrop = ["time_*"]
+
+[[inputs.disk]]
+  ignore_fs = ["tmpfs", "devtmpfs"]
+
+[[inputs.diskio]]
+[[inputs.kernel]]
+[[inputs.mem]]
+[[inputs.processes]]
+[[inputs.swap]]
+[[inputs.system]]
+
+[[inputs.snmp]]
+  agents = ["192.168.7.1"]
+  version = 1
+  community = "unifi"
+  
+  [[inputs.snmp.field]]
+  name = "uptime"
+  oid = "DISMAN-EVENT-MIB::sysUpTimeInstance"
+
+  [[inputs.snmp.field]]
+  name = "avrload_1min"
+  oid = "UCD-SNMP-MIB::laLoadInt.1"
+  conversion = "float(0)"
+
+  [[inputs.snmp.field]]
+  name = "avrload_5min"
+  oid = "UCD-SNMP-MIB::laLoadInt.2"
+  conversion = "float(0)"
+
+  [[inputs.snmp.field]]
+  name = "avrload_15min"
+  oid = "UCD-SNMP-MIB::laLoadInt.3"
+  conversion = "float(0)"
+
+  [[inputs.snmp.field]]
+  name = "available_memory"
+  oid = "HOST-RESOURCES-MIB::hrMemorySize.0"
+  conversion = "int"
+#
+#  [[inputs.snmp.field]]
+#  name = "used_memory"
+#  oid = "1.3.6.1.2.1.25.2.3.1.6.101"
+#  conversion = "int"

@@ -1,0 +1,16 @@
+---
+- include_tasks: setup.yml
+  tags: monitoring_server_setup
+
+- include_tasks: install_influxdb.yml
+  become: yes
+  tags: influxdb-install
+
+- include_tasks: configure_influxdb.yml
+  tags: influxdb-configure
+
+- include_tasks: install_grafana.yml
+  tags: grafana-install
+
+- include_tasks: telegraf.yml
+  tags: telegraf

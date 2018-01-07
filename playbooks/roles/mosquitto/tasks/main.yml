@@ -1,0 +1,16 @@
+---
+
+- name: "start mosquitto docker container"
+  become: yes
+  docker_container:
+    name: mosquitto
+    image: eclipse-mosquitto
+    restart_policy: always
+    state: started
+    pull: True
+    exposed_ports:
+      - 1883/tcp
+    published_ports:
+      - 1883:1883
+
+

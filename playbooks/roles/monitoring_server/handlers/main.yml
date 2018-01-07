@@ -1,0 +1,12 @@
+---
+- name: restart influxdb
+  become: yes
+  service: 
+    name: influxdb
+    state: restarted
+
+- name: restart telegraf
+  become: yes
+  service:
+    name: telegraf
+    state: restarted

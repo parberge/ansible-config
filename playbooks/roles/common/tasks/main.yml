@@ -1,0 +1,14 @@
+---
+## Install packages
+- include_tasks: "tasks/os/RedHat/packages.yml"
+  when: ansible_os_family == "RedHat"
+  tags: package
+
+- include_tasks: "tasks/os/Debian/packages.yml"
+  when: ansible_os_family == "Debian"
+  tags: package
+
+## Add user
+- include_tasks: add_user.yml
+  when: user is defined
+  tags: user

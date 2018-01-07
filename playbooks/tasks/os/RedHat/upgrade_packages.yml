@@ -1,0 +1,9 @@
+---
+- name: Upgrade Packages
+  become: yes
+  yum: name=* state=latest
+  register: packages
+
+- name: Kernel was upgraded
+  debug: msg="Reboot is required"
+  when: "'kernel' in packages['results'][0]"

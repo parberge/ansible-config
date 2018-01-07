@@ -1,0 +1,18 @@
+---
+
+- name: "start home assistant docker container"
+  become: yes
+  docker_container:
+    name: home_assistant
+    image: homeassistant/home-assistant
+    restart_policy: always
+    state: started
+    pull: True
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ home_assistant_cfg_dir }}:/config"
+    devices:
+      - /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
+      - /dev/serial/by-id/usb-0658_0200-if00
+    network_mode: host
+    restart: "{{ hass_container_restart |default('no') }}"

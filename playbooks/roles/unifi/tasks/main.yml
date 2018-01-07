@@ -1,0 +1,16 @@
+---
+
+- name: "start unifi docker container"
+  become: yes
+  docker_container:
+    name: unifi
+    image: jacobalberty/unifi
+    restart_policy: always
+    state: started
+    pull: True
+    volumes:
+      - /opt/docker/unifi/data:/var/lib/unifi
+      - /opt/docker/unifi/logs:/var/log/unifi
+    env:
+      TZ: Europe/Stockholm 
+    network_mode: host

@@ -1,0 +1,6 @@
+---
+# handlers file for ddclient
+#
+- name: restart ddclient 
+  become: yes
+  service: name=ddclient state=restarted enabled=yes

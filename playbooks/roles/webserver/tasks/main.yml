@@ -1,0 +1,57 @@
+# vim:ft=ansible:
+---
+- name: "Install nginx"
+  become: yes
+  yum:
+    name: nginx
+    state: present
+
+- name: "Deploy nginx.conf"
+  become: yes
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+  notify: Restart nginx
+
+- name: "Create additional directories"
+  become: yes
+  file:
+    state: directory
+    dest: "{{ item }}"
+    owner: root
+    group: root
+  with_items:
+    - /etc/nginx/sites-available
+    - /etc/nginx/sites-enabled
+
+- name: "Deploy configs"
+  become: yes
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/nginx/sites-available/{{ item }}"
+    owner: root
+    group: root
+  notify: Restart nginx
+  with_items:
+    - ha.peers.se.conf
+    - graph.peers.se.conf
+
+- name: "Activate sites"
+  become: yes
+  file:
+    state: link
+    src: "/etc/nginx/sites-available/{{ item }}"
+    dest: "/etc/nginx/sites-enabled/{{ item }}"
+  notify: Restart nginx
+  with_items:
+    - ha.peers.se.conf
+    - graph.peers.se.conf
+
+- name: "Start and enable service"
+  become: yes
+  service:
+    name: nginx
+    state: started
+    enabled: yes

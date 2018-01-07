@@ -1,0 +1,39 @@
+---
+# ddclient config. Password is set via roles/ddclient/vars/main.yml
+ddclient_daemon: 300
+ddclient_syslog: "yes"
+ddclient_mail_failure: root
+ddclient_pid: /var/run/ddclient/ddclient.pid
+ddclient_ssl: "yes"
+ddclient_use: web
+ddclient_web: loopia
+ddclient_protocol: dyndns2
+ddclient_script: /XDynDNSServer/XDynDNS.php
+ddclient_server: dns.loopia.se
+ddclient_login: peers.se
+ddclient_subdomain: peers.se,www.peers.se
+
+# Packages that should be installed
+packages:
+  - irssi
+  - ddclient
+  - yum-utils
+  - yum-cron
+  - git
+  - ansible
+  - httpd
+  - htop
+  - denyhosts
+  - vnstat
+  - rpmconf
+  - fish
+
+
+services:
+  - denyhosts
+  - httpd
+  - couchpotato
+  - ddclient
+  - ntpd
+  - sickbeard
+  - vnstatd

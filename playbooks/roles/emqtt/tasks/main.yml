@@ -1,0 +1,33 @@
+---
+
+- name: "Checkout github repo for emqtt"
+  git:
+    repo: ssh://git@github.com/wicol/emqtt.git
+    dest: '/tmp/emqtt_build'
+  register: emqtt_repo
+
+- name: "Build emqtt docker image"
+  become: yes
+  docker_image:
+    path: '/tmp/emqtt_build'
+    state: present
+    name: "{{ emqtt_image_name|default('emqtt') }}"
+    force: True
+  when: emqtt_repo.changed
+
+- name: "start emqtt docker container"
+  become: yes
+  docker_container:
+    name: "{{ emqtt_name|default('emqtt') }}"
+    image: "{{ emqtt_image_name|default('emqtt') }}"
+    network_mode: host
+    restart_policy: always
+    state: started
+    volumes:
+      - "{{ emqtt_log }}"
+      - "{{ emqtt_attachments }}"
+      - /etc/localtime:/etc/localtime:ro
+    env:
+      MQTT_USERNAME: "{{ emqtt_user }}"
+      MQTT_PASSWORD: "{{ emqtt_password }}"
+      DEBUG: "{{ emqtt_DEBUG|default('True') }}"

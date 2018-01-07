@@ -1,0 +1,14 @@
+---
+- name: Install the ddclient packages
+  become: yes
+  yum:
+    name: ddclient
+    state: present
+
+- name: Set ddclient config
+  become: yes
+  template:
+    src: ddclient.conf.j2
+    dest: /etc/ddclient.conf
+  notify:
+    - restart ddclient

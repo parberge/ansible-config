@@ -1,0 +1,3 @@
+[submodule "playbooks/roles/ansible_unifi_controller"]
+	path = playbooks/roles/ansible_unifi_controller
+	url = git@github.com:peerster/ansible_unifi_controller.git

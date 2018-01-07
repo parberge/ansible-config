@@ -1,0 +1,17 @@
+---
+- hosts: fileserver
+  remote_user: peer
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+  roles:
+    - { role: common, tags: common }
+    - { role: ddclient, tags: ddclient }
+    - { role: webserver, tags: webserver }
+    - { role: monitoring_server, tags: monitoring_server }
+    - { role: docker, tags: docker }
+    - { role: mariadb, tags: mariadb, become: yes }
+    - { role: transmission, tags: transmission }
+    - { role: home_assistant, tags: ['home_assistant', 'docker_container'] }
+    - { role: mosquitto, tags: ['mosquitto', 'docker_container'] }
+    - { role: emqtt, tags: ['emqtt', 'docker_container'] }
+    - { role: unifi, tags: ['unifi', 'docker_container'] }

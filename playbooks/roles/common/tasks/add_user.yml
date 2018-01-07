@@ -1,0 +1,9 @@
+---
+  - name: "Add user"
+    become: yes
+    user:
+      name: peer
+      state: present
+      update_password: always
+      password: '{{ user_passwd }}'
+      shell: '{{ def_shell }}'
