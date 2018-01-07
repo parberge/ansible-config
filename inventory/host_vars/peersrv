@@ -8,7 +8,7 @@ ddclient_subdomain: 'peers.se,www.peers.se,ha.peers.se,graph.peers.se'
 
 mariadb_users:
   - name: kodi
-    password: kodi
+    password: '{{ kodi_db_password }}'
     priv: '*.*:ALL,GRANT'
     host: '192.168.7.8'
 
