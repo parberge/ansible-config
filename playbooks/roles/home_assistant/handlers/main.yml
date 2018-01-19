@@ -2,7 +2,6 @@
 
 - include_tasks: docker.yml hass_container_restart='yes'
   register: hass_is_restarting
-  notify: annotate influxdb
 
 - name: Check homeassistant config
   become: yes
