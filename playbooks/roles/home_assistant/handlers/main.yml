@@ -1,8 +1,5 @@
 ---
 
-- include_tasks: docker.yml hass_container_restart='yes'
-  register: hass_is_restarting
-
 - name: Check homeassistant config
   become: yes
   command: 'docker exec home_assistant python -m homeassistant --script check_config -c /config'
@@ -14,6 +11,12 @@
     that:
       - "'ERROR' not in hass_config_check.stdout"
     msg: "Config check reported error"
+
+- name: restart home assistant container
+  become: yes
+  command: 'docker restart home_assistant'
+  register: hass_is_restarting
+  notify: annotate influxdb
 
 - name: Reload group config
   uri:
