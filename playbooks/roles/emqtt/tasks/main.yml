@@ -4,6 +4,7 @@
   git:
     repo: ssh://git@github.com/wicol/emqtt.git
     dest: '/tmp/emqtt_build'
+    force: True
   register: emqtt_repo
 
 - name: "Build emqtt docker image"
