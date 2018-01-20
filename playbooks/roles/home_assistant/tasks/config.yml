@@ -110,7 +110,7 @@
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
-    - start home assistant docker container
+    - restart home assistant container
 
 - name: "Deploy home assistant secrets template"
   become: yes
