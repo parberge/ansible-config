@@ -31,8 +31,6 @@ http {
     # See http://nginx.org/en/docs/ngx_core_module.html#include
     # for more information.
     include /etc/nginx/conf.d/*.conf;
-
-
     map $http_upgrade $connection_upgrade {
         default upgrade;
         ''      close;
