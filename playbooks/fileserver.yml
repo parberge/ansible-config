@@ -11,7 +11,7 @@
     - { role: docker, tags: docker }
     - { role: mariadb, tags: mariadb, become: yes }
     - { role: transmission, tags: transmission }
-    - { role: home_assistant, tags: ['home_assistant', 'docker_container'] }
+    - { role: home_assistant, tags: home_assistant }
     - { role: mosquitto, tags: ['mosquitto', 'docker_container'] }
     - { role: emqtt, tags: ['emqtt', 'docker_container'] }
     - { role: unifi, tags: ['unifi', 'docker_container'] }
