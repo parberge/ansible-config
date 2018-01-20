@@ -24,6 +24,7 @@ hass_group_templates:
     - name: 'topfloor.yaml'
     - name: 'mainfloor.yaml'
     - name: 'basement.yaml'
+    - name: 'config.yaml'
 
 hass_automation_templates:
   src_path: '{{ hass_config_dir }}/automation'
