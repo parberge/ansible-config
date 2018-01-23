@@ -1,0 +1,26 @@
+---
+
+- name: "Download OpenVAS container"
+  become: yes
+  docker_image:
+    name: "mikesplain/openvas:{{ openvas_docker_image_version| default('latest') }}"
+    pull: True
+  tags: docker_container
+  register: openvas_container_image
+
+- name: "start OpenVAS docker container"
+  become: yes
+  docker_container:
+    name: openvas
+    image: "mikesplain/openvas:{{ openvas_docker_image_version| default('latest') }}"
+    restart_policy: always
+    state: started
+    volumes: 
+      - "{{ openvas_data_dir }}:/var/lib/openvas/mgr/"
+    ports:
+      - 9443:443
+      - 9390:9390
+    env:
+      OV_PASSWORD: "{{ openvas_admin_password }}"
+    restart: "{{ openvas_container_restart |default('no') }}"
+  tags: docker_container

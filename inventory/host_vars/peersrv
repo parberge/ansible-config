@@ -60,4 +60,4 @@ hass_config_templates:
 
 home_assistant_secrets_file: '~/secrets.yaml.j2'
 docker_install_compose: False
-
+openvas_data_dir: "/mnt/storage/openvas"
