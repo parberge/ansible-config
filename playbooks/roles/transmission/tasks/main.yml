@@ -1,0 +1,20 @@
+---
+
+- name: "Download transmission docker image"
+  become: yes
+  docker_image:
+    name: "linuxserver/transmission:{{ transmission_docker_image_version| default('latest') }}"
+    pull: True
+  tags: docker_container
+  register: transmission_container_image
+
+- name: "start transmission docker container"
+  become: yes
+  docker_container:
+    name: transmission
+    image: "linuxserver/transmission:{{ transmission_docker_image_version| default('latest') }}"
+    restart_policy: always
+    state: started
+    ports:
+      - 9390:9390
+  tags: docker_container
