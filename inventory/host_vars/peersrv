@@ -57,6 +57,7 @@ hass_config_templates:
     - name: 'lights.yaml'
     - name: 'influxdb.yaml'
     - name: 'scripts.yaml'
+    - name: 'input_boolean.yaml'
 
 home_assistant_secrets_file: '~/secrets.yaml.j2'
 docker_install_compose: False
