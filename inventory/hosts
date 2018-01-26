@@ -3,7 +3,3 @@ peerhtpc
 
 [fileserver]
 peersrv
-
-# Servers in this group will have scheduled plays running
-[auto]
-peersrv
