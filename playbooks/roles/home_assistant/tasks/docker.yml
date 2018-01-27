@@ -8,6 +8,11 @@
   tags: docker_container
   register: hass_container_image
 
+- name: "Set container to restart when new image"
+  set_fact:
+    hass_container_restart: 'yes'
+  when: hass_container_image.changed
+
 - name: "start home assistant docker container"
   become: yes
   docker_container:
@@ -15,7 +20,6 @@
     image: "homeassistant/home-assistant:{{ hass_docker_image_version| default('latest') }}"
     restart_policy: always
     state: started
-    #pull: True
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ home_assistant_cfg_dir }}:/config"
@@ -24,5 +28,4 @@
       - /dev/serial/by-id/usb-0658_0200-if00
     network_mode: host
     restart: "{{ hass_container_restart |default('no') }}"
-  when:  hass_container_image.changed
   tags: docker_container
