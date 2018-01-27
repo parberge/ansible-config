@@ -1,5 +1,26 @@
 ---
 
+- name: "Setup config dir"
+  become: yes
+  file:
+    state: directory
+    path: "{{ transmission_cfg_dir }}"
+    owner: "{{ transmission_user }}"
+
+- name: "Deploy transmission config if not present"
+  become: yes
+  template:
+    src: settings.json.j2
+    dest: "{{ transmission_cfg_dir}}/settings.json"
+    owner: "{{ transmission_user }}"
+    force: "{{ transmission_update_cfg|default('no') }}"
+  register: tansmission_config_status
+
+- name: "Set container to restart"
+  set_fact:
+    transmission_container_restart: 'yes'
+  when: tansmission_config_status.changed
+
 - name: "Download transmission docker image"
   become: yes
   docker_image:
@@ -15,6 +36,17 @@
     image: "linuxserver/transmission:{{ transmission_docker_image_version| default('latest') }}"
     restart_policy: always
     state: started
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ transmission_cfg_dir }}:/config"
+      - "{{ transmission_download_dir }}:/downloads"
+      - "{{ transmission_watch_dir }}:/watch"
     ports:
-      - 9390:9390
+      - 9091:9091
+      - 51413:51413
+    restart: "{{ transmission_container_restart|default('no') }}"
+    env:
+      PGID: "{{ transmission_group_id }}"
+      PUID: "{{ transmission_user_id }}"
   tags: docker_container
+  register: transmission_container_status
