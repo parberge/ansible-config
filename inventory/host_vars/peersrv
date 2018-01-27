@@ -62,3 +62,10 @@ hass_config_templates:
 home_assistant_secrets_file: '~/secrets.yaml.j2'
 docker_install_compose: False
 openvas_data_dir: "/mnt/storage/openvas"
+
+transmission_cfg_dir: '/home/peer/transmission'
+transmission_user: 'peer'
+transmission_download_dir: '/mnt/storage/torrents'
+transmission_watch_dir: "{{ transmission_cfg_dir }}/watch"
+transmission_group_id: 1000
+transmission_user_id: 1000
