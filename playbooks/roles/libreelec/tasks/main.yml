@@ -1,0 +1,6 @@
+---
+
+- name: "Deploy advancedsettings.xml"
+  template:
+    src: advancedsettings.xml.j2
+    dest: /storage/.kodi/userdata/advancedsettings.xml
