@@ -1,24 +1,31 @@
 ---
 - hosts: htpc
-  vars_files:
-    - "vars/family/{{ ansible_os_family }}.yml"
+  remote_user: root
   gather_facts: false
 
   pre_tasks:
+    - name: "Check if online"
+      ping:
+      register: ping_result
+      failed_when: false
+      delegate_to: 127.0.0.1
+
     - name: "Wake the HTPC"
       wakeonlan:
         mac: e0:69:95:53:23:67
       delegate_to: 127.0.0.1
+      when: not ping_result.ping == "pong"
 
-    - name: Wait 300 seconds for port 22 to become open"
+    - name: Wait 300 seconds for port 22 to become open
       wait_for:
         port: 22
-        host: 192.168.7.8
+        host: "{{ inventory_hostname }}"
         delay: 10
       connection: local
+      when: not ping_result.ping == "pong"
 
     - name: Gather facts
       setup:
 
   roles:
-    - { role: common, tags: common }
+    - libreelec
