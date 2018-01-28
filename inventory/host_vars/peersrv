@@ -15,7 +15,10 @@ mariadb_users:
 hass_influxdb_enabled: True
 hass_url: https://ha.peers.se
 
+home_assistant_secrets_file: '~/secrets.yaml.j2'
 hass_config_dir: '/home/peer/home-assistant-config'
+hass_docker_image_version: '0.62.0'
+hass_download_image_version: '0.62.0'
 
 hass_group_templates:
   src_path: '{{ hass_config_dir }}/group'
@@ -59,7 +62,6 @@ hass_config_templates:
     - name: 'scripts.yaml'
     - name: 'input_boolean.yaml'
 
-home_assistant_secrets_file: '~/secrets.yaml.j2'
 docker_install_compose: False
 openvas_data_dir: "/mnt/storage/openvas"
 
