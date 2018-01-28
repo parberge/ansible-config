@@ -3,15 +3,10 @@
 - name: "Download home assistant docker container"
   become: yes
   docker_image:
-    name: "homeassistant/home-assistant:{{ hass_docker_image_version| default('latest') }}"
+    name: "homeassistant/home-assistant:{{ hass_download_image_version| default('latest') }}"
     pull: True
   tags: docker_container
   register: hass_container_image
-
-- name: "Set container to restart when new image"
-  set_fact:
-    hass_container_restart: 'yes'
-  when: hass_container_image.changed
 
 - name: "start home assistant docker container"
   become: yes
