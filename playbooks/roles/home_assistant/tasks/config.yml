@@ -120,4 +120,5 @@
   tags: hass_deploy_cfg
   notify:
     - Check homeassistant config
+    - restart home assistant container
   when: home_assistant_secrets_file is defined
