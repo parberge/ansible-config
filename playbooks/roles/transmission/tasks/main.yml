@@ -1,5 +1,4 @@
 ---
-
 - name: "Setup config dir"
   become: yes
   file:
@@ -7,19 +6,29 @@
     path: "{{ transmission_cfg_dir }}"
     owner: "{{ transmission_user }}"
 
-- name: "Deploy transmission config if not present"
+- name: "Need to stop running container if we're updating config"
+  become: yes
+  docker_container:
+    name: transmission
+    state: stopped
+  when: transmission_update_cfg == 'yes'
+
+- name: "Set container to restart"
+  set_fact:
+    transmission_container_restart: 'yes'
+  when: transmission_update_cfg == 'yes'
+
+ # Template will always differ since transmission will hash the password
+ # But I use tmeplate anyway because it's nice to see any diffs
+ # I reccomend running with --diff arguemnt to laverage this
+- name: "Deploy transmission config"
   become: yes
   template:
     src: settings.json.j2
     dest: "{{ transmission_cfg_dir}}/settings.json"
     owner: "{{ transmission_user }}"
     force: "{{ transmission_update_cfg|default('no') }}"
-  register: tansmission_config_status
 
-- name: "Set container to restart"
-  set_fact:
-    transmission_container_restart: 'yes'
-  when: tansmission_config_status.changed
 
 - name: "Download transmission docker image"
   become: yes

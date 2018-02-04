@@ -1,0 +1,4 @@
+---
+
+# I recommend using -e "transmission_update_cfg='yes" to ansible-playbook when you want to update cfg
+transmission_update_cfg: False
