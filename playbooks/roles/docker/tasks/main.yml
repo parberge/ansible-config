@@ -8,7 +8,9 @@
 
 - name: Install Docker.
   become: yes
-  package: name={{ docker_package }} state={{ docker_package_state }}
+  package:
+    name: "{{ docker_package }}"
+    state: "{{ docker_package_state }}"
 
 - name: Ensure Docker is started and enabled at boot.
   become: yes
@@ -19,3 +21,6 @@
 
 - include_tasks: docker-compose.yml
   when: docker_install_compose
+
+- include_tasks: maintenance.yml
+  when: docker_package_state == 'present'

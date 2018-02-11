@@ -1,0 +1,19 @@
+---
+- name: "Check if we have dangling images"
+  become: yes
+  command: "docker images -q -f dangling=true"
+  register: docker_dangling_images
+
+- name: "Dangling images"
+  debug: var=docker_dangling_images
+  verbosity: 1
+
+- name: "Cleanup dangling images"
+  become: yes
+  command: "docker rmi {{ item }}"
+  with_items: "{{ docker_dangling_images.stdout_lines }}"
+  when: docker_dangling_images.stdout_lines
+
+- name: "Cleanup volumes"
+  become: yes
+  command: "docker volume prune -f"
