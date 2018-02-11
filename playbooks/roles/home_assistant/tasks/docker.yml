@@ -1,6 +1,6 @@
 ---
 
-- name: "Download home assistant docker container"
+- name: "Downloading version {{ hass_download_image_version }} of home assistant docker image"
   become: yes
   docker_image:
     name: "homeassistant/home-assistant:{{ hass_download_image_version| default('latest') }}"
@@ -8,7 +8,7 @@
   tags: docker_container
   register: hass_container_image
 
-- name: "start home assistant docker container"
+- name: "Starting home assistant docker container with version {{ hass_docker_image_version }}"
   become: yes
   docker_container:
     name: home_assistant
