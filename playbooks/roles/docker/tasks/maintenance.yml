@@ -5,8 +5,9 @@
   register: docker_dangling_images
 
 - name: "Dangling images"
-  debug: var=docker_dangling_images
-  verbosity: 1
+  debug:
+    var: docker_dangling_images
+    verbosity: 1
 
 - name: "Cleanup dangling images"
   become: yes
