@@ -5,7 +5,9 @@
   docker_image:
     name: "homeassistant/home-assistant:{{ hass_download_image_version| default('latest') }}"
     pull: True
-  tags: docker_container
+  tags:
+    - docker_container
+    - hass_download_image
   register: hass_container_image
 
 - name: "Starting home assistant docker container with version {{ hass_docker_image_version }}"
