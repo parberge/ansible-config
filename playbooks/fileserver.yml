@@ -1,6 +1,9 @@
 ---
 - hosts: fileserver
   remote_user: peer
+
+  vars:
+    upgrade_packages: 'yes'
   vars_files:
     - "vars/family/{{ ansible_os_family }}.yml"
   roles:
@@ -16,3 +19,9 @@
     - { role: unifi, tags: ['unifi', 'docker_container'] }
     - { role: openvas, tags: ['openvas', 'docker_container'] }
     - { role: transmission, tags: ['transmission', 'docker_container'] }
+
+  tasks:
+    - name: "Upgrade packages"
+      include_tasks: tasks/os/RedHat/upgrade_packages.yml
+      tags: upgrade_packages
+      when: upgrade_packages == 'yes'
