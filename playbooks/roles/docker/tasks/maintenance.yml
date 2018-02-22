@@ -3,6 +3,7 @@
   become: yes
   command: "docker images -q -f dangling=true"
   register: docker_dangling_images
+  check_mode: no
 
 - name: "Dangling images"
   debug:
