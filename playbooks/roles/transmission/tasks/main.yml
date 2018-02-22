@@ -35,8 +35,8 @@
   docker_image:
     name: "linuxserver/transmission:{{ transmission_docker_image_version| default('latest') }}"
     pull: True
+    force: True
   tags: docker_container
-  register: transmission_container_image
 
 - name: "start transmission docker container"
   become: yes
@@ -58,4 +58,3 @@
       PGID: "{{ transmission_group_id }}"
       PUID: "{{ transmission_user_id }}"
   tags: docker_container
-  register: transmission_container_status
