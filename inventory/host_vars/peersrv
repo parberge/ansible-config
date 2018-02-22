@@ -17,8 +17,8 @@ hass_url: https://ha.peers.se
 
 home_assistant_secrets_file: '~/secrets.yaml.j2'
 hass_config_dir: '/home/peer/home-assistant-config'
-hass_docker_image_version: '0.62.0'
-hass_download_image_version: '0.62.0'
+hass_download_image_version: '0.63.3'
+hass_docker_image_version: '0.63.3'
 
 hass_group_templates:
   src_path: '{{ hass_config_dir }}/group'
@@ -71,3 +71,4 @@ transmission_download_dir: '/mnt/storage/torrents'
 transmission_watch_dir: "{{ transmission_cfg_dir }}/watch"
 transmission_group_id: 1000
 transmission_user_id: 1000
+transmission_incomplete_dir_enabled: 'false'
