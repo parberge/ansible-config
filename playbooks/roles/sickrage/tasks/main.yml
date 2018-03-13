@@ -1,0 +1,25 @@
+---
+- name: "Download sickrage docker image {{ sickrage_docker_image_version }}"
+  become: yes
+  docker_image:
+    name: "linuxserver/sickrage:{{ sickrage_docker_image_version }}"
+    pull: True
+    force: True
+  tags: docker_container
+
+- name: "start sickrage docker container with image {{ sickrage_docker_version }}"
+  become: yes
+  docker_container:
+    name: sickrage
+    image: "linuxserver/sickrage:{{ sickrage_docker_version }}"
+    restart_policy: always
+    state: started
+    restart: "{{ sickrage_container_restart|default('no') }}"
+    ports:
+      - 8082:8081
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ sickrage_tv_shows }}:/tv"
+      - "{{ sickrage_downloads }}:/downloads"
+      - "{{ sickrage_config }}:/config"
+  tags: docker_container
