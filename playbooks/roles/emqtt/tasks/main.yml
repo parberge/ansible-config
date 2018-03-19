@@ -1,26 +1,18 @@
 ---
 
-- name: "Checkout github repo for emqtt"
-  git:
-    repo: ssh://git@github.com/wicol/emqtt.git
-    dest: '/tmp/emqtt_build'
-    force: True
-  register: emqtt_repo
-
-- name: "Build emqtt docker image"
+- name: "Download emqtt docker image"
   become: yes
   docker_image:
-    path: '/tmp/emqtt_build'
+    name: "wicol/emqtt:{{ emqtt_download_image_version| default('latest') }}"
+    pull: True
     state: present
-    name: "{{ emqtt_image_name|default('emqtt') }}"
     force: True
-  when: emqtt_repo.changed
 
-- name: "start emqtt docker container"
+- name: "Start emqtt docker container"
   become: yes
   docker_container:
     name: "{{ emqtt_name|default('emqtt') }}"
-    image: "{{ emqtt_image_name|default('emqtt') }}"
+    image: "wicol/emqtt:{{ emqtt_docker_image_version| default('latest') }}"
     network_mode: host
     restart_policy: always
     state: started
