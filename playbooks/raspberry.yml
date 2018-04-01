@@ -1,0 +1,12 @@
+---
+- hosts: raspberry
+  remote_user: pi
+
+  vars:
+    upgrade_packages: 'yes'
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+  roles:
+    - { role: docker, tags: docker, become: yes}
+    - { role: ddclient, tags: ddclient}
+    - { role: webserver, tags: webserver}
