@@ -2,7 +2,7 @@
 ---
 - name: "Install nginx"
   become: yes
-  yum:
+  package:
     name: nginx
     state: present
 
@@ -34,9 +34,7 @@
     owner: root
     group: root
   notify: Restart nginx
-  with_items:
-    - ha.peers.se.conf
-    - graph.peers.se.conf
+  with_items: "{{ nginx_sites|default({}) }}"
 
 - name: "Activate sites"
   become: yes
@@ -45,9 +43,7 @@
     src: "/etc/nginx/sites-available/{{ item }}"
     dest: "/etc/nginx/sites-enabled/{{ item }}"
   notify: Restart nginx
-  with_items:
-    - ha.peers.se.conf
-    - graph.peers.se.conf
+  with_items: "{{ nginx_sites|default({}) }}"
 
 - name: "Start and enable service"
   become: yes

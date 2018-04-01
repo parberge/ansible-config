@@ -37,6 +37,7 @@ http {
     }
 
     server {
+        server_name peers.se wwww.peers.se;
         listen 80 default_server;
 
         location / {
@@ -49,6 +50,15 @@ http {
         location = /50x.html {
             root /usr/share/nginx/html;
         }
+    }
+    server {
+        ssl_certificate /etc/letsencrypt/live/peers.se/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/peers.se/privkey.pem; # managed by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        server_name peers.se wwww.peers.se;
+        listen 443;
+        ssl on;
+        return 444;
     }
     include /etc/nginx/sites-enabled/*.conf;
 }
