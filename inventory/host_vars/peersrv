@@ -6,6 +6,11 @@ def_shell: '/usr/bin/bash'
 
 ddclient_subdomain: 'peers.se,www.peers.se,ha.peers.se,graph.peers.se'
 
+nginx_sites:
+  - peers.se.conf.j2
+  - ha.peers.se.conf.j2
+  - graph.peers.se.conf.j2
+
 mariadb_users:
   - name: kodi
     password: '{{ kodi_db_password }}'
