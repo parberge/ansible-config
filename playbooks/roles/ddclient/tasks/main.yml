@@ -1,7 +1,7 @@
 ---
 - name: Install the ddclient packages
   become: yes
-  yum:
+  package:
     name: ddclient
     state: present
 
@@ -12,3 +12,10 @@
     dest: /etc/ddclient.conf
   notify:
     - restart ddclient
+
+- name: Start and enable service
+  become: yes
+  service:
+    name: ddclient
+    state: started
+    enabled: yes
