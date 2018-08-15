@@ -3,7 +3,7 @@
 - name: "Downloading version {{ hass_download_image_version }} of home assistant docker image"
   become: yes
   docker_image:
-    name: "homeassistant/home-assistant:{{ hass_download_image_version| default('latest') }}"
+    name: "homeassistant/{{ hass_image_variant }}:{{ hass_download_image_version }}"
     pull: True
   tags:
     - docker_container
@@ -14,15 +14,13 @@
   become: yes
   docker_container:
     name: home_assistant
-    image: "homeassistant/home-assistant:{{ hass_docker_image_version| default('latest') }}"
+    image: "homeassistant/{{ hass_image_variant }}:{{ hass_docker_image_version }}"
     restart_policy: always
     state: started
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ home_assistant_cfg_dir }}:/config"
-    devices:
-      - /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
-      - /dev/serial/by-id/usb-0658_0200-if00
+    devices: "{{ hass_docker_devices|default([]) }}"
     network_mode: host
     restart: "{{ hass_container_restart |default('no') }}"
   tags: docker_container
