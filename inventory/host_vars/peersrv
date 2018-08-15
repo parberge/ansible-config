@@ -25,6 +25,10 @@ hass_config_dir: '/home/peer/home-assistant-config'
 hass_download_image_version: '0.65.3'
 hass_docker_image_version: '0.65.3'
 
+hass_docker_devices:
+  - /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
+  - /dev/serial/by-id/usb-0658_0200-if00
+
 hass_group_templates:
   src_path: '{{ hass_config_dir }}/group'
   names:

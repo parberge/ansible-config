@@ -12,3 +12,7 @@ ddclient_script: /XDynDNSServer/XDynDNS.php
 ddclient_server: dns.loopia.se
 ddclient_login: peers.se
 ddclient_subdomain: djupbrodal.se
+
+hass_image_variant: 'raspberrypi2-homeassistant'
+hass_download_image_version: '0.65.3'
+hass_docker_image_version: '0.65.3'
