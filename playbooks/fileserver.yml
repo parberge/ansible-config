@@ -22,7 +22,8 @@
     - { role: sickrage, tags: ['sickrage', 'docker_container'] }
 
   tasks:
-    - name: "Upgrade packages"
-      include_tasks: tasks/os/RedHat/upgrade_packages.yml
-      tags: upgrade_packages
-      when: upgrade_packages == 'yes'
+    - name: Upgrade Packages
+      become: yes
+      yum:
+        name: '*'
+        state: latest
