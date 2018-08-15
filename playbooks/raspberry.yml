@@ -10,3 +10,4 @@
     - { role: docker, tags: docker, become: yes}
     - { role: ddclient, tags: ddclient}
     - { role: webserver, tags: webserver}
+    - { role: home_assistant, tags: home_assistant }
