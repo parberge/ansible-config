@@ -7,9 +7,9 @@ def_shell: '/usr/bin/bash'
 ddclient_subdomain: 'peers.se,www.peers.se,ha.peers.se,graph.peers.se'
 
 nginx_sites:
-  - peers.se.conf.j2
-  - ha.peers.se.conf.j2
-  - graph.peers.se.conf.j2
+  - peers.se.conf
+  - ha.peers.se.conf
+  - graph.peers.se.conf
 
 mariadb_users:
   - name: kodi
