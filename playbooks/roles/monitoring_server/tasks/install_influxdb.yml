@@ -8,6 +8,7 @@
     - python-pip
 
 - name: Install python package dependencies for influxdb
+  become: true
   pip:
     name: "{{ item }}"
     state: present
