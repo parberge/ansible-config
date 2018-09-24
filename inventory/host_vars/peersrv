@@ -70,6 +70,7 @@ hass_config_templates:
     - name: 'influxdb.yaml'
     - name: 'scripts.yaml'
     - name: 'input_boolean.yaml'
+    - name: 'google_casts.yaml'
 
 docker_install_compose: False
 openvas_data_dir: "/mnt/storage/openvas"
