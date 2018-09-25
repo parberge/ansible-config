@@ -22,8 +22,8 @@ hass_url: https://ha.peers.se
 
 home_assistant_secrets_file: '~/secrets.yaml.j2'
 hass_config_dir: '/home/peer/home-assistant-config'
-hass_download_image_version: '0.75.3'
-hass_docker_image_version: '0.75.3'
+hass_download_image_version: '0.78.3'
+hass_docker_image_version: '0.78.3'
 
 hass_docker_devices:
   - /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
