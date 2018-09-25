@@ -1,4 +1,10 @@
 ---
+- name: "Make sure influxdb RPM is not installed"
+  become: true
+  yum:
+    name: influxdb
+    state: absent
+
 - name: "Set configuration directory path for influxdb to {{ influxdb_configuration_dir }}"
   become: yes
   file:
