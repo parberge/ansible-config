@@ -1,10 +1,12 @@
 ---
 - name: "Set configuration directory path for influxdb to {{ influxdb_configuration_dir }}"
+  become: yes
   file:
     path: "{{ influxdb_configuration_dir }}"
     state: directory
 
 - name: Set templatized InfluxDB configuration
+  become: yes
   template: 
     src: influxdb.conf.j2 
     dest: "{{ influxdb_configuration_dir }}/influxdb.conf"
@@ -15,16 +17,3 @@
     mode: 0744
   when: influxdb_template_configuration
   notify: restart influxdb
-  
-- name: Start the InfluxDB service
-  service:
-    name: influxdb
-    state: started
-    enabled: yes
-
-- name: Create telegraf DB
-  influxdb_database:
-      hostname: "{{ influxdb_telegraf_hostname }}"
-      database_name: "{{ influxdb_telegraf_db_name }}"
-      state: present
-  when: influxdb_telegraf_setup

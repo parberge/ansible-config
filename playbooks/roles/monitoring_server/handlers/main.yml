@@ -1,9 +1,7 @@
 ---
 - name: restart influxdb
   become: yes
-  service: 
-    name: influxdb
-    state: restarted
+  command: 'docker restart influxdb'
 
 - name: restart telegraf
   become: yes

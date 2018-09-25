@@ -1,0 +1,22 @@
+---
+
+- name: "start influxdb docker container"
+  become: yes
+  docker_container:
+    name: influxdb
+    image: influxdb
+    restart_policy: always
+    state: started
+    pull: True
+    volumes:
+      - "{{ influxdb_data_dir }}:/var/lib/influxdb"
+      - "{{ influxdb_configuration_dir}}/influxdb.conf:/etc/influxdb/influxdb.conf:ro"
+    published_ports:
+      - 8086:8086
+
+- name: Create telegraf DB
+  influxdb_database:
+      hostname: "{{ influxdb_telegraf_hostname }}"
+      database_name: "{{ influxdb_telegraf_db_name }}"
+      state: present
+  when: influxdb_telegraf_setup

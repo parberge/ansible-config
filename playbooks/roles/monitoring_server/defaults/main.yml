@@ -18,7 +18,7 @@ influxdb_telegraf_db_name: telegraf
 influxdb_meta_dir: /var/lib/influxdb/meta
 
 ## Data Settings
-influxdb_data_dir: /var/lib/influxdb/data
+influxdb_data_dir: /var/lib/influxdb
 
 ## Retention Settings
 influxdb_retention_enabled: "true"
