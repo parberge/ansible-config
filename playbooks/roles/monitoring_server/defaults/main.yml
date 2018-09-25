@@ -8,17 +8,16 @@
 influxdb_configuration_dir: /etc/influxdb
 influxdb_disable_reporting: "true"
 
-
 ## Create database for telegraf
 influxdb_telegraf_setup: yes
 influxdb_telegraf_hostname: localhost
 influxdb_telegraf_db_name: telegraf
 
-## Meta Settings
-influxdb_meta_dir: /var/lib/influxdb/meta
+## Influxdb root dir
+influxdb_root_dir: /var/lib/influxdb
 
-## Data Settings
-influxdb_data_dir: /var/lib/influxdb
+## Meta Settings
+influxdb_meta_dir: "{{ influxdb_root_dir }}/meta"
 
 ## Retention Settings
 influxdb_retention_enabled: "true"

@@ -44,10 +44,10 @@ reporting-disabled = {{ influxdb_disable_reporting }}
 
 [data]
   # The directory where the TSM storage engine stores TSM files.
-  dir = "{{ influxdb_data_dir }}"
+  dir = "{{ influxdb_root_dir }}"
 
   # The directory where the TSM storage engine stores WAL files.
-  wal-dir = "/var/lib/influxdb/wal"
+  wal-dir = "{{ influxdb_root_dir }}/wal"
 
   # Trace logging provides more verbose output around the tsm engine. Turning
   # this on can provide more useful output for debugging tsm engine issues.
