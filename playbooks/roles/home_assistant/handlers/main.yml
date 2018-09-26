@@ -23,7 +23,7 @@
     url: "{{ hass_url }}/api/services/group/reload"
     method: POST
     headers:
-      x-ha-access: "{{ hass_password }}"
+      Authorization: "Bearer {{ ansible_hass_token }}"
       Content-Type: application/json
   when: hass_is_restarting is not defined
 
@@ -32,7 +32,7 @@
     url: "{{ hass_url }}/api/services/automation/reload"
     method: POST
     headers:
-      x-ha-access: "{{ hass_password }}"
+      Authorization: "Bearer {{ ansible_hass_token }}"
       Content-Type: application/json
   when: hass_is_restarting is not defined
 
@@ -41,7 +41,7 @@
     url: "{{ hass_url }}/api/services/homeassistant/reload_core_config"
     method: POST
     headers:
-      x-ha-access: "{{ hass_password }}"
+      Authorization: "Bearer {{ ansible_hass_token }}"
       Content-Type: application/json
   when: hass_is_restarting is not defined
 
@@ -50,7 +50,7 @@
     url: "{{ hass_url }}/api/services/script/reload"
     method: POST
     headers:
-      x-ha-access: "{{ hass_password }}"
+      Authorization: "Bearer {{ ansible_hass_token }}"
       Content-Type: application/json
   when: hass_is_restarting is not defined
 
