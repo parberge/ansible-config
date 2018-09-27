@@ -1,0 +1,15 @@
+- name: "start grafana docker container"
+  become: yes
+  docker_container:
+    name: "{{ grafana_container_name|default('grafana') }}"
+    image: "grafana/grafana:{{ grafana_docker_image_version|default('latest') }}"
+    restart_policy: "{{ grafana_restart_policy|default('always') }}"
+    state: started
+    pull: True
+    published_ports:
+      - "{{ grafana_port|default(3000) }}:3000"
+    volumes:
+      - "{{ grafana_datasource_dir }}/:/etc/grafana/provisioning/datasources/"
+    env:
+      GF_SECURITY_ADMIN_PASSWORD: "{{ grafana_admin_password|default('admin') }}"
+  no_log: True

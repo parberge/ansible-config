@@ -1,0 +1,10 @@
+---
+
+- import_tasks: datasources.yml
+  when: grafana_datasources != []
+  tags:
+    - grafana-datasource
+
+- import_tasks: container.yml
+  tags:
+    - grafana-container
