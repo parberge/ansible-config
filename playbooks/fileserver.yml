@@ -11,6 +11,7 @@
     - { role: ddclient, tags: ddclient }
     - { role: webserver, tags: webserver }
     - { role: monitoring_server, tags: monitoring_server }
+    - {role: grafana, tags: grafana }
     - { role: docker, tags: docker }
     - { role: mariadb, tags: mariadb, become: yes }
     - { role: home_assistant, tags: home_assistant }
