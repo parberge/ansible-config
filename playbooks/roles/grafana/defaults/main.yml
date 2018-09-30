@@ -3,7 +3,7 @@ grafana_root_dir: "/opt/grafana"
 grafana_provisioning: "{{ grafana_root_dir }}/provisioning"
 grafana_datasource_dir: "{{ grafana_provisioning }}/datasources"
 grafana_data: "{{ grafana_root_dir }}/data"
-grafana_port: 3001
+grafana_port: 3000
 
 # Datasources data structure example:
 # grafana_datasources:
