@@ -1,9 +1,8 @@
 ---
 
-- import_tasks: datasources.yml
-  when: grafana_datasources != []
+- import_tasks: configure.yml
   tags:
-    - grafana-datasource
+    - grafana-configure
 
 - import_tasks: container.yml
   tags:

@@ -4,8 +4,13 @@
   file:
     state: directory
     owner: root
-    group: grafana
-    path: "{{ grafana_datasource_dir }}"
+    group: 472
+    mode: 0770
+    path: "{{ item }}"
+  with_items:
+    - "{{ grafana_data }}"
+    - "{{ grafana_provisioning }}"
+    - "{{ grafana_datasource_dir }}"
 
 - name: Create/Update datasources file (provisioning)
   become: true
