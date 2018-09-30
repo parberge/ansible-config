@@ -1,4 +1,4 @@
 ---
 - name: restart grafana
   become: true
-  shell: "docker restart {{ grafana_container_name|default('grafana' }}"
+  shell: "docker restart {{ grafana_container_name|default('grafana') }}"
