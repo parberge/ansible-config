@@ -87,3 +87,16 @@ transmission_incomplete_dir_enabled: 'false'
 sickrage_tv_shows: '/mnt/storage/serier'
 sickrage_downloads: '/mnt/storage/torrents'
 sickrage_config: '/home/peer/sickrage/config'
+
+grafana_datasources: 
+  - name: "general"
+    type: "influxdb"
+    access: "proxy"
+    url: "http://192.168.7.7:8086"
+    isDefault: true
+    database: "telegraf"
+  - name: "home_assistant"
+    type: "influxdb"
+    access: "proxy"
+    url: "http://192.168.7.7:8086"
+    database: "home_assistant"
