@@ -22,7 +22,7 @@
       datasources:
       {{ grafana_datasources | to_nice_yaml }}
     backup: false
-    owner: grafana
-    group: grafana
-    mode: 0644
+    owner: root
+    group: 472
+    mode: 0640
   notify: restart grafana
