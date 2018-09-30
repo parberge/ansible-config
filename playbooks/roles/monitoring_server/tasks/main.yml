@@ -6,8 +6,5 @@
   become: yes
   tags: influxdb-run
 
-- include_tasks: install_grafana.yml
-  tags: grafana-install
-
 - include_tasks: telegraf.yml
   tags: telegraf
