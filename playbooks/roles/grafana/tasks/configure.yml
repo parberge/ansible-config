@@ -1,0 +1,28 @@
+---
+- name: "Create directories on the container host"
+  become: true
+  file:
+    state: directory
+    owner: root
+    group: 472
+    mode: 0770
+    path: "{{ item }}"
+  with_items:
+    - "{{ grafana_data }}"
+    - "{{ grafana_provisioning }}"
+    - "{{ grafana_datasource_dir }}"
+
+- name: Create/Update datasources file (provisioning)
+  become: true
+  copy:
+    dest: "{{ grafana_datasource_dir }}/ansible.yml"
+    content: |
+      apiVersion: 1
+      deleteDatasources: []
+      datasources:
+      {{ grafana_datasources | to_nice_yaml }}
+    backup: false
+    owner: grafana
+    group: grafana
+    mode: 0644
+  notify: restart grafana

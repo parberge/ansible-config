@@ -1,0 +1,9 @@
+---
+
+- import_tasks: configure.yml
+  tags:
+    - grafana-configure
+
+- import_tasks: container.yml
+  tags:
+    - grafana-container
