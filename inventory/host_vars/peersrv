@@ -18,10 +18,11 @@ mariadb_users:
     host: '192.168.7.8'
 
 hass_influxdb_enabled: True
+influxdb_host: 192.168.7.7
 hass_url: https://ha.peers.se
 
-home_assistant_secrets_file: '~/secrets.yaml.j2'
-hass_config_dir: '/home/peer/home-assistant-config'
+hass_config_dir: '~/home-assistant-config'
+home_assistant_secrets_file: '{{ hass_config_dir }}/secrets.yaml.j2'
 hass_download_image_version: '0.78.3'
 hass_docker_image_version: '0.78.3'
 
