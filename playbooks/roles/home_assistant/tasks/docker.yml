@@ -1,15 +1,5 @@
 ---
 
-- name: "Downloading version {{ hass_download_image_version }} of home assistant docker image"
-  become: yes
-  docker_image:
-    name: "homeassistant/{{ hass_image_variant }}:{{ hass_download_image_version }}"
-    pull: True
-  tags:
-    - docker_container
-    - hass_download_image
-  register: hass_container_image
-
 - name: "Starting home assistant docker container with version {{ hass_docker_image_version }}"
   become: yes
   docker_container:
@@ -17,6 +7,7 @@
     image: "homeassistant/{{ hass_image_variant }}:{{ hass_docker_image_version }}"
     restart_policy: always
     state: started
+    pull: True
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ home_assistant_cfg_dir }}:/config"
