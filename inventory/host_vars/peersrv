@@ -23,8 +23,7 @@ hass_url: https://ha.peers.se
 
 hass_config_dir: '~/home-assistant-config'
 home_assistant_secrets_file: '{{ hass_config_dir }}/secrets.yaml.j2'
-hass_download_image_version: '0.78.3'
-hass_docker_image_version: '0.79.3'
+hass_docker_image_version: '0.80.3'
 
 hass_docker_devices:
   - /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
@@ -101,3 +100,5 @@ grafana_datasources:
     access: "proxy"
     url: "http://192.168.7.7:8086"
     database: "home_assistant"
+
+influxdb_telegraf_hostname: "{{ ansible_host }}"
