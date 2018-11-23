@@ -10,7 +10,7 @@ influxdb_disable_reporting: "true"
 
 ## Create database for telegraf
 influxdb_telegraf_setup: yes
-influxdb_telegraf_hostname: localhost
+influxdb_host: localhost
 influxdb_telegraf_db_name: telegraf
 
 ## Influxdb root dir
@@ -22,12 +22,6 @@ influxdb_meta_dir: "{{ influxdb_root_dir }}/meta"
 ## Retention Settings
 influxdb_retention_enabled: "true"
 
-### GRAFANA ###
-grafana_repo_channel: stable
-grafana_repo_base_url: "https://packagecloud.io/grafana/{{ grafana_repo_channel }}"
-grafana_repo_yum_baseurl: "{{ grafana_repo_base_url }}/el/$releasever/$basearch"
-
-
 ### TELEGRAF ###
-telegraf_influxdb_url: "http://{{ influxdb_telegraf_hostname }}:8086"
+telegraf_influxdb_url: "http://{{ influxdb_host }}:8086"
 telegraf_influxdb_db_name: "{{ influxdb_telegraf_db_name }}"
