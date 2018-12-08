@@ -1,13 +1,5 @@
 ---
 
-- name: "Download emqtt docker image"
-  become: yes
-  docker_image:
-    name: "wicol/emqtt:{{ emqtt_download_image_version| default('latest') }}"
-    pull: True
-    state: present
-    force: True
-
 - name: "Start emqtt docker container"
   become: yes
   docker_container:
@@ -16,6 +8,7 @@
     network_mode: host
     restart_policy: always
     state: started
+    pull: True
     volumes:
       - "{{ emqtt_log }}"
       - "{{ emqtt_attachments }}"
