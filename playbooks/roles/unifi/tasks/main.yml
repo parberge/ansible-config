@@ -1,15 +1,5 @@
 ---
 
-- name: "Download {{ unifi_download_image_version }} of unifi docker image"
-  become: yes
-  docker_image:
-    name: "jacobalberty/unifi:{{ unifi_download_image_version }}"
-    pull: True
-    force: True
-  tags:
-    - docker_container
-    - unifi_download_image
-
 - name: "start unifi docker container using version {{ unifi_docker_image_version }}"
   become: yes
   docker_container:
@@ -17,6 +7,7 @@
     image: "jacobalberty/unifi:{{ unifi_docker_image_version }}"
     restart_policy: always
     state: started
+    pull: True
     volumes:
       - /opt/docker/unifi/data:/var/lib/unifi
       - /opt/docker/unifi/logs:/var/log/unifi

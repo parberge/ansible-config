@@ -30,14 +30,6 @@
     force: "{{ transmission_update_cfg|default('no') }}"
 
 
-- name: "Download transmission docker image"
-  become: yes
-  docker_image:
-    name: "linuxserver/transmission:{{ transmission_docker_image_version| default('latest') }}"
-    pull: True
-    force: True
-  tags: docker_container
-
 - name: "start transmission docker container"
   become: yes
   docker_container:
@@ -50,6 +42,7 @@
       - "{{ transmission_cfg_dir }}:/config"
       - "{{ transmission_download_dir }}:/downloads"
       - "{{ transmission_watch_dir }}:/watch"
+    pull: True
     ports:
       - 9091:9091
       - 51413:51413

@@ -1,11 +1,4 @@
 ---
-- name: "Download sickrage docker image {{ sickrage_docker_image_version }}"
-  become: yes
-  docker_image:
-    name: "linuxserver/sickrage:{{ sickrage_docker_image_version }}"
-    pull: True
-    force: True
-  tags: docker_container
 
 - name: "start sickrage docker container with image {{ sickrage_docker_version }}"
   become: yes
@@ -14,6 +7,7 @@
     image: "linuxserver/sickrage:{{ sickrage_docker_version }}"
     restart_policy: always
     state: started
+    pull: True
     restart: "{{ sickrage_container_restart|default('no') }}"
     ports:
       - 8082:8081
