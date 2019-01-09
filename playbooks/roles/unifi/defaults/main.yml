@@ -1,4 +1,3 @@
 ---
 
-unifi_download_image_version: 'latest'
 unifi_docker_image_version: 'latest'

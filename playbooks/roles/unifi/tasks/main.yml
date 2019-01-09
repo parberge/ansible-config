@@ -9,8 +9,8 @@
     state: started
     pull: True
     volumes:
-      - /opt/docker/unifi/data:/var/lib/unifi
-      - /opt/docker/unifi/logs:/var/log/unifi
+      - "{{ unifi_data_dir }}:/var/lib/unifi"
+      - "{{ unifi_log_dir }}:/var/log/unifi"
     env:
-      TZ: Europe/Stockholm 
+      TZ: Europe/Stockholm
     network_mode: host
