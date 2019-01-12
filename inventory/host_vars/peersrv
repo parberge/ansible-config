@@ -23,7 +23,7 @@ hass_url: https://ha.peers.se
 
 hass_config_dir: '~/home-assistant-config'
 home_assistant_secrets_file: '{{ hass_config_dir }}/secrets.yaml.j2'
-hass_docker_image_version: '0.80.3'
+hass_docker_image_version: '0.84.2'
 
 hass_docker_devices:
   - /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A11I6JAE-if00-port0
@@ -37,6 +37,7 @@ hass_group_templates:
     - name: 'mainfloor.yaml'
     - name: 'basement.yaml'
     - name: 'config.yaml'
+    - name: 'climate.yaml'
 
 hass_automation_templates:
   src_path: '{{ hass_config_dir }}/automation'
