@@ -1,0 +1,22 @@
+---
+# tasks file for deconz
+- name: Create directory for presistent storage
+  file:
+    state: directory
+    path: "{{ deconz_host_path }}"
+    owner: root
+    group: root
+
+- name: Start deconz container
+  docker_container:
+    name: deconz
+    image: "marthoc/deconz:{{ deconz_version|default('latest') }}"
+    pull: True
+    network_mode: host
+    devices:
+      - "{{ deconz_docker_device }}:/dev/ttyUSB0"
+    env:
+      DECONZ_WEB_PORT: 8888
+      DECONZ_WS_PORT: 4443
+    volumes:
+      - "{{ deconz_host_path }}:/root/.local/share/dresden-elektronik/deCONZ"
