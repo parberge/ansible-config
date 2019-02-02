@@ -46,6 +46,7 @@ hass_automation_templates:
     - name: 'notifies.yaml'
     - name: 'basement.yaml'
     - name: 'mainfloor.yaml'
+    - name: 'topfloor.yaml'
 
 hass_customization_templates:
   src_path: '{{ hass_config_dir }}'
@@ -106,3 +107,5 @@ influxdb_telegraf_hostname: "{{ ansible_host }}"
 
 unifi_data_dir: /opt/docker/unifi/data
 unifi_log_dir: /opt/docker/unifi/logs
+
+deconz_docker_device: /dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_DO01MP7Z-if00-port0
