@@ -1,2 +1,2 @@
 *.swp
-.vaultpass # Ignore the vault password file
+ansible-inventory
