@@ -13,6 +13,7 @@
     image: "marthoc/deconz:{{ deconz_version|default('latest') }}"
     pull: True
     network_mode: host
+    restart_policy: always
     devices:
       - "{{ deconz_docker_device }}:/dev/ttyUSB0"
     env:
