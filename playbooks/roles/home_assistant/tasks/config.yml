@@ -30,16 +30,19 @@
 - name: "Deploy home assistant group templates"
   become: yes
   template:
-    src: "{{ hass_group_templates.src_path }}/{{ item.name }}"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/group/{{ item.name }}"
+    src: "{{ item.src }}"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/group/{{ item.path }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
     block_start_string: "{{ item.block_start | default('<%') }}"
     block_end_string: "{{ item.block_end | default('%>') }}"
     variable_start_string: "{{ item.variable_start | default('<<') }}"
     variable_end_string: "{{ item.variable_end | default('>>') }}"
-  with_items: "{{ hass_group_templates.names }}"
-  tags: hass_deploy_cfg
+  with_filetree: "{{ hass_config_dir }}/group"
+  tags: 
+    - hass_deploy_cfg
+    - hass_deploy_groups
+
   notify:
     - Check homeassistant config
     - Reload group config
