@@ -16,14 +16,3 @@ hass_influxdb_database: 'home_assistant'
 hass_image_variant: 'home-assistant'
 hass_download_image_version: 'latest'
 hass_docker_image_version: 'latest'
-
-hass_group_templates:
-  names: []
-hass_automation_templates:
-  names: []
-hass_customization_templates:
-  names: []
-hass_script_templates:
-  names: []
-hass_config_templates:
-  names: []

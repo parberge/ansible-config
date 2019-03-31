@@ -65,56 +65,25 @@
     - Check homeassistant config
     - Reload automation config
 
-- name: "Deploy home assistant customizations templates"
+- name: "Deploy home assistant customization and config templates"
   become: yes
   template:
-    src: "{{ hass_customization_templates.src_path }}/{{ item.name }}"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
+    src: "{{ item }}"
+    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item | basename }}"
     owner: "{{ home_assistant_user }}"
     group: "{{ home_assistant_user }}"
     block_start_string: "{{ item.block_start | default('<%') }}"
     block_end_string: "{{ item.block_end | default('%>') }}"
     variable_start_string: "{{ item.variable_start | default('<<') }}"
     variable_end_string: "{{ item.variable_end | default('>>') }}"
-  with_items: "{{ hass_customization_templates.names }}"
-  tags: hass_deploy_cfg
-  notify:
-    - Check homeassistant config
-    - Reload core config
-
-- name: "Deploy home assistant script templates"
-  become: yes
-  template:
-    src: "{{ hass_script_templates.src_path }}/{{ item.name }}"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
-    owner: "{{ home_assistant_user }}"
-    group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('<%') }}"
-    block_end_string: "{{ item.block_end | default('%>') }}"
-    variable_start_string: "{{ item.variable_start | default('<<') }}"
-    variable_end_string: "{{ item.variable_end | default('>>') }}"
-  with_items: "{{ hass_script_templates.names }}"
-  tags: hass_deploy_cfg
-  notify:
-    - Check homeassistant config
-    - Reload script config
-
-- name: "Deploy home assistant config templates"
-  become: yes
-  template:
-    src: "{{ hass_config_templates.src_path }}/{{ item.name }}"
-    dest: "/home/{{ home_assistant_user }}/.homeassistant/{{ item.name }}"
-    owner: "{{ home_assistant_user }}"
-    group: "{{ home_assistant_user }}"
-    block_start_string: "{{ item.block_start | default('<%') }}"
-    block_end_string: "{{ item.block_end | default('%>') }}"
-    variable_start_string: "{{ item.variable_start | default('<<') }}"
-    variable_end_string: "{{ item.variable_end | default('>>') }}"
-  with_items: "{{ hass_config_templates.names }}"
-  tags: hass_deploy_cfg
+  with_fileglob: "{{ hass_config_dir }}/*.yaml"
+  tags: 
+    - hass_deploy_cfg
+    - testing
   notify:
     - Check homeassistant config
     - restart home assistant container
+
 
 - name: "Deploy home assistant secrets template"
   become: yes
