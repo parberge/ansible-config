@@ -39,7 +39,7 @@
     variable_start_string: "{{ item.variable_start | default('<<') }}"
     variable_end_string: "{{ item.variable_end | default('>>') }}"
   with_filetree: "{{ hass_config_dir }}/group"
-  tags: 
+  tags:
     - hass_deploy_cfg
     - hass_deploy_groups
   notify:
@@ -58,7 +58,7 @@
     variable_start_string: "{{ item.variable_start | default('<<') }}"
     variable_end_string: "{{ item.variable_end | default('>>') }}"
   with_filetree: "{{ hass_config_dir }}/automation"
-  tags: 
+  tags:
     - hass_deploy_cfg
     - hass_deploy_automations
   notify:
@@ -77,9 +77,8 @@
     variable_start_string: "{{ item.variable_start | default('<<') }}"
     variable_end_string: "{{ item.variable_end | default('>>') }}"
   with_fileglob: "{{ hass_config_dir }}/*.yaml"
-  tags: 
+  tags:
     - hass_deploy_cfg
-    - testing
   notify:
     - Check homeassistant config
     - restart home assistant container
@@ -90,7 +89,10 @@
   template:
     src: "{{ home_assistant_secrets_file }}"
     dest: "/home/{{ home_assistant_user }}/.homeassistant/secrets.yaml"
-  tags: hass_deploy_cfg
+  no_log: True
+  tags:
+    - hass_deploy_cfg
+    - hass_deploy_secrets
   notify:
     - Check homeassistant config
     - restart home assistant container
