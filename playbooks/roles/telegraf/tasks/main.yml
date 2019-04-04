@@ -1,5 +1,11 @@
 ---
-- name: Create directory
+- name: "Make sure telegraf RPM is not installed"
+  become: true
+  yum:
+    name: telegraf
+    state: absent
+
+- name: Create telegraf config directory
   become: yes
   file:
     path: /etc/telegraf/telegraf.d
@@ -8,7 +14,7 @@
     mode: 0750
     state: directory
 
-- name: "Deploy the templates"
+- name: Deploy the templates
   become: yes
   template:
     src: "{{ item.src }}"
