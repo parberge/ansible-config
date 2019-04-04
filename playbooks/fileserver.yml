@@ -22,6 +22,7 @@
     - { role: sickrage, tags: ['sickrage', 'docker_container'] }
     - { role: transfermssion, tags: ['transfermission'], become: yes }
     - { role: deconz, tags: ['deconz', 'docker_container'], become: yes }
+    - { role: telegraf, tags: ['telegraf', 'docker_container'], become: yes }
 
   tasks:
     - name: Upgrade Packages
