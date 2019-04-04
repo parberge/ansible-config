@@ -36,7 +36,8 @@
     name: telegraf
     image: "telegraf:{{ telegraf_agent_version }}"
     state: started
-    restart_policy: "always"
+    restart_policy: always
+    pull: True
     command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
     volumes:
       - /:/hostfs:ro
