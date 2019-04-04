@@ -7,21 +7,10 @@
 # InfluxDB configuration file options
 influxdb_configuration_dir: /etc/influxdb
 influxdb_disable_reporting: "true"
-
-## Create database for telegraf
-influxdb_telegraf_setup: yes
 influxdb_host: localhost
 influxdb_telegraf_db_name: telegraf
-
-## Influxdb root dir
 influxdb_root_dir: /var/lib/influxdb
-
-## Meta Settings
 influxdb_meta_dir: "{{ influxdb_root_dir }}/meta"
-
-## Retention Settings
 influxdb_retention_enabled: "true"
-
-### TELEGRAF ###
 telegraf_influxdb_url: "http://{{ influxdb_host }}:8086"
 telegraf_influxdb_db_name: "{{ influxdb_telegraf_db_name }}"

@@ -5,6 +5,3 @@
 - include_tasks: run_influxdb.yml
   become: yes
   tags: influxdb-run
-
-- include_tasks: telegraf.yml
-  tags: telegraf

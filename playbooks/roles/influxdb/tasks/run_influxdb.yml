@@ -24,4 +24,3 @@
       hostname: "{{ influxdb_host }}"
       database_name: "{{ influxdb_telegraf_db_name }}"
       state: present
-  when: influxdb_telegraf_setup

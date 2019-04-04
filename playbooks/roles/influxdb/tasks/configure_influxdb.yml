@@ -21,5 +21,4 @@
     owner: influxdb
     group: influxdb
     mode: 0744
-  when: influxdb_template_configuration
   notify: restart influxdb

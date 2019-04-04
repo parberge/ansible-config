@@ -1,0 +1,4 @@
+---
+- name: restart influxdb
+  become: yes
+  command: 'docker restart influxdb'
