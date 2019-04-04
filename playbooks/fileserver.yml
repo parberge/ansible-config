@@ -10,8 +10,8 @@
     - { role: common, tags: common }
     - { role: ddclient, tags: ddclient }
     - { role: webserver, tags: webserver }
-    - { role: monitoring_server, tags: monitoring_server }
     - { role: docker, tags: docker }
+    - { role: influxdb, tags: ['influxdb', 'docker_container'] }
     - { role: mariadb, tags: mariadb, become: yes }
     - { role: home_assistant, tags: home_assistant }
     - { role: grafana, tags: ['grafana','docker_container'] }
