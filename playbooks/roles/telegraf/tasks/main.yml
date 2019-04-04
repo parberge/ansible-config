@@ -1,0 +1,45 @@
+---
+- name: Create directory
+  become: yes
+  file:
+    path: /etc/telegraf/telegraf.d
+    owner: root
+    group: root
+    mode: 0750
+    state: directory
+
+- name: "Deploy the templates"
+  become: yes
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0640
+  with_items:
+    - { src: telegraf.conf.j2, dest: /etc/telegraf/telegraf.conf }  
+    - { src: telegraf-network.conf.j2, dest: /etc/telegraf/telegraf.d/telegraf-network.conf }  
+    - { src: telegraf-system.conf.j2, dest: /etc/telegraf/telegraf.d/telegraf-system.conf }  
+    - { src: telegraf-unifi.conf.j2, dest: /etc/telegraf/telegraf.d/telegraf-unifi.conf }  
+  notify:
+    - Restart Telegraf container
+
+- name: "Ensure Telegraf Docker container is running with version {{ telegraf_agent_version }}"
+  become: yes
+  docker_container:
+    name: telegraf
+    image: "telegraf:{{ telegraf_agent_version }}"
+    state: started
+    restart_policy: "always"
+    command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    volumes:
+      - /:/hostfs:ro
+      - /etc/telegraf:/etc/telegraf:ro
+      - /proc:/hostfs/proc:ro
+      - /sys:/hostfs/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/share/snmp/mibs:/usr/share/snmp/mibs
+    env:
+      HOST_MOUNT_PREFIX: /hostfs
+      HOST_PROC: /hostfs/proc
+      HOST_SYS: /hostfs/sys

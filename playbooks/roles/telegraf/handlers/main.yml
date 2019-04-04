@@ -1,0 +1,7 @@
+---
+# handlers file for ansible-telegraf
+
+- name: "Restart Telegraf container"
+  docker_container:
+    name: telegraf
+    restart: True
