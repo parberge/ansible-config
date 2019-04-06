@@ -1,0 +1,4 @@
+---
+
+unifi_nvr_docker_image_version: 'latest'
+unifi_nvr_data_dir: /mnt/storage/unifi-video

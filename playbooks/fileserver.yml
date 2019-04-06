@@ -23,6 +23,7 @@
     - { role: transfermssion, tags: ['transfermission'], become: yes }
     - { role: deconz, tags: ['deconz', 'docker_container'], become: yes }
     - { role: telegraf, tags: ['telegraf', 'docker_container'], become: yes }
+    - { role: unifi-nvr, tags: ['unifi_nvr', 'docker_container'], become: yes }
 
   tasks:
     - name: Upgrade Packages
