@@ -34,4 +34,3 @@
       TZ: Europe/Stockholm
       PUID: '99'
       PGID: '100'
-    #network_mode: host
