@@ -63,7 +63,7 @@
     - hass_deploy_automations
   notify:
     - Check homeassistant config
-    - Reload automation config
+    - restart home assistant container
 
 - name: "Deploy home assistant customization and config templates"
   become: yes
