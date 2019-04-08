@@ -27,21 +27,9 @@
   conversion = "float(0)"
 
   [[inputs.snmp.field]]
-  name = "avrload_5min"
-  oid = "UCD-SNMP-MIB::laLoadInt.2"
-  conversion = "float(0)"
-
-  [[inputs.snmp.field]]
-  name = "avrload_15min"
-  oid = "UCD-SNMP-MIB::laLoadInt.3"
-  conversion = "float(0)"
-
-  [[inputs.snmp.field]]
   name = "available_memory"
   oid = "HOST-RESOURCES-MIB::hrMemorySize.0"
   conversion = "int"
-#
-#  [[inputs.snmp.field]]
-#  name = "used_memory"
-#  oid = "1.3.6.1.2.1.25.2.3.1.6.101"
-#  conversion = "int"
+
+  [[inputs.http_response]]
+  address = "http://192.168.7.7:8888/pwa/login.html"
