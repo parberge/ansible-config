@@ -9,7 +9,7 @@
   timeout = 10
 
 [[ inputs.ping]]
-  urls = [ "192.168.7.10", "192.168.7.11", "192.168.7.1"]
+  urls = [ "192.168.7.10", "192.168.7.11", "192.168.7.1", "192.168.8.112"]
   count = 5
 
 [[inputs.snmp]]
@@ -33,3 +33,7 @@
 
   [[inputs.http_response]]
   address = "http://192.168.7.7:8888/pwa/login.html"
+
+  [[inputs.http_response]]
+  address = "https://192.168.7.7:8443/manage/account/login"
+  insecure_skip_verify = true
