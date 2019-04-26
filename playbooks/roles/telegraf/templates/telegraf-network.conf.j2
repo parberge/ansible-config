@@ -32,15 +32,21 @@
   conversion = "int"
 
   [[inputs.http_response]]
-  address = "http://192.168.7.7:8888/pwa/login.html"
+  address = "http://{{ ansible_default_ipv4.address }}:8888/pwa/login.html"
 
   [[inputs.http_response]]
-  address = "https://192.168.7.7:8443/manage/account/login"
+  address = "https://{{ ansible_default_ipv4.address }}:8443/manage/account/login"
   insecure_skip_verify = true
 
   [[inputs.http_response]]
-  address = "http://192.168.7.7:7080/login"
+  address = "http://{{ ansible_default_ipv4.address }}:7080/login"
   follow_redirects = true
 
   [[inputs.http_response]]
-  address = "http://192.168.7.7:8123"
+  address = "http://{{ ansible_default_ipv4.address }}:8123"
+
+  [[inputs.http_response]]
+  address = "http://{{ ansible_default_ipv4.address }}:9091"
+
+  [[inputs.http_response]]
+  address = "http://{{ ansible_default_ipv4.address }}:8082"
