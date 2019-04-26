@@ -11,18 +11,6 @@
 # Change this option to true to disable reporting.
 reporting-disabled = {{ influxdb_disable_reporting }}
 
-# we'll try to get the hostname automatically, but if it the os returns something
-# that isn't resolvable by other servers in the cluster, use this option to
-# manually set the hostname
-# hostname = "localhost"
-
-###
-### [meta]
-###
-### Controls the parameters for the Raft consensus group that stores metadata
-### about the InfluxDB cluster.
-###
-
 [meta]
   # Where the metadata/raft database is stored
   dir = "{{ influxdb_meta_dir }}"
@@ -33,14 +21,6 @@ reporting-disabled = {{ influxdb_disable_reporting }}
   # If log messages are printed for the meta service
   # logging-enabled = true
 
-###
-### [data]
-###
-### Controls where the actual shard data for InfluxDB lives and how it is
-### flushed from the WAL. "dir" may need to be changed to a suitable place
-### for your system, but the WAL settings are an advanced configuration. The
-### defaults should work for most systems.
-###
 
 [data]
   # The directory where the TSM storage engine stores TSM files.
@@ -87,12 +67,6 @@ reporting-disabled = {{ influxdb_disable_reporting }}
   # disabled by setting it to 0.
   # max-values-per-tag = 100000
 
-###
-### [coordinator]
-###
-### Controls the clustering service configuration.
-###
-
 [coordinator]
   # The default time a write request will wait until a "timeout" error is returned to the caller.
   # write-timeout = "10s"
@@ -125,26 +99,12 @@ reporting-disabled = {{ influxdb_disable_reporting }}
   # number of buckets unlimited.
   # max-select-buckets = 0
 
-###
-### [retention]
-###
-### Controls the enforcement of retention policies for evicting old data.
-###
-
 [retention]
   # Determines whether retention policy enforcment enabled.
   # enabled = true
 
   # The interval of time when retention policy enforcement checks run.
   # check-interval = "30m"
-
-###
-### [shard-precreation]
-###
-### Controls the precreation of shards, so they are available before data arrives.
-### Only shards that, after creation, will have both a start- and end-time in the
-### future, will ever be created. Shards are never precreated that would be wholly
-### or partially in the past.
 
 [shard-precreation]
   # Determines whether shard pre-creation service is enabled.
@@ -157,14 +117,6 @@ reporting-disabled = {{ influxdb_disable_reporting }}
   # group is created.
   # advance-period = "30m"
 
-###
-### Controls the system self-monitoring, statistics and diagnostics.
-###
-### The internal database for monitoring data is created automatically if
-### if it does not already exist. The target retention within this database
-### is called 'monitor' and is also created with a retention period of 7 days
-### and a replication factor of 1, if it does not exist. In all cases the
-### this retention policy is configured as the default for the database.
 
 [monitor]
   # Whether to record statistics internally.
@@ -175,14 +127,6 @@ reporting-disabled = {{ influxdb_disable_reporting }}
 
   # The interval at which to record statistics
   # store-interval = "10s"
-
-###
-### [admin]
-###
-### Controls the availability of the built-in, web-based admin interface. If HTTPS is
-### enabled for the admin interface, HTTPS must also be enabled on the [http] service.
-###
-### NOTE: This interface is deprecated as of 1.1.0 and will be removed in a future release.
 
 [admin]
   # Determines whether the admin service is enabled.
@@ -196,13 +140,6 @@ reporting-disabled = {{ influxdb_disable_reporting }}
 
   # The SSL certificate used when HTTPS is enabled.
   # https-certificate = "/etc/ssl/influxdb.pem"
-
-###
-### [http]
-###
-### Controls how the HTTP endpoints are configured. These are the primary
-### mechanism for getting data into and out of InfluxDB.
-###
 
 [http]
   # Determines whether HTTP endpoint is enabled.
@@ -252,13 +189,6 @@ reporting-disabled = {{ influxdb_disable_reporting }}
   # The path of the unix domain socket.
   # bind-socket = "/var/run/influxdb.sock"
 
-###
-### [subscriber]
-###
-### Controls the subscriptions, which can be used to fork a copy of all data
-### received by the InfluxDB host.
-###
-
 [subscriber]
   # Determines whether the subscriber service is enabled.
   # enabled = true
@@ -279,161 +209,5 @@ reporting-disabled = {{ influxdb_disable_reporting }}
   # The number of in-flight writes buffered in the write channel.
   # write-buffer-size = 1000
 
-
-###
-### [[graphite]]
-###
-### Controls one or many listeners for Graphite data.
-###
-
-[[graphite]]
-  # Determines whether the graphite endpoint is enabled.
-  # enabled = false
-  # database = "graphite"
-  # retention-policy = ""
-  # bind-address = ":2003"
-  # protocol = "tcp"
-  # consistency-level = "one"
-
-  # These next lines control how batching works. You should have this enabled
-  # otherwise you could get dropped metrics or poor performance. Batching
-  # will buffer points in memory if you have many coming in.
-
-  # Flush if this many points get buffered
-  # batch-size = 5000
-
-  # number of batches that may be pending in memory
-  # batch-pending = 10
-
-  # Flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "1s"
-
-  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
-  # udp-read-buffer = 0
-
-  ### This string joins multiple matching 'measurement' values providing more control over the final measurement name.
-  # separator = "."
-
-  ### Default tags that will be added to all metrics.  These can be overridden at the template level
-  ### or by tags extracted from metric
-  # tags = ["region=us-east", "zone=1c"]
-
-  ### Each template line requires a template pattern.  It can have an optional
-  ### filter before the template and separated by spaces.  It can also have optional extra
-  ### tags following the template.  Multiple tags should be separated by commas and no spaces
-  ### similar to the line protocol format.  There can be only one default template.
-  # templates = [
-  #   "*.app env.service.resource.measurement",
-  #   # Default template
-  #   "server.*",
-  # ]
-
-###
-### [collectd]
-###
-### Controls one or many listeners for collectd data.
-###
-
-[[collectd]]
-  # enabled = false
-  # bind-address = ":25826"
-  # database = "collectd"
-  # retention-policy = ""
-  #
-  # The collectd service supports either scanning a directory for multiple types
-  # db files, or specifying a single db file.
-  # typesdb = "/usr/local/share/collectd"
-  #
-  # security-level = "none"
-  # auth-file = "/etc/collectd/auth_file"
-
-  # These next lines control how batching works. You should have this enabled
-  # otherwise you could get dropped metrics or poor performance. Batching
-  # will buffer points in memory if you have many coming in.
-
-  # Flush if this many points get buffered
-  # batch-size = 5000
-
-  # Number of batches that may be pending in memory
-  # batch-pending = 10
-
-  # Flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "10s"
-
-  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
-  # read-buffer = 0
-
-###
-### [opentsdb]
-###
-### Controls one or many listeners for OpenTSDB data.
-###
-
-[[opentsdb]]
-  # enabled = false
-  # bind-address = ":4242"
-  # database = "opentsdb"
-  # retention-policy = ""
-  # consistency-level = "one"
-  # tls-enabled = false
-  # certificate= "/etc/ssl/influxdb.pem"
-
-  # Log an error for every malformed point.
-  # log-point-errors = true
-
-  # These next lines control how batching works. You should have this enabled
-  # otherwise you could get dropped metrics or poor performance. Only points
-  # metrics received over the telnet protocol undergo batching.
-
-  # Flush if this many points get buffered
-  # batch-size = 1000
-
-  # Number of batches that may be pending in memory
-  # batch-pending = 5
-
-  # Flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "1s"
-
-###
-### [[udp]]
-###
-### Controls the listeners for InfluxDB line protocol data via UDP.
-###
-
-[[udp]]
-  # enabled = false
-  # bind-address = ":8089"
-  # database = "udp"
-  # retention-policy = ""
-
-  # These next lines control how batching works. You should have this enabled
-  # otherwise you could get dropped metrics or poor performance. Batching
-  # will buffer points in memory if you have many coming in.
-
-  # Flush if this many points get buffered
-  # batch-size = 5000
-
-  # Number of batches that may be pending in memory
-  # batch-pending = 10
-
-  # Will flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "1s"
-
-  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
-  # read-buffer = 0
-
-###
-### [continuous_queries]
-###
-### Controls how continuous queries are run within InfluxDB.
-###
-
-[continuous_queries]
-  # Determiens whether the continuous query service is enabled.
-  # enabled = true
-
-  # Controls whether queries are logged when executed by the CQ service.
-  # log-enabled = true
-
-  # interval for how often continuous queries will be checked if they need to run
-  # run-interval = "1s"
+[logging]
+  level = "warn"
