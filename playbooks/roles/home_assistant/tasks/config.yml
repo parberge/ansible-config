@@ -44,7 +44,7 @@
     - hass_deploy_groups
   notify:
     - Check homeassistant config
-    - Reload group config
+    - restart home assistant container
 
 - name: "Deploy home assistant automation templates"
   become: yes
