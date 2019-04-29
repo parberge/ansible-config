@@ -1,0 +1,15 @@
+---
+# tasks file for certbot
+
+- name: Install certbot package
+  become: yes
+  package:
+    name: certbot
+    state: present
+
+- name: Create cron job for auto renew
+  become: yes
+  cron:
+    name: "Certbot auto renew"
+    special_time: weekly
+    job: "certbot renew --nginx"

@@ -8,6 +8,7 @@
     - "vars/family/{{ ansible_os_family }}.yml"
   roles:
     - { role: common, tags: common }
+    - { role: certbot, tags: certbot }
     - { role: ddclient, tags: ddclient }
     - { role: webserver, tags: webserver }
     - { role: docker, tags: docker }
