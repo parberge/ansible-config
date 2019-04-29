@@ -34,3 +34,13 @@
       TZ: Europe/Stockholm
       PUID: '99'
       PGID: '100'
+
+
+- name: "Cron job to cleanup old vidoes"
+  become: yes
+  cron:
+    name: "Cleanup old vidoes"
+    special_time: daily
+    job: "find {{ unifi_nvr_data_dir }}/videos -name '*.mp4' -mtime +7|xargs rm -f"
+    state: present
+    user: root

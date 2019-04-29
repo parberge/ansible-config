@@ -11,9 +11,18 @@
     pull: True
     volumes:
       - "{{ emqtt_log }}"
-      - "{{ emqtt_attachments }}"
+      - "{{ emqtt_attachments }}:/emqtt/attachments"
       - /etc/localtime:/etc/localtime:ro
     env:
       MQTT_USERNAME: "{{ emqtt_user }}"
       MQTT_PASSWORD: "{{ emqtt_password }}"
       DEBUG: "{{ emqtt_DEBUG|default('True') }}"
+
+- name: "Cron job to cleanup old images"
+  become: yes
+  cron:
+    name: "Cleanup old images"
+    special_time: daily
+    job: "find {{ emqtt_attachments }} -name '*.jpg' -mtime +30|xargs rm -f"
+    state: present
+    user: root
