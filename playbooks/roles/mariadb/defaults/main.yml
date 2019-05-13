@@ -24,7 +24,7 @@ mariadb_max_connections: 505
 mariadb_max_user_connections: 500
 mariadb_max_allowed_packet: '16M'
 mariadb_max_heap_table_size: '16M'
-ansible_wait_timeout: 60
+ansible_wait_timeout: 28800
 
 mariadb_query_cache_size: 0
 mariadb_sort_buffer_size: '2M'
