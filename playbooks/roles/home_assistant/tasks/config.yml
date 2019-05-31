@@ -25,7 +25,7 @@
       hostname: "{{ home_assistant_influxdb_host }}"
       database_name: "{{ hass_influxdb_database }}"
       state: present
-  when: hass_influxdb_enabled
+  when: hass_influxdb_enabled|bool
 
 - name: "Deploy home assistant group templates"
   become: yes
