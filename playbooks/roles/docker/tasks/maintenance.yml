@@ -1,12 +1,4 @@
 ---
-- name: "Cleanup containers"
+- name: "Prune system"
   become: yes
-  command: "docker container prune -f"
-
-- name: "Cleanup volumes"
-  become: yes
-  command: "docker volume prune -f"
-
-- name: "Cleanup images"
-  become: yes
-  command: "docker image prune -f -a"
+  command: "docker system prune -f"
