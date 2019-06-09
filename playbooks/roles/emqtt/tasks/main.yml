@@ -16,7 +16,7 @@
     env:
       MQTT_USERNAME: "{{ emqtt_user }}"
       MQTT_PASSWORD: "{{ emqtt_password }}"
-      DEBUG: "{{ emqtt_DEBUG|default('True') }}"
+      DEBUG: "{{ emqtt_DEBUG |string }}"
 
 - name: "Cron job to cleanup old images"
   become: yes

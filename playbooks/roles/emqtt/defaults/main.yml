@@ -1,6 +1,7 @@
 ---
 
-emqtt_user: mqtt
+emqtt_user: "mqtt"
 emqtt_password: mqtt
 emqtt_log: "/tmp/emqtt/log:/emqtt/log"
 emqtt_attachments: "/mnt/storage/surveillance"
+emqtt_DEBUG: "True"
