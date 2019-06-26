@@ -8,3 +8,5 @@ docker_package_state: present
 docker_yum_repo_url: https://download.docker.com/linux/centos/docker-{{ docker_edition }}.repo
 docker_yum_repo_enable_edge: 0
 docker_yum_repo_enable_test: 0
+
+docker_data_dir: /mnt/storage/docker
