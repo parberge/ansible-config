@@ -12,3 +12,11 @@
 - include_tasks: add_user.yml
   when: user is defined
   tags: user
+
+- name: Create cron job for auto patching for CentOS
+  become: yes
+  cron:
+    name: "auto patching"
+    special_time: weekly
+    job: "yum upgrade -y"
+  when: ansible_os_family == "RedHat"
