@@ -27,8 +27,19 @@
     - { role: unifi-nvr, tags: ['unifi_nvr', 'docker_container'], become: yes }
 
   tasks:
-    - name: Upgrade Packages
-      become: yes
-      yum:
-        name: '*'
-        state: latest
+    - name: Check if reboot is required
+      command: needs-restarting -r
+      register: reboot_required
+      failed_when: reboot_required.rc > 1
+      tags:
+        - check_reboot
+    
+    - name: reboot_required
+      debug:
+        msg: "Reboot is required"
+      tags:
+        - check_reboot
+      when:
+        - reboot_required is defined
+        - reboot_required.rc == 1
+
