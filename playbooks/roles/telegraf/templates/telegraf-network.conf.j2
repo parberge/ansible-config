@@ -9,14 +9,20 @@
   timeout = 10
 
 [[ inputs.ping]]
-  urls = [ "192.168.7.10", "192.168.7.11", "192.168.7.1", "192.168.8.112"]
+  urls = [
+    "192.168.7.10",
+    "192.168.7.11",
+    "192.168.7.102",
+    "192.168.7.119",
+    "192.168.7.203",
+  ]
   count = 5
 
 [[inputs.snmp]]
   agents = ["192.168.7.1"]
   version = 1
   community = "unifi"
-  
+
   [[inputs.snmp.field]]
   name = "uptime"
   oid = "DISMAN-EVENT-MIB::sysUpTimeInstance"
@@ -50,3 +56,13 @@
 
   [[inputs.http_response]]
   address = "http://{{ ansible_default_ipv4.address }}:8082"
+
+  [[inputs.http_response]]
+  address = "http://192.168.7.9:80"
+
+  [[inputs.http_response]]
+  address = "http://192.168.8.112:80"
+
+  [[inputs.http_response]]
+  address = "https://192.168.7.1"
+  insecure_skip_verify = true
