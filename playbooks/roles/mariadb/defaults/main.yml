@@ -7,7 +7,7 @@ mariadb_root_password: ''
 
 mariadb_version: '10.2'
 
-mariadb_swappiness: 0
+mariadb_swappiness: "0"
 
 # Network configuration (network.cnf)
 mariadb_bind_address: '{{ ansible_default_ipv4.address }}'
