@@ -28,6 +28,7 @@
 
   tasks:
     - name: Check if reboot is required
+      become: true
       command: needs-restarting -r
       register: reboot_required
       failed_when: reboot_required.rc > 1
