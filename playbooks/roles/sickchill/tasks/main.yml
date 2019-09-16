@@ -1,0 +1,19 @@
+---
+
+- name: "start sickchill docker container with image {{ sickchill_docker_version }}"
+  become: yes
+  docker_container:
+    name: sickchill
+    image: "sickchill/sickchill:{{ sickchill_docker_version }}"
+    restart_policy: always
+    state: started
+    pull: True
+    restart: "{{ sickchill_container_restart|default('no') }}"
+    ports:
+      - 8082:8081
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - "{{ sickchill_tv_shows }}:/tv"
+      - "{{ sickchill_downloads }}:/downloads"
+      - "{{ sickchill_config }}:/config"
+  tags: docker_container
