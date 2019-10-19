@@ -3,10 +3,6 @@
 # the URL to hass (used by handlers)
 hass_url: 'https://localhost'
 
-home_assistant_user: "homeassistant"
-home_assistant_dir: "homeassistant"
-home_assistant_cfg_dir: "/home/{{ home_assistant_user }}/.homeassistant/"
-
 # If you want to log states in influxdb
 home_assistant_influxdb_host: localhost
 hass_influxdb_enabled: False
