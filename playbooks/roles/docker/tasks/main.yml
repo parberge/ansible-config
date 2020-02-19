@@ -22,6 +22,7 @@
     enabled: yes
 
 - name: Ensure docker python module is present
+  become: yes
   pip:
     name: docker
     state: present
