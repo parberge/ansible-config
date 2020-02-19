@@ -4,7 +4,7 @@
 
 - name: Install Docker.
   become: yes
-  package:
+  yum:
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"
 
@@ -20,6 +20,11 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Ensure docker python module is present
+  pip:
+    name: docker
+    state: present
 
 - include_tasks: maintenance.yml
   when: docker_package_state == 'present'
