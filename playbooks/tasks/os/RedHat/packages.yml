@@ -4,3 +4,5 @@
   become: yes
   yum:
     name: "{{ packages }}"
+  when:
+    - packages is defined
