@@ -4,7 +4,7 @@
 
 - name: Install Docker.
   become: yes
-  yum:
+  dnf:
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"
 
@@ -13,6 +13,8 @@
   template:
     src: daemon.json.j2
     dest: /etc/docker/daemon.json
+  when:
+    - docker_config|bool
 
 - name: Ensure Docker is started and enabled at boot.
   become: yes
