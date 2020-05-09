@@ -1,0 +1,34 @@
+---
+- hosts: home
+  remote_user: peer
+
+  vars:
+    upgrade_packages: 'yes'
+  vars_files:
+    - "vars/family/{{ ansible_os_family }}.yml"
+  roles:
+    - { role: common, tags: common }
+    - role: docker
+      tags: docker
+      vars:
+        docker_config: False
+
+  tasks:
+    - name: Check if reboot is required
+      become: true
+      command: needs-restarting -r
+      register: reboot_required
+      failed_when: reboot_required.rc > 1
+      changed_when: False
+      tags:
+        - check_reboot
+
+    - name: reboot_required
+      debug:
+        msg: "Reboot is required"
+      tags:
+        - check_reboot
+      when:
+        - reboot_required is defined
+        - reboot_required.rc == 1
+
