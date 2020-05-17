@@ -3,6 +3,7 @@
   command: needs-restarting -r
   register: reboot_required
   failed_when: reboot_required.rc > 1
+  check_mode: no
   changed_when: False
   tags:
     - check_reboot
