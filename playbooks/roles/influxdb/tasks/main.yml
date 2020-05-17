@@ -2,5 +2,5 @@
 - include_tasks: configure_influxdb.yml
   tags: influxdb-configure
 
-- include_tasks: run_influxdb.yml
+- import_tasks: run_influxdb.yml
   tags: influxdb-run
