@@ -24,6 +24,7 @@
       hostname: "{{ influxdb_host }}"
       database_name: "{{ influxdb_telegraf_db_name }}"
       state: present
+      udp_port: 4444 # Needs to be defined to prevent a bug in ansible 2.9
   register: result
   retries: 3
   delay: 10
