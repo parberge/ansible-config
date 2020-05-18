@@ -1,0 +1,37 @@
+- name: Debug
+  debug:
+    var: common_extra_disk
+
+- name: Add partition to volume
+  become: yes
+  lvg:
+    vg: "{{ common_extra_disk.volume_group }}"
+    pvs: "{{ common_extra_disk.pvs }}"
+
+- name: Setup data partion
+  become: yes
+  lvol:
+    vg: "{{ common_extra_disk.volume_group }}"
+    lv: "{{ common_extra_disk.lv }}"
+    size: "{{ common_extra_disk.size }}"
+    state: present
+
+- name: Create directory
+  become: yes
+  file:
+    path: "{{ common_extra_disk.path }}"
+    state: directory
+
+- name: Create filesystem
+  become: yes
+  filesystem:
+    fstype: "{{ common_extra_disk.fstype }}"
+    dev: "/dev/mapper/{{ common_extra_disk.volume_group }}-{{ common_extra_disk.lv }}"
+
+- name: Mount data volume
+  become: yes
+  mount:
+    path: "{{ common_extra_disk.path }}"
+    src: "/dev/mapper/{{ common_extra_disk.volume_group }}-{{ common_extra_disk.lv }}"
+    fstype: "{{ common_extra_disk.fstype }}"
+    state: mounted

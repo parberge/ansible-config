@@ -15,6 +15,12 @@
   when: user is defined
   tags: user
 
+- import_tasks: extra_disk.yml
+  when:
+    - common_extra_disk is defined
+  tags:
+    - extra_disk
+
 - name: Create cron job for auto patching for CentOS
   become: yes
   cron:
