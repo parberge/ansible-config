@@ -21,7 +21,9 @@
 
 - name: Create home assistant DB in influxdb
   influxdb_database:
-      hostname: "{{ home_assistant_influxdb_host }}"
+      hostname: "{{ influxdb_host }}"
       database_name: "{{ hass_influxdb_database }}"
+      udp_port: 4444
       state: present
   when: hass_influxdb_enabled|bool
+  delegate_to: localhost
