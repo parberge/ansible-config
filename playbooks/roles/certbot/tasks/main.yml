@@ -1,15 +1,6 @@
 ---
 # tasks file for certbot
 
-- name: Make sure pip packages are absent
-  become: yes
-  pip:
-    name: 
-      - requests
-      - six
-      - urllib3
-    state: absent
-  
 - name: Install certbot and dependencies
   become: yes
   package:
