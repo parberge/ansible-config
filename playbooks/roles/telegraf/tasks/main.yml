@@ -22,11 +22,7 @@
     owner: root
     group: root
     mode: 0640
-  with_items:
-    - { src: telegraf.conf.j2, dest: /etc/telegraf/telegraf.conf }  
-    - { src: telegraf-network.conf.j2, dest: /etc/telegraf/telegraf.d/telegraf-network.conf }  
-    - { src: telegraf-system.conf.j2, dest: /etc/telegraf/telegraf.d/telegraf-system.conf }  
-    - { src: telegraf-unifi.conf.j2, dest: /etc/telegraf/telegraf.d/telegraf-unifi.conf }  
+  with_items: "{{ telegraf_templates }}"
   notify:
     - Restart Telegraf container
 
