@@ -1,4 +1,13 @@
 ---
-- name: "Prune system"
+- name: Prune everything (including non-dangling images)
   become: yes
-  command: "docker system prune -f"
+  docker_prune:
+    containers: yes
+    images: yes
+    images_filters:
+      dangling: false
+    networks: yes
+    volumes: yes
+    builder_cache: yes
+  tags:
+    - docker_prune
