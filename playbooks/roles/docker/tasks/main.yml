@@ -36,5 +36,5 @@
     name: docker
     state: present
 
-- include_tasks: maintenance.yml
+- import_tasks: maintenance.yml
   when: docker_package_state == 'present'
