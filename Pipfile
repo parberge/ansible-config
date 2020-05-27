@@ -9,6 +9,7 @@ verify_ssl = true
 ansible = "*"
 docker = "*"
 ansible-lint = "*"
+influxdb = "*"
 
 [requires]
 python_version = "3.7"
