@@ -7,8 +7,44 @@
   vars_files:
     - "vars/family/{{ ansible_os_family }}.yml"
   roles:
-    - { role: common, tags: common }
+    - role: common
+      tags:
+        - common
+
     - role: docker
-      tags: docker
-      vars:
-        docker_config: False
+      tags:
+        - docker
+
+    - role: telegraf
+      become: yes
+      tags:
+        - telegraf
+
+- hosts: peersrv
+  remote_user: peer
+
+  roles:
+    - { role: certbot, tags: certbot }
+    - { role: webserver, tags: webserver }
+    - { role: mariadb, tags: mariadb, become: yes }
+    - { role: home_assistant, tags: home_assistant }
+    - { role: grafana, tags: ['grafana','docker_container'] }
+    - { role: emqtt, tags: ['emqtt', 'docker_container'] }
+    - { role: unifi, tags: ['unifi', 'docker_container'] }
+    - { role: transmission, tags: ['transmission', 'docker_container'] }
+    - { role: transfermssion, tags: ['transfermission'], become: yes }
+    - { role: deconz, tags: ['deconz', 'docker_container'], become: yes }
+    - { role: unifi-nvr, tags: ['unifi_nvr', 'docker_container'], become: yes }
+
+
+- hosts: peernuc
+  remote_user: peer
+
+  roles:
+    - role: influxdb
+      tags:
+        - influxdb
+
+    - role: mosquitto
+      tags:
+        - mosquitto
