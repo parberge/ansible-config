@@ -22,6 +22,8 @@
     dest: /etc/docker/daemon.json
   when:
     - docker_config|bool
+  notify:
+    - restart docker
 
 - name: Ensure Docker is started and enabled at boot.
   become: yes
