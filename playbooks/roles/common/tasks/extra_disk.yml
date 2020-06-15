@@ -1,6 +1,7 @@
 - name: Debug
   debug:
     var: common_extra_disk
+    verbosity: 2
 
 - name: Add partition to volume
   become: yes
