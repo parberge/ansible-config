@@ -2,20 +2,24 @@
 - hosts: home
   remote_user: peer
 
-  vars:
-    upgrade_packages: 'yes'
   vars_files:
     - "vars/family/{{ ansible_os_family }}.yml"
-  roles:
-    - role: common
+
+  tasks:
+    - import_role:
+        name: common
+      vars:
+        upgrade_packages: 'yes'
       tags:
         - common
 
-    - role: docker
+    - import_role:
+        name: docker
       tags:
         - docker
 
-    - role: telegraf
+    - import_role:
+        name: telegraf
       become: yes
       tags:
         - telegraf
@@ -40,11 +44,21 @@
 - hosts: peernuc
   remote_user: peer
 
-  roles:
-    - role: influxdb
+  tasks:
+    - import_role:
+        name: influxdb
       tags:
         - influxdb
 
-    - role: mosquitto
+    - import_role:
+        name: mosquitto
       tags:
         - mosquitto
+
+    - import_role:
+        name: unifi-nvr
+      become: yes
+      vars:
+        unifi_nvr_data_dir: '/mnt/data/unifi-video'
+      tags:
+        - unifi_nvr
