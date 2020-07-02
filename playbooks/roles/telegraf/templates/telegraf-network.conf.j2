@@ -45,7 +45,7 @@
   insecure_skip_verify = true
 
   [[inputs.http_response]]
-  address = "http://{{ ansible_default_ipv4.address }}:7080/login"
+  address = "http://{{ nvr_ip }}:7080/login"
   follow_redirects = true
 
   [[inputs.http_response]]
