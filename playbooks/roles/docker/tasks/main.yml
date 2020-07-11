@@ -2,12 +2,21 @@
 - import_tasks: setup.yml
   become: yes
 
-- name: Install containerd separately (CentOS 8).
-  become: yes
-  package:
-    name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-    state: present
+# Centos 8 stuff
+- block:
+  - name: Install containerd separately (CentOS 8).
+    package:
+      name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+      state: present
+  - name: Disable firewalld
+    service:
+      name: firewalld
+      state: stopped
+      enabled: no
+    tags:
+      - temp
   when: ansible_distribution_major_version | int == 8
+  become: yes
 
 - name: Install Docker.
   become: yes
@@ -40,3 +49,5 @@
 
 - import_tasks: maintenance.yml
   when: docker_package_state == 'present'
+
+
