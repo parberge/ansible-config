@@ -61,3 +61,8 @@
         unifi_nvr_data_dir: '/mnt/data/unifi-video'
       tags:
         - unifi_nvr
+
+    - import_role:
+        name: grafana-renderer
+      tags:
+        - grafana-renderer
