@@ -1,0 +1,4 @@
+---
+- name: restart grafana-renderer
+  become: true
+  shell: "docker restart {{ grafana_renderer_container_name|default('grafana-renderer') }}"

@@ -1,0 +1,11 @@
+---
+- name: "start grafana-renderer docker container"
+  become: yes
+  docker_container:
+    name: "{{ grafana_renderer_container_name|default('grafana-renderer') }}"
+    image: "grafana/grafana-image-renderer:{{ grafana_renderer_docker_image_version|default('latest') }}"
+    restart_policy: "{{ grafana_restart_policy|default('always') }}"
+    state: started
+    pull: True
+    published_ports:
+      - "{{ grafana_renderer_port|default(8081) }}:8081"
