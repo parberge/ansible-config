@@ -4,6 +4,8 @@ grafana_provisioning: "{{ grafana_root_dir }}/provisioning"
 grafana_datasource_dir: "{{ grafana_provisioning }}/datasources"
 grafana_data: "{{ grafana_root_dir }}/data"
 grafana_port: 3000
+grafana_renderer_server_url: http://127.0.0.1:8081/render
+grafana_rendering_callback_url: "http://127.0.0.1:3000"
 
 # Datasources data structure example:
 # grafana_datasources:
