@@ -4,7 +4,7 @@
   file:
     state: directory
     owner: root
-    group: 472
+    group: "472"
     mode: 0770
     path: "{{ item }}"
   with_items:
@@ -23,6 +23,6 @@
       {{ grafana_datasources | to_nice_yaml }}
     backup: false
     owner: root
-    group: 472
+    group: "472"
     mode: 0640
   notify: restart grafana
