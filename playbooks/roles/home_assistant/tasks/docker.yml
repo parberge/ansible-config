@@ -26,6 +26,7 @@
     name: home_assistant
     image: "{{ hass_image_variant }}-local:{{ hass_docker_image_version }}"
     restart_policy: always
+    container_default_behavior: no_defaults
     state: started
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -33,6 +34,6 @@
     devices: "{{ hass_docker_devices|default([]) }}"
     network_mode: host
     restart: "{{ hass_container_restart |default('no') }}"
-  tags: 
+  tags:
     - docker_container
     - hass-docker-container

@@ -11,6 +11,7 @@
   docker_container:
     name: deconz
     image: "marthoc/deconz:{{ deconz_version|default('latest') }}"
+    container_default_behavior: no_defaults
     pull: True
     network_mode: host
     restart_policy: always

@@ -8,6 +8,7 @@
     restart_policy: always
     state: started
     pull: True
+    container_default_behavior: no_defaults
     volumes:
       - "{{ influxdb_root_dir }}:/var/lib/influxdb"
       - "{{ influxdb_configuration_dir}}/influxdb.conf:/etc/influxdb/influxdb.conf:ro"

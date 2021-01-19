@@ -35,6 +35,7 @@
   docker_container:
     name: transmission
     image: "linuxserver/transmission:{{ transmission_docker_image_version| default('latest') }}"
+    container_default_behavior: no_defaults
     restart_policy: always
     state: started
     volumes:

@@ -4,27 +4,28 @@
   file:
     path: "{{ unifi_nvr_data_dir }}/videos"
     state: directory
-  
+
 - name: "start unifi nvr docker container using version {{ unifi_nvr_docker_image_version }}"
   become: yes
   docker_container:
     name: unifi-nvr
     image: "pducharme/unifi-video-controller:{{ unifi_nvr_docker_image_version }}"
     restart_policy: always
+    container_default_behavior: no_defaults
     capabilities:
       - SYS_ADMIN
       - DAC_READ_SEARCH
     published_ports:
-      - 10001:10001 
-      - 1935:1935 
-      - 6666:6666 
-      - 7080:7080 
-      - 7442:7442 
-      - 7443:7443 
-      - 7444:7444 
-      - 7445:7445 
-      - 7446:7446 
-      - 7447:7447 
+      - 10001:10001
+      - 1935:1935
+      - 6666:6666
+      - 7080:7080
+      - 7442:7442
+      - 7443:7443
+      - 7444:7444
+      - 7445:7445
+      - 7446:7446
+      - 7447:7447
     state: started
     pull: True
     volumes:

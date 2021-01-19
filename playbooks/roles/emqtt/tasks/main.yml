@@ -7,6 +7,7 @@
     image: "wicol/emqtt:{{ emqtt_docker_image_version| default('latest') }}"
     network_mode: host
     restart_policy: always
+    container_default_behavior: no_defaults
     state: started
     pull: True
     volumes:

@@ -5,6 +5,7 @@
   docker_container:
     name: unifi
     image: "jacobalberty/unifi:{{ unifi_docker_image_version }}"
+    container_default_behavior: no_defaults
     restart_policy: always
     state: started
     pull: True

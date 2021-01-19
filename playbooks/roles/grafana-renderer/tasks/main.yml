@@ -5,6 +5,7 @@
     name: "{{ grafana_renderer_container_name|default('grafana-renderer') }}"
     image: "grafana/grafana-image-renderer:{{ grafana_renderer_docker_image_version|default('latest') }}"
     restart_policy: "{{ grafana_restart_policy|default('always') }}"
+    container_default_behavior: no_defaults
     state: started
     pull: True
     published_ports:

@@ -6,6 +6,7 @@
     name: sickchill
     image: "sickchill/sickchill:{{ sickchill_docker_version }}"
     restart_policy: always
+    container_default_behavior: no_defaults
     state: started
     pull: True
     restart: "{{ sickchill_container_restart|default('no') }}"
