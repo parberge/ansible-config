@@ -1,10 +1,10 @@
 ---
 
-- name: "start mosquitto docker container"
+- name: "start mosquitto docker container with version {{ mosquitto_version }}"
   become: yes
   docker_container:
     name: mosquitto
-    image: eclipse-mosquitto
+    image: "eclipse-mosquitto:{{ mosquitto_version | default('latest')}}"
     restart_policy: always
     state: started
     container_default_behavior: no_defaults
