@@ -1,0 +1,8 @@
+- name: reboot required
+  debug:
+    msg: "Reboot is required: {{ reboot_required.stdout }}"
+  tags:
+    - check_reboot
+  when:
+    - reboot_required is defined
+    - reboot_required.rc == 1
