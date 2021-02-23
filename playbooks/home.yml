@@ -71,3 +71,8 @@
         name: route53-record-updater
       tags:
         - route53-record-updater
+
+    - import_role:
+        name: unifi-dns
+      tags:
+        - unifi-dns
