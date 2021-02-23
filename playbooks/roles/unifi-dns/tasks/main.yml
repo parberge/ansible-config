@@ -1,6 +1,4 @@
 ---
-# tasks file for dnsmasq
-
 - name: "Run unifi-dns container"
   become: true
   docker_container:
