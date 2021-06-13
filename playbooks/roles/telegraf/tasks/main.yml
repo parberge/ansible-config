@@ -34,7 +34,7 @@
     state: started
     restart_policy: always
     pull: True
-    container_default_behavior: no_defaults
+    container_default_behavior: compatibility
     command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
     volumes:
       - /:/hostfs:ro
