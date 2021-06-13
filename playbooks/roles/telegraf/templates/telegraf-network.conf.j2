@@ -8,61 +8,26 @@
   domains = ["peers.se"]
   timeout = 10
 
-[[ inputs.ping]]
-  urls = [
-    "192.168.7.10",
-    "192.168.7.11",
-    "192.168.7.102",
-    "192.168.7.119",
-    "192.168.7.203",
-  ]
+[[ inputs.ping ]]
+  urls =  {{ telegraf_ping_urls }}
   count = 5
 
-[[inputs.snmp]]
-  agents = ["192.168.7.1"]
-  version = 1
-  community = "unifi"
 
-  [[inputs.snmp.field]]
-  name = "uptime"
-  oid = "DISMAN-EVENT-MIB::sysUpTimeInstance"
-
-  [[inputs.snmp.field]]
-  name = "avrload_1min"
-  oid = "UCD-SNMP-MIB::laLoadInt.1"
-  conversion = "float(0)"
-
-  [[inputs.snmp.field]]
-  name = "available_memory"
-  oid = "HOST-RESOURCES-MIB::hrMemorySize.0"
-  conversion = "int"
-
-  [[inputs.http_response]]
-  address = "http://{{ ansible_default_ipv4.address }}:8888/pwa/login.html"
-
-  [[inputs.http_response]]
-  address = "https://{{ ansible_default_ipv4.address }}:8443/manage/account/login"
+[[ inputs.http_response ]]
+  urls = [
+    "http://{{ ansible_default_ipv4.address }}:8888/pwa/login.html",
+    "http://{{ ansible_default_ipv4.address }}:8123",
+    "http://{{ ansible_default_ipv4.address }}:8082",
+    "http://{{ ansible_default_ipv4.address }}:9091",
+    "http://192.168.7.9:80",
+    "http://192.168.7.30:80"
+  ]
+[[ inputs.http_response ]]
+  urls = [
+    "https://{{ ansible_default_ipv4.address }}:8443/manage/account/login",
+    "https://192.168.7.1"
+  ]
   insecure_skip_verify = true
-
-  [[inputs.http_response]]
-  address = "http://{{ nvr_ip }}:7080/login"
+[[ inputs.http_response ]]
+  urls = ["http://{{ nvr_ip }}:7080/login"]
   follow_redirects = true
-
-  [[inputs.http_response]]
-  address = "http://{{ ansible_default_ipv4.address }}:8123"
-
-  [[inputs.http_response]]
-  address = "http://{{ ansible_default_ipv4.address }}:9091"
-
-  [[inputs.http_response]]
-  address = "http://{{ ansible_default_ipv4.address }}:8082"
-
-  [[inputs.http_response]]
-  address = "http://192.168.7.9:80"
-
-  [[inputs.http_response]]
-  address = "http://192.168.7.30:80"
-
-  [[inputs.http_response]]
-  address = "https://192.168.7.1"
-  insecure_skip_verify = true
