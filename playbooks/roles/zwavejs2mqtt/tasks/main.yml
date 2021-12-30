@@ -1,0 +1,19 @@
+---
+- name: "start zwavejs2mqtt docker container using version {{ zwavejs2mqtt_docker_image_version }}"
+  become: yes
+  docker_container:
+    name: zwavejs2mqtt
+    image: "zwavejs/zwavejs2mqtt:{{ zwavejs2mqtt_docker_image_version }}"
+    container_default_behavior: no_defaults
+    restart_policy: always
+    devices:
+      - "/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"
+    published_ports:
+      - 8091:8091
+      - 3001:3000
+    volumes:
+      - "/opt/zwavejs2mqtt:/usr/src/app/store"
+    state: started
+    pull: True
+    env:
+      TZ: Europe/Stockholm
