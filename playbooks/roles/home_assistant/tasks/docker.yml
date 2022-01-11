@@ -1,30 +1,10 @@
 ---
-- name: Deploy Dockerfile
-  become: yes
-  template:
-    src: Dockerfile.j2
-    dest: "/home/{{ home_assistant_user }}/Dockerfile"
-  tags:
-    - hass-build-image
 
-- name: Build home assistant image
-  become: yes
-  docker_image:
-    build:
-      path: "/home/{{ home_assistant_user }}"
-      pull: yes
-    name: "{{ hass_image_variant }}-local"
-    tag: "{{ hass_docker_image_version }}"
-    source: build
-    state: present
-  tags:
-    - hass-build-image
-
-- name: "Starting home assistant docker container with version {{ hass_docker_image_version }}"
+- name: "Starting home assistant docker container with image {{ hass_image_name }}:{{ hass_docker_image_version }}"
   become: yes
   docker_container:
     name: home_assistant
-    image: "{{ hass_image_variant }}-local:{{ hass_docker_image_version }}"
+    image: "{{ hass_image_name }}:{{ hass_docker_image_version }}"
     restart_policy: always
     container_default_behavior: no_defaults
     state: started

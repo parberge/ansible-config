@@ -1,14 +1,15 @@
 ---
-
 # the URL to hass (used by handlers)
-hass_url: 'https://localhost'
+hass_url: "https://localhost"
 
 # If you want to log states in influxdb
 home_assistant_influxdb_host: localhost
 hass_influxdb_enabled: False
-hass_influxdb_database: 'home_assistant'
+hass_influxdb_database: "home_assistant"
 
+# To build custom image from Dockerfile.j2, set to true
+build_hass_image: False
 
-hass_image_variant: 'home-assistant'
-hass_download_image_version: 'latest'
-hass_docker_image_version: 'latest'
+# This name needs to be changed when building a custom image to make the image name not collide with home-assistant
+hass_image_name: "homeassistant/home-assistant"
+hass_docker_image_version: "latest"

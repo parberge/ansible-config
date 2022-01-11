@@ -1,0 +1,20 @@
+- name: Deploy Dockerfile
+  become: yes
+  template:
+    src: Dockerfile.j2
+    dest: "/home/{{ home_assistant_user }}/Dockerfile"
+  tags:
+    - hass-build-image
+
+- name: Build home assistant image
+  become: yes
+  docker_image:
+    build:
+      path: "/home/{{ home_assistant_user }}"
+      pull: yes
+    name: "{{ hass_image_name }}"
+    tag: "{{ hass_docker_image_version }}"
+    source: build
+    state: present
+  tags:
+    - hass-build-image

@@ -1,5 +1,8 @@
 ---
 - import_tasks: config.yml
+- import_tasks: build.yml
+  when:
+    - build_hass_image
 - import_tasks: docker.yml
   tags:
     - hass-docker
