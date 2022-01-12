@@ -2,10 +2,11 @@
   become: yes
   docker_container:
     name: "{{ grafana_container_name|default('grafana') }}"
-    image: "grafana/grafana:{{ grafana_docker_image_version|default('latest') }}"
+    image: "grafana/grafana-oss:{{ grafana_docker_image_version|default('latest') }}"
     restart_policy: "{{ grafana_restart_policy|default('always') }}"
     state: started
     pull: True
+    user: 0
     published_ports:
       - "{{ grafana_port|default(3000) }}:3000"
     volumes:
@@ -16,4 +17,4 @@
       GF_RENDERING_SERVER_URL: "{{ grafana_renderer_server_url }}"
       GF_RENDERING_CALLBACK_URL: "{{ grafana_rendering_callback_url }}"
       GF_SERVER_ROOT_URL: "{{ grafana_server_root_url }}"
-  no_log: True
+  no_log: "{{ grafana_no_log|bool }}"
