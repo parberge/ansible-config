@@ -16,7 +16,7 @@ server {
     proxy_buffering off;
 
     location / {
-        proxy_pass http://192.168.7.7:3000;
+        proxy_pass http://{{ grafana_ip }}:3000;
         proxy_set_header Host $host;
         proxy_http_version 1.1;
     }
