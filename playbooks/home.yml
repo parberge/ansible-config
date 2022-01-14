@@ -82,3 +82,13 @@
       tags:
         - grafana
       vars:
+
+    - import_role:
+        name: chrony
+      tags:
+        - chrony
+
+    - import_role:
+        name: prometheus
+      tags:
+        - prometheus
