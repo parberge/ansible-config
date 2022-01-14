@@ -5,10 +5,9 @@
     src: env.j2
     dest: "{{ route53_env_path }}"
 
-
 - name: "Schedule update of route53 record"
   become: true
   ansible.builtin.cron:
     name: "route53 record updater"
     special_time: hourly
-    job: "docker run --env-file {{ route53_env_path }} parberge/route53-record-updater:latest"
+    job: "docker run --env-file {{ route53_env_path }} parberge/route53-record-updater:latest"
