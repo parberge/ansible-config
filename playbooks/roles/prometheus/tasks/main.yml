@@ -1,0 +1,14 @@
+---
+- name: "start prometheus docker container using version {{ prometheus_docker_image_version }}"
+  become: yes
+  docker_container:
+    name: prometheus
+    image: "prom/prometheus:{{ prometheus_docker_image_version }}"
+    container_default_behavior: no_defaults
+    restart_policy: always
+    state: started
+    pull: True
+    published_ports:
+      - 9090:9090
+    env:
+      TZ: Europe/Stockholm
