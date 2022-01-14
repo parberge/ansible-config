@@ -1,0 +1,12 @@
+---
+- name: Install chrony package
+  become: true
+  package:
+    name: chrony
+    state: present
+
+- name: start and enable chronyd
+  service:
+    name: chronyd
+    state: started
+    enabled: true
