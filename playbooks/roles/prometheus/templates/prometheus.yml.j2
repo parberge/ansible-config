@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+
+scrape_configs:
+  - job_name: "hass"
+    scrape_interval: 60s
+    metrics_path: /api/prometheus
+
+    # Long-Lived Access Token
+    authorization:
+      credentials: "{{ prometheus_auth_hass_token }}"
+
+    scheme: https
+    static_configs:
+      - targets: ["{{ hass_hostname }}"]

@@ -1,0 +1,3 @@
+- name: Restart prometheus
+  become: yes
+  shell: docker restart prometheus

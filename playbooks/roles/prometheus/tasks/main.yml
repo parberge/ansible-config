@@ -1,4 +1,13 @@
 ---
+
+- name: "Deploy prometheus config file"
+  become: yes
+  template:
+    src: prometheus.yml.j2
+    dest: "{{ prometheus_host_path }}/prometheus.yml"
+  notify:
+    - Restart prometheus
+
 - name: "start prometheus docker container using version {{ prometheus_docker_image_version }}"
   become: yes
   docker_container:
@@ -8,7 +17,11 @@
     restart_policy: always
     state: started
     pull: True
+    user: 0
     published_ports:
       - 9090:9090
     env:
       TZ: Europe/Stockholm
+    volumes:
+      - "{{ prometheus_host_path }}:/etc/prometheus"
+      - "{{ prometheus_host_path }}/data:/prometheus"
