@@ -1,7 +1,4 @@
 ---
-# the URL to hass (used by handlers)
-hass_url: "https://localhost"
-
 # If you want to log states in influxdb
 home_assistant_influxdb_host: localhost
 hass_influxdb_enabled: False
