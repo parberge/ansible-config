@@ -89,5 +89,7 @@
 
     - import_role:
         name: prometheus
+      vars:
+        prometheus_retention_time: "60d"
       tags:
         - prometheus

@@ -1,3 +1,4 @@
 ---
 prometheus_docker_image_version: "latest"
 prometheus_host_path: "/opt/prometheus"
+prometheus_retention_time: "15d"
