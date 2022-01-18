@@ -31,7 +31,6 @@
     - { role: certbot, tags: certbot }
     - { role: webserver, tags: webserver }
     - { role: home_assistant, tags: home_assistant }
-    - { role: emqtt, tags: ["emqtt", "docker_container"] }
     - { role: unifi, tags: ["unifi", "docker_container"] }
     - { role: deconz, tags: ["deconz", "docker_container"], become: yes }
     - {
