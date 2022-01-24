@@ -12,3 +12,8 @@ scrape_configs:
     scheme: https
     static_configs:
       - targets: ["{{ hass_hostname }}"]
+
+  - job_name: "telegraf"
+    scrape_interval: 60s
+    static_configs:
+      - targets: {{ telegraf_targets }}
