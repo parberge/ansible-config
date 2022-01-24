@@ -36,6 +36,8 @@
     pull: True
     container_default_behavior: compatibility
     command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
+    published_ports:
+      - 9273:9273
     volumes:
       - /:/hostfs:ro
       - /etc/telegraf:/etc/telegraf:ro
