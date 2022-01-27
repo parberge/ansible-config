@@ -1,0 +1,28 @@
+---
+- name: Pre upgrade tasks
+  block:
+    - name: "Stop zigbee2mqtt"
+      docker_container:
+        name: "{{ zigbee2mqtt_container_name }}"
+        state: stopped
+
+    - name: Backup data
+      command: "cp -r {{ zigbee2mqtt_host_config_dir }} {{ zigbee2mqtt_backup_dir }}"
+  when: zigbee2mqtt_upgrade|bool is true
+
+- name: "start zigbee2mqtt docker container using version {{ zigbee2mqtt_docker_image_version }}"
+  docker_container:
+    name: "{{ zigbee2mqtt_container_name }}"
+    image: "koenkk/zigbee2mqtt:{{ zigbee2mqtt_docker_image_version }}"
+    container_default_behavior: no_defaults
+    restart_policy: always
+    devices:
+      - "{{ zigbee2mqtt_usb_path }}"
+    published_ports:
+      - 8080:8080
+    volumes:
+      - "{{ zigbee2mqtt_host_config_dir }}:/app/data"
+    state: started
+    pull: True
+    env:
+      TZ: Europe/Stockholm
