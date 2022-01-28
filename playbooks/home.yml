@@ -98,3 +98,9 @@
         zigbee2mqtt_backup_dir: /opt/backups/zigbee2mqtt
       tags:
         - zigbee2mqtt
+
+    - import_role:
+        name: blackbox-exporter
+      vars:
+      tags:
+        - blackbox-exporter

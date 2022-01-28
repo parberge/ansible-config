@@ -1,0 +1,23 @@
+---
+# - name: "Deploy prometheus config file"
+#   become: yes
+#   template:
+#     src: prometheus.yml.j2
+#     dest: "{{ prometheus_host_path }}/prometheus.yml"
+#   notify:
+#     - Restart prometheus
+
+- name: "start blackbox-exporter docker container using version {{ blackbox_exporter_docker_image_version }}"
+  become: yes
+  docker_container:
+    name: blackbox-exporter
+    image: "prom/blackbox-exporter:{{ blackbox_exporter_docker_image_version }}"
+    container_default_behavior: no_defaults
+    command_handling: correct
+    restart_policy: always
+    state: started
+    pull: True
+    published_ports:
+      - 9115:9115
+    env:
+      TZ: Europe/Stockholm
