@@ -62,11 +62,6 @@
         - unifi_nvr
 
     - import_role:
-        name: grafana-renderer
-      tags:
-        - grafana-renderer
-
-    - import_role:
         name: route53-record-updater
       tags:
         - route53-record-updater
