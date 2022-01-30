@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+http:
+  # Add the router
+  routers:
+    homeassistant-router:
+      entryPoints:
+      - http
+      middlewares:
+      service: homeassistant-service
+      rule: Host(`ha.peers.se`)
+  services:
+    homeassistant-service:
+      loadBalancer:
+        servers:
+          - url: http://{{ peersrv_ip }}:8123
