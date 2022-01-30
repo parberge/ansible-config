@@ -31,3 +31,5 @@
     volumes:
       - "{{ prometheus_host_path }}:/etc/prometheus"
       - "{{ prometheus_host_path }}/data:/prometheus"
+    labels:
+      "{{ prometheus_docker_label|default(omit) }}"
