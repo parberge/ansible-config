@@ -1,10 +1,18 @@
 ---
+- name: "Deploy mosquitto config file"
+  become: yes
+  template:
+    src: mosquitto.conf.j2
+    dest: "{{ mosquitto_host_path }}/mosquitto.conf"
+  notify:
+    - Restart mosquitto
+
 
 - name: "start mosquitto docker container with version {{ mosquitto_version }}"
   become: yes
   docker_container:
     name: mosquitto
-    image: "eclipse-mosquitto:{{ mosquitto_version | default('latest')}}"
+    image: "eclipse-mosquitto:{{ mosquitto_version }}"
     restart_policy: always
     state: started
     container_default_behavior: no_defaults
@@ -13,5 +21,7 @@
       - 1883/tcp
     published_ports:
       - 1883:1883
+    volumes:
+      - "{{ mosquitto_host_path }}/mosquitto.conf:/mosquitto/config/mosquitto.conf"
 
 
