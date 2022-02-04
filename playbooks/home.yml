@@ -67,11 +67,6 @@
         - route53-record-updater
 
     - import_role:
-        name: unifi-dns
-      tags:
-        - unifi-dns
-
-    - import_role:
         name: grafana
       tags:
         - grafana
