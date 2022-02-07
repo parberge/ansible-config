@@ -1,0 +1,23 @@
+---
+- name: "start pihole docker container using version {{ pihole_docker_image_version }}"
+  become: yes
+  docker_container:
+    name: pihole
+    image: "pihole/pihole:{{ pihole_docker_image_version }}"
+    container_default_behavior: no_defaults
+    command_handling: correct
+    restart_policy: always
+    state: started
+    pull: True
+    published_ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8087:80/tcp"
+    env:
+      TZ: Europe/Stockholm
+      WEBPASSWORD: "{{ pihole_password }}"
+    volumes:
+      - "{{ pihole_host_path }}/pihole:/etc/pihole"
+      - "{{ pihole_host_path }}/dnsmasq:/etc/dnsmasq.d"
+

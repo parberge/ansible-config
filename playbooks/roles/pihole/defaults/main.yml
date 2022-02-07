@@ -1,0 +1,4 @@
+---
+pihole_docker_image_version: "latest"
+pihole_host_path: /opt/pihole
+pihole_password: changeme
