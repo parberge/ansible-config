@@ -96,6 +96,16 @@
 
     - import_role:
         name: blackbox-exporter
-      vars:
       tags:
         - blackbox-exporter
+
+    - import_role:
+        name: pihole
+      tags:
+        - pihole
+
+    - import_role:
+        name: traefik
+      become: yes
+      tags:
+        - traefik
