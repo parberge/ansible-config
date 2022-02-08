@@ -18,6 +18,7 @@
     command:
       - --api.insecure=true
       - --providers.docker
+      - --providers.docker.exposedByDefault=false
       - --providers.file.directory=/etc/traefik
       - --providers.file.watch=true
       - --entrypoints.http

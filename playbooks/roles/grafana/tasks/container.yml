@@ -15,6 +15,5 @@
     env:
       GF_SECURITY_ADMIN_PASSWORD: "{{ grafana_admin_password|default('admin') }}"
       GF_SERVER_ROOT_URL: "{{ grafana_server_root_url }}"
-    labels: 
-      "{{ grafana_docker_label|default(omit) }}"
+    labels: "{{ grafana_docker_label|default(omit) }}"
   no_log: "{{ grafana_no_log|bool }}"

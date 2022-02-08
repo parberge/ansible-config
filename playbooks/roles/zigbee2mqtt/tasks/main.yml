@@ -26,5 +26,4 @@
     pull: True
     env:
       TZ: Europe/Stockholm
-    labels:
-      "{{ zigbee2mqtt_docker_label|default(omit) }}"
+    labels: "{{ zigbee2mqtt_docker_label|default(omit) }}"
