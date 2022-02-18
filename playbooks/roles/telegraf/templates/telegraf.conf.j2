@@ -13,12 +13,5 @@
   hostname = "{{ inventory_hostname }}"
   omit_hostname = false
   
-[[outputs.influxdb]]
-  urls = ["{{ telegraf_influxdb_url }}"] # required
-  database = "{{ telegraf_influxdb_db_name|default('telegraf') }}" # required
-  precision = "s"
-  write_consistency = "any"
-  timeout = "5s"
-
 [[outputs.prometheus_client]]
   listen = ":9273"
