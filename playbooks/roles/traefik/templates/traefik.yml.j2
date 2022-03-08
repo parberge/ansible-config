@@ -5,9 +5,11 @@ http:
     homeassistant-router:
       entryPoints:
       - http
+      - https
       middlewares:
       service: homeassistant-service
       rule: Host(`ha.peers.se`)
+      tls: {}
   services:
     homeassistant-service:
       loadBalancer:
