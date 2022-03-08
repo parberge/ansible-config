@@ -1,8 +1,8 @@
-- name: "start grafana docker container"
+- name: "start grafana docker container with version {{ grafana_docker_image_version }}"
   become: yes
   docker_container:
     name: "{{ grafana_container_name|default('grafana') }}"
-    image: "grafana/grafana-oss:{{ grafana_docker_image_version|default('latest') }}"
+    image: "grafana/grafana-oss:{{ grafana_docker_image_version }}"
     restart_policy: "{{ grafana_restart_policy|default('always') }}"
     state: started
     pull: True
