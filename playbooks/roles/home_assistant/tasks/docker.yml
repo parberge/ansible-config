@@ -8,6 +8,7 @@
     restart_policy: always
     container_default_behavior: no_defaults
     state: started
+    pull: true
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ home_assistant_cfg_dir }}:/config"
