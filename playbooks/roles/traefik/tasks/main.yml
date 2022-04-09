@@ -15,17 +15,7 @@
     image: "traefik:{{ traefik_docker_image_version }}"
     container_default_behavior: no_defaults
     command_handling: correct
-    command:
-      - --api.insecure=true
-      - --providers.docker
-      - --providers.docker.exposedByDefault=false
-      - --providers.file.directory=/etc/traefik
-      - --providers.file.watch=true
-      - --entrypoints.http
-      - --entrypoints.http.address=:80
-      - --entrypoints.http.forwardedheaders.insecure=true
-      - --entrypoints.https
-      - --entrypoints.https.address=:443
+    command: "{{ traefik_command_list }}"
     restart_policy: always
     state: started
     pull: True
@@ -40,3 +30,4 @@
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/traefik/dynamic.yml:/etc/traefik/dynamic.yml
+      - /opt/traefik/acme:/etc/traefik/acme

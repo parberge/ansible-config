@@ -9,9 +9,13 @@ http:
       middlewares:
       service: homeassistant-service
       rule: Host(`ha.peers.se`)
-      tls: {}
+      tls:
+        certResolver: myresolver
   services:
     homeassistant-service:
       loadBalancer:
         servers:
           - url: http://{{ peersrv_ip }}:8123
+
+log:
+  level: INFO
