@@ -28,8 +28,6 @@
   remote_user: peer
 
   roles:
-    - { role: certbot, tags: certbot }
-    - { role: webserver, tags: webserver }
     - { role: home_assistant, tags: home_assistant }
     - { role: unifi, tags: ["unifi", "docker_container"] }
     - { role: deconz, tags: ["deconz", "docker_container"], become: yes }
@@ -43,11 +41,6 @@
   remote_user: peer
 
   tasks:
-    - import_role:
-        name: influxdb
-      tags:
-        - influxdb
-
     - import_role:
         name: mosquitto
       tags:
