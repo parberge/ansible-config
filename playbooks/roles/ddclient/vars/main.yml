@@ -1,2 +1,0 @@
----
-ddclient_password: "{{ ddclient_secret }}"
