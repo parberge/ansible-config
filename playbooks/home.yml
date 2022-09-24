@@ -31,11 +31,7 @@
     - { role: home_assistant, tags: home_assistant }
     - { role: unifi, tags: ["unifi", "docker_container"] }
     - { role: deconz, tags: ["deconz", "docker_container"], become: yes }
-    - {
-        role: zwavejs2mqtt,
-        tags: ["zwavejs2mqtt", "docker_container"],
-        become: yes,
-      }
+    - { role: zwavejs_ui, tags: ["zwavejs_ui", "docker_container"], become: true }
 
 - hosts: peernuc
   remote_user: peer

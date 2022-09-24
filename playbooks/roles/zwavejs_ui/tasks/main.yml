@@ -1,9 +1,9 @@
 ---
-- name: "start zwavejs2mqtt docker container using version {{ zwavejs2mqtt_docker_image_version }}"
-  become: yes
+- name: "Start zwave_js_ui docker container using version {{ zwave_js_ui_docker_image_version }}"
+  become: true
   docker_container:
-    name: zwavejs2mqtt
-    image: "zwavejs/zwavejs2mqtt:{{ zwavejs2mqtt_docker_image_version }}"
+    name: zwave_js_ui
+    image: "zwavejs/zwave-js-ui:{{ zwave_js_ui_docker_image_version }}"
     container_default_behavior: no_defaults
     restart_policy: always
     devices:
@@ -12,8 +12,8 @@
       - 8091:8091
       - 3001:3000
     volumes:
-      - "/opt/zwavejs2mqtt:/usr/src/app/store"
+      - "/opt/zwave-js-ui:/usr/src/app/store"
     state: started
-    pull: True
+    pull: true
     env:
       TZ: Europe/Stockholm
