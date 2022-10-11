@@ -9,4 +9,4 @@ build_hass_image: False
 
 # This name needs to be changed when building a custom image to make the image name not collide with home-assistant
 hass_image_name: "homeassistant/home-assistant"
-hass_docker_image_version: "2022.9"
+hass_docker_image_version: "2022.10"
