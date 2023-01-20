@@ -29,7 +29,6 @@
 
   roles:
     - { role: home_assistant, tags: home_assistant }
-    - { role: unifi, tags: ["unifi", "docker_container"] }
     - { role: zwavejs_ui, tags: ["zwavejs_ui", "docker_container"], become: true }
 
 - hosts: peernuc
