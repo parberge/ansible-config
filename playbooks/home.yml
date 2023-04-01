@@ -24,6 +24,11 @@
       tags:
         - telegraf
 
+    - import_role:
+        name: pihole
+      tags:
+        - pihole
+
 - hosts: peersrv
   remote_user: peer
 
@@ -86,10 +91,7 @@
       tags:
         - blackbox-exporter
 
-    - import_role:
-        name: pihole
-      tags:
-        - pihole
+
 
     - import_role:
         name: traefik
