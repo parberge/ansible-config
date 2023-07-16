@@ -4,5 +4,6 @@
   become: true
   ansible.builtin.dnf:
     name: "{{ packages }}"
+    use_backend: dnf4
   when:
     - packages is defined
