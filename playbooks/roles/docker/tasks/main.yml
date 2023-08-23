@@ -23,7 +23,6 @@
   ansible.builtin.dnf:
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"
-    use_backend: dnf4
 
 - name: Deploy daemon.json config
   become: yes
