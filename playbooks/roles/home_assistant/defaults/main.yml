@@ -10,3 +10,4 @@ build_hass_image: false
 # This name needs to be changed when building a custom image to make the image name not collide with home-assistant
 hass_image_name: "ghcr.io/home-assistant/home-assistant"
 hass_docker_image_version: "stable"
+home_assistant_user: "homeassistant"

@@ -15,6 +15,7 @@
     devices: "{{ hass_docker_devices|default([]) }}"
     network_mode: host
     restart: "{{ hass_container_restart |default('no') }}"
+    labels: "{{ homeassistant_docker_label|default(omit) }}"
   tags:
     - docker_container
     - hass-docker-container
