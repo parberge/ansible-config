@@ -1,9 +1,7 @@
 ---
+
 - hosts: home
   remote_user: peer
-
-  vars_files:
-    - "vars/family/{{ ansible_os_family }}.yml"
 
   tasks:
     - import_role:
@@ -18,28 +16,6 @@
       tags:
         - docker
 
-    - import_role:
-        name: telegraf
-      become: yes
-      tags:
-        - telegraf
-
-    - import_role:
-        name: pihole
-      tags:
-        - pihole
-
-- hosts: peersrv
-  remote_user: peer
-
-  roles:
-    - { role: home_assistant, tags: home_assistant }
-    - { role: zwavejs_ui, tags: ["zwavejs_ui", "docker_container"], become: true }
-
-- hosts: peernuc
-  remote_user: peer
-
-  tasks:
     - import_role:
         name: mosquitto
       tags:
@@ -91,10 +67,21 @@
       tags:
         - blackbox-exporter
 
-
-
     - import_role:
         name: traefik
       become: yes
       tags:
         - traefik
+
+    - ansible.builtin.import_role:
+        name: home_assistant
+      tags:
+        - home_assistant
+
+    - name: ZwaveJS UI
+      ansible.builtin.import_role:
+        name: zwavejs_ui
+      vars:
+        zwavejs_ui_devices: ["/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"]
+      tags:
+        - zwavejs_ui
