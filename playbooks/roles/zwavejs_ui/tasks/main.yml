@@ -6,14 +6,15 @@
     image: "zwavejs/zwave-js-ui:{{ zwave_js_ui_docker_image_version }}"
     container_default_behavior: no_defaults
     restart_policy: always
-    devices:
-      - "/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"
+    devices: "{{ zwavejs_ui_devices|default([]) }}"
+
     published_ports:
       - 8091:8091
-      - 3001:3000
+      - 3001:3001
     volumes:
       - "/opt/zwave-js-ui:/usr/src/app/store"
     state: started
     pull: true
     env:
       TZ: Europe/Stockholm
+    labels: "{{ zwavejs_ui_docker_label|default(omit) }}"
