@@ -3,15 +3,16 @@
 scrape_configs:
   - job_name: "hass"
     scrape_interval: 60s
+    scrape_timeout: 20s
     metrics_path: /api/prometheus
 
     # Long-Lived Access Token
     authorization:
       credentials: "{{ prometheus_auth_hass_token }}"
 
-    scheme: https
+    scheme: http
     static_configs:
-      - targets: ["{{ hass_hostname }}"]
+      - targets: ["{{ home_assistant_ip }}:8123"]
 
   - job_name: "telegraf"
     scrape_interval: 60s
