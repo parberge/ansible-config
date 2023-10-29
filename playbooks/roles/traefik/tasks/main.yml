@@ -1,16 +1,18 @@
 ---
 - name: Create directory
-  file:
+  ansible.builtin.file:
     path: /opt/traefik
     state: directory
+    mode: "0755"
 
 - name: Deploy config
-  template:
+  ansible.builtin.template:
     src: traefik.yml.j2
     dest: /opt/traefik/dynamic.yml
+    mode: "0644"
 
-- name: "start traefik docker container using version {{ traefik_docker_image_version }}"
-  docker_container:
+- name: "Start traefik docker container using version {{ traefik_docker_image_version }}"
+  community.docker.docker_container:
     name: traefik
     image: "traefik:{{ traefik_docker_image_version }}"
     container_default_behavior: no_defaults
@@ -18,7 +20,8 @@
     command: "{{ traefik_command_list }}"
     restart_policy: always
     state: started
-    pull: True
+    pull: true
+    dns_servers: "{{ traefik_dns_servers }}"
     published_ports:
       - "80:80"
       - "443:443"
