@@ -17,6 +17,11 @@
         - docker
 
     - import_role:
+        name: pihole
+      tags:
+        - pihole
+
+    - import_role:
         name: mosquitto
       tags:
         - mosquitto
