@@ -1,7 +1,7 @@
 ---
 - name: Deploy config file
   become: true
-  template:
+  ansible.bultin.template:
     src: env.j2
     dest: "{{ route53_env_path }}"
 
@@ -10,4 +10,4 @@
   ansible.builtin.cron:
     name: "route53 record updater"
     special_time: hourly
-    job: "docker run --env-file {{ route53_env_path }} parberge/route53-record-updater:latest"
+    job: "docker run --env-file {{ route53_env_path }} ghcr.io/parberge/route53-record-updater:latest"
