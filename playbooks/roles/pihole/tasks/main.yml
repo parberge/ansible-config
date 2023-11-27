@@ -1,14 +1,14 @@
 ---
-- name: "start pihole docker container using version {{ pihole_docker_image_version }}"
-  become: yes
-  docker_container:
+- name: "Start pihole docker container using version {{ pihole_docker_image_version }}"
+  become: true
+  community.docker.docker_container:
     name: pihole
     image: "pihole/pihole:{{ pihole_docker_image_version }}"
     container_default_behavior: no_defaults
     command_handling: correct
     restart_policy: always
     state: started
-    pull: True
+    pull: true
     published_ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -20,4 +20,3 @@
     volumes:
       - "{{ pihole_host_path }}/pihole:/etc/pihole"
       - "{{ pihole_host_path }}/dnsmasq:/etc/dnsmasq.d"
-
