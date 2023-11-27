@@ -1,7 +1,7 @@
 ---
 - name: Deploy config file
   become: true
-  ansible.bultin.template:
+  ansible.builtin.template:
     src: env.j2
     dest: "{{ route53_env_path }}"
 
