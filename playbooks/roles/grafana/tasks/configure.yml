@@ -1,11 +1,11 @@
 ---
 - name: "Create directories on the container host"
   become: true
-  file:
+  ansible.builtin.file:
     state: directory
     owner: root
     group: "472"
-    mode: 0770
+    mode: "0770"
     path: "{{ item }}"
   with_items:
     - "{{ grafana_data }}"
@@ -14,7 +14,7 @@
 
 - name: Create/Update datasources file (provisioning)
   become: true
-  copy:
+  ansible.builtin.copy:
     dest: "{{ grafana_datasource_dir }}/ansible.yml"
     content: |
       apiVersion: 1
@@ -24,5 +24,7 @@
     backup: false
     owner: root
     group: "472"
-    mode: 0640
+    mode: "0640"
   notify: restart grafana
+  when:
+    - grafana_datasources is defined

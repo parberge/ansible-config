@@ -6,7 +6,7 @@ grafana_data: "{{ grafana_root_dir }}/data"
 grafana_port: 3000
 grafana_renderer_server_url: http://127.0.0.1:8081/render
 grafana_rendering_callback_url: "http://127.0.0.1:3000"
-grafana_no_log: True
+grafana_no_log: true
 grafana_docker_image_version: "latest"
 # Datasources data structure example:
 # grafana_datasources:
