@@ -1,9 +1,5 @@
 ---
 # If you want to log states in influxdb
-home_assistant_influxdb_host: localhost
-hass_influxdb_enabled: false
-hass_influxdb_database: "home_assistant"
-
 # To build custom image from Dockerfile.j2, set to true
 build_hass_image: false
 
