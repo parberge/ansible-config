@@ -1,12 +1,12 @@
 ---
-- name: "Start zwave_js_ui docker container using version {{ zwave_js_ui_docker_image_version }}"
+- name: "Start zwavejs_ui docker container using version {{ zwavejs_ui_docker_image_version }}"
   become: true
-  docker_container:
+  community.docker.docker_container:
     name: zwave_js_ui
-    image: "zwavejs/zwave-js-ui:{{ zwave_js_ui_docker_image_version }}"
+    image: "zwavejs/zwave-js-ui:{{ zwavejs_ui_docker_image_version }}"
     container_default_behavior: no_defaults
     restart_policy: always
-    devices: "{{ zwavejs_ui_devices|default([]) }}"
+    devices: "{{ zwavejs_ui_devices | default([]) }}"
 
     published_ports:
       - 8091:8091
@@ -17,4 +17,4 @@
     pull: true
     env:
       TZ: Europe/Stockholm
-    labels: "{{ zwavejs_ui_docker_label|default(omit) }}"
+    labels: "{{ zwavejs_ui_docker_label | default(omit) }}"
