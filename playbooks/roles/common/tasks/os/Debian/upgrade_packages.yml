@@ -1,4 +1,0 @@
----
-  - name: Upgrade Packages
-    become: yes
-    apt: upgrade=safe update_cache=yes

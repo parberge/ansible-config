@@ -1,8 +1,0 @@
----
-- name: Upgrade Packages
-  become: yes
-  yum: 
-    name: '*'
-    state: latest
-  register: packages
-

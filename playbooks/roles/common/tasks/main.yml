@@ -1,30 +1,43 @@
 ---
-- import_tasks: "tasks/os/RedHat/packages.yml"
-  when: ansible_os_family == "RedHat"
-  tags: package
+- name: Make sure packages are installed
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - yum-utils
+      - python3-pip
+      - tmux
+      - chrony
+      - dnf-automatic
+    state: present
 
-- import_tasks: "tasks/os/RedHat/checks.yml"
-  when: ansible_os_family == "RedHat"
-  tags: checks
+- name: Appy dnf automatic configuration
+  become: true
+  ansible.builtin.template:
+    src: dnf-automatic.conf.j2
+    dest: /etc/dnf/automatic.conf
+    owner: root
+    group: root
+    mode: "0644"
 
-- include_tasks: "tasks/os/Debian/packages.yml"
-  when: ansible_os_family == "Debian"
-  tags: package
+- name: Enable and start dnf-automatic
+  become: true
+  ansible.builtin.service:
+    name: dnf-automatic.timer
+    state: started
+    enabled: true
 
-- include_tasks: add_user.yml
-  when: user is defined
-  tags: user
+- name: Add user
+  become: true
+  ansible.builtin.user:
+    name: peer
+    state: present
+    update_password: always
+    password: '{{ user_passwd }}'
+    shell: '{{ def_shell }}'
 
-- import_tasks: extra_disk.yml
+- name: Import extra_disk tasks
+  ansible.builtin.import_tasks: extra_disk.yml
   when:
     - common_extra_disk is defined
   tags:
     - extra_disk
-
-- name: Create cron job for auto patching for CentOS
-  become: yes
-  cron:
-    name: "auto patching"
-    special_time: weekly
-    job: "yum upgrade -y"
-  when: ansible_os_family == "RedHat"
