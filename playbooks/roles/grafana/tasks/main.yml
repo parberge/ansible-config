@@ -1,9 +1,13 @@
 ---
 
-- import_tasks: configure.yml
+- name: Import configure.yml
+  ansible.builtin.import_tasks:
+    file: configure.yml
   tags:
     - grafana-configure
 
-- import_tasks: container.yml
+- name: Import container.yml
+  ansible.builtin.import_tasks:
+    file: container.yml
   tags:
     - grafana-container

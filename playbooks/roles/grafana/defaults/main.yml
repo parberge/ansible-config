@@ -21,4 +21,3 @@ grafana_docker_image_version: "latest"
 #    jsonData:
 #      tlsAuth: false
 #      tlsAuthWithCACert: false
-#      tlsSkipVerify: true
