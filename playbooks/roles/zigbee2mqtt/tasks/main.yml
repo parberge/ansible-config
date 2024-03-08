@@ -1,6 +1,6 @@
 ---
-- name: "start zigbee2mqtt docker container using version {{ zigbee2mqtt_docker_image_version }}"
-  docker_container:
+- name: "Start zigbee2mqtt docker container using version {{ zigbee2mqtt_docker_image_version }}"
+  community.docker.docker_container:
     name: "{{ zigbee2mqtt_container_name }}"
     image: "koenkk/zigbee2mqtt:{{ zigbee2mqtt_docker_image_version }}"
     container_default_behavior: no_defaults
@@ -12,7 +12,8 @@
     volumes:
       - "{{ zigbee2mqtt_host_config_dir }}:/app/data"
     state: started
-    pull: True
+    pull: true
     env:
       TZ: Europe/Stockholm
-    labels: "{{ zigbee2mqtt_docker_label|default(omit) }}"
+    labels: "{{ zigbee2mqtt_docker_label | default(omit) }}"
+    image_name_mismatch: recreate
