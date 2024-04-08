@@ -7,7 +7,7 @@
     container_default_behavior: no_defaults
     restart_policy: always
     devices: "{{ zwavejs_ui_devices | default([]) }}"
-
+    image_name_mismatch: recreate
     published_ports:
       - 8091:8091
       - 3001:3001
