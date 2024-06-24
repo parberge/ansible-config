@@ -1,13 +1,13 @@
 ---
 - name: Prune everything (including non-dangling images)
-  become: yes
-  docker_prune:
-    containers: yes
-    images: yes
+  become: true
+  community.docker.docker_prune:
+    containers: true
+    images: true
     images_filters:
       dangling: false
-    networks: yes
-    volumes: yes
-    builder_cache: yes
+    networks: true
+    volumes: true
+    builder_cache: true
   tags:
     - docker_prune
