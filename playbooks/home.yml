@@ -1,92 +1,37 @@
 ---
 
-- hosts: home
+- name: My Play
+  hosts: home
   remote_user: peer
 
   tasks:
-    - import_role:
+    - name: Import common role
+      ansible.builtin.import_role:
         name: common
-      vars:
-        upgrade_packages: "yes"
       tags:
         - common
 
-    - import_role:
+    - name: Import docker role
+      ansible.builtin.import_role:
         name: docker
       tags:
         - docker
 
-    - import_role:
+    - name: Import pihole role
+      ansible.builtin.import_role:
         name: pihole
       tags:
         - pihole
 
-    - import_role:
+    - name: Import mosquitto role
+      ansible.builtin.import_role:
         name: mosquitto
       tags:
         - mosquitto
 
-    - import_role:
-        name: unifi-nvr
-      become: yes
-      vars:
-        unifi_nvr_data_dir: "/mnt/data/unifi-video"
-      tags:
-        - unifi_nvr
-
-    - import_role:
-        name: route53-record-updater
-      tags:
-        - route53-record-updater
-
-    - import_role:
-        name: grafana
-      tags:
-        - grafana
-      vars:
-
-    - import_role:
-        name: chrony
-      tags:
-        - chrony
-
-    - import_role:
-        name: prometheus
-      vars:
-        prometheus_retention_time: "730d"
-      tags:
-        - prometheus
-
-    - import_role:
-        name: zigbee2mqtt
-      become: yes
-      vars:
-        zigbee2mqtt_usb_path: /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_d6125fe12a3bec11852ca4957a0af07f-if00-port0
-        zigbee2mqtt_host_config_dir: /opt/zigbee2mqtt
-        zigbee2mqtt_backup_dir: /opt/backups/zigbee2mqtt
-      tags:
-        - zigbee2mqtt
-
-    - import_role:
-        name: blackbox-exporter
-      tags:
-        - blackbox-exporter
-
-    - import_role:
-        name: traefik
-      become: yes
-      tags:
-        - traefik
-
-    - ansible.builtin.import_role:
-        name: home_assistant
-      tags:
-        - home_assistant
-
-    - name: ZwaveJS UI
+    - name: Import unifi-nvr role
       ansible.builtin.import_role:
-        name: zwavejs_ui
-      vars:
-        zwavejs_ui_devices: ["/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"]
+        name: unifi-nvr
+      become: true
       tags:
-        - zwavejs_ui
+        - unifi-nvr
