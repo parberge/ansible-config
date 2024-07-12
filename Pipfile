@@ -10,6 +10,7 @@ ansible = "*"
 docker = "*"
 ansible-lint = "*"
 cryptography = "*"
+ansible-core = "==2.16.8" # Limit version to support python3 version shipped with centos8
 
 [requires]
 python_version = "3.12"
