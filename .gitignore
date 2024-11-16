@@ -1,3 +1,5 @@
 *.swp
 ansible-inventory
 .vscode/settings.json
+.env.fish
+vault.txt
