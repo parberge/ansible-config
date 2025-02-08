@@ -1,4 +1,3 @@
-
 - name: Home
   hosts: home
   remote_user: peer
@@ -50,7 +49,6 @@
         name: grafana
       tags:
         - grafana
-      vars:
 
     - name: Chrony role
       ansible.builtin.import_role:
