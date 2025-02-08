@@ -1,13 +1,13 @@
 ---
-
 - name: Create directories
-  file:
+  ansible.builtin.file:
     path: "{{ unifi_nvr_data_dir }}/videos"
     state: directory
+    mode: "0775"
 
-- name: "start unifi nvr docker container using version {{ unifi_nvr_docker_image_version }}"
-  become: yes
-  docker_container:
+- name: "Start unifi nvr docker container using version {{ unifi_nvr_docker_image_version }}"
+  become: true
+  community.docker.docker_container:
     name: unifi-nvr
     image: "pducharme/unifi-video-controller:{{ unifi_nvr_docker_image_version }}"
     restart_policy: always
@@ -27,18 +27,17 @@
       - 7446:7446
       - 7447:7447
     state: started
-    pull: True
+    pull: true
     volumes:
       - "{{ unifi_nvr_data_dir }}:/var/lib/unifi-video"
       - "{{ unifi_nvr_data_dir }}/videos:/var/lib/unifi-video/videos"
     env:
       TZ: Europe/Stockholm
-      PUID: '99'
-      PGID: '100'
-
+      PUID: "99"
+      PGID: "100"
 
 - name: "Cron job to cleanup old vidoes"
-  become: yes
+  become: true
   cron:
     name: "Cleanup old vidoes"
     special_time: daily
