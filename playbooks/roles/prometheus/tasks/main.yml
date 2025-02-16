@@ -1,6 +1,6 @@
 ---
 - name: "Deploy prometheus config file"
-  become: yes
+  become: true
   template:
     src: prometheus.yml.j2
     dest: "{{ prometheus_host_path }}/prometheus.yml"
@@ -8,7 +8,7 @@
     - Restart prometheus
 
 - name: "start prometheus docker container using version {{ prometheus_docker_image_version }}"
-  become: yes
+  become: true
   docker_container:
     name: prometheus
     image: "prom/prometheus:{{ prometheus_docker_image_version }}"
@@ -16,7 +16,7 @@
     command_handling: correct
     restart_policy: always
     state: started
-    pull: True
+    pull: true
     user: 0
     command:
       - --config.file=/etc/prometheus/prometheus.yml
