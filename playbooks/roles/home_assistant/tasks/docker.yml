@@ -1,5 +1,4 @@
 ---
-
 - name: "Starting home assistant docker container with image {{ hass_image_name }}:{{ hass_docker_image_version }}"
   become: yes
   docker_container:
@@ -7,6 +6,7 @@
     image: "{{ hass_image_name }}:{{ hass_docker_image_version }}"
     restart_policy: always
     container_default_behavior: no_defaults
+    image_name_mismatch: recreate
     state: started
     pull: true
     volumes:
