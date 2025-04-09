@@ -1,3 +1,3 @@
 ---
-zigbee2mqtt_docker_image_version: "2.1.3"
+zigbee2mqtt_docker_image_version: "2.2.1"
 zigbee2mqtt_container_name: zigbee2mqtt
