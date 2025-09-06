@@ -18,3 +18,9 @@
         - docker
       vars:
         docker_package: "docker"
+
+    - name: Grafana role
+      ansible.builtin.import_role:
+        name: grafana
+      tags:
+        - grafana
