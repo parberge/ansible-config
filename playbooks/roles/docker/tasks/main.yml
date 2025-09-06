@@ -1,53 +1,65 @@
 ---
-- import_tasks: setup.yml
-  become: yes
+- name: Import setup tasks for CentOS 8
+  ansible.builtin.import_tasks: setup.yml
+  become: true
+  when: ansible_distribution_major_version | int == 8 # Only for CentOS 8
 
 # Centos 8 stuff
-- block:
-  - name: Install containerd separately (CentOS 8).
-    package:
-      name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-      state: present
-  - name: Disable firewalld
-    service:
-      name: firewalld
-      state: stopped
-      enabled: no
-    tags:
-      - temp
+- name: CentOS 8 specific setup
   when: ansible_distribution_major_version | int == 8
-  become: yes
+  become: true
+  block:
+    - name: Install containerd separately (CentOS 8).
+      ansible.builtin.package:
+        name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+        state: present
+    - name: Disable firewalld
+      ansible.builtin.service:
+        name: firewalld
+        state: stopped
+        enabled: false
+      tags:
+        - temp
 
 - name: Install Docker.
-  become: yes
+  become: true
   ansible.builtin.dnf:
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"
 
 - name: Deploy daemon.json config
-  become: yes
-  template:
+  become: true
+  ansible.builtin.template:
     src: daemon.json.j2
     dest: /etc/docker/daemon.json
+    mode: '0644'
   when:
     - docker_config|bool
   notify:
     - restart docker
 
 - name: Ensure Docker is started and enabled at boot.
-  become: yes
-  service:
+  become: true
+  ansible.builtin.service:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
 
-- name: Ensure docker python module is present
-  become: yes
-  pip:
+- name: Ensure docker python module is present if on CentOS 8.
+  become: true
+  ansible.builtin.pip:
     name: docker
     state: present
+  when: ansible_distribution_major_version | int == 8
 
-- import_tasks: maintenance.yml
+- name: Ensure docker python module is present if on amazon linux 2.
+  become: true
+  ansible.builtin.dnf:
+    name: python3-docker
+    state: present
+  when: ansible_distribution == "Amazon"
+
+- name: Import maintenance tasks
+  ansible.builtin.import_tasks: maintenance.yml
   when: docker_package_state == 'present'
-
 

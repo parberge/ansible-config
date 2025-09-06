@@ -1,0 +1,20 @@
+- name: Cloud
+  hosts: cloud
+  remote_user: ec2-user
+
+  tasks:
+    - name: Common role
+      ansible.builtin.import_role:
+        name: common
+      vars:
+        upgrade_packages: "yes"
+      tags:
+        - common
+
+    - name: Docker role
+      ansible.builtin.import_role:
+        name: docker
+      tags:
+        - docker
+      vars:
+        docker_package: "docker"
