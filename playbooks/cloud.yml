@@ -24,3 +24,26 @@
         name: grafana
       tags:
         - grafana
+
+    - name: Chrony role
+      ansible.builtin.import_role:
+        name: chrony
+      tags:
+        - chrony
+
+    - name: Prometheus role
+      ansible.builtin.import_role:
+        name: prometheus
+      vars:
+        prometheus_retention_time: "730d"
+        prometheus_template: "prometheus-cloud.yml.j2"
+      tags:
+        - prometheus
+
+
+    - name: traefik role
+      become: true
+      ansible.builtin.import_role:
+        name: traefik
+      tags:
+        - traefik
