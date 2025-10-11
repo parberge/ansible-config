@@ -1,21 +1,4 @@
 # {{ ansible_managed }}
-http:
-  # Add the router
-  routers:
-    homeassistant-router:
-      entryPoints:
-      - http
-      - https
-      middlewares:
-      service: homeassistant-service
-      rule: Host(`ha.peers.se`)
-      tls:
-        certResolver: myresolver
-  services:
-    homeassistant-service:
-      loadBalancer:
-        servers:
-          - url: http://{{ home_assistant_ip }}:8123
-
+{{ traefik_http_config | default ("# This is a default configuration, please override in host_vars or group_vars") }}
 log:
   level: INFO
