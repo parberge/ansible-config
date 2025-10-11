@@ -1,8 +1,14 @@
 ---
+- name: "Create prometheus host path {{ prometheus_host_path }}"
+  become: true
+  file:
+    path: "{{ prometheus_host_path }}"
+    state: directory
+    
 - name: "Deploy prometheus config file"
   become: true
   template:
-    src: prometheus.yml.j2
+    src: "{{ prometheus_template }}"
     dest: "{{ prometheus_host_path }}/prometheus.yml"
   notify:
     - Restart prometheus
