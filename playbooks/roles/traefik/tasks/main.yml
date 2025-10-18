@@ -34,3 +34,4 @@
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/traefik/dynamic.yml:/etc/traefik/dynamic.yml
       - /opt/traefik/acme:/etc/traefik/acme
+    labels: "{{ traefik_docker_label | default(omit) }}"
