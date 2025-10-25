@@ -38,10 +38,15 @@
       tags:
         - prometheus
 
-
-    - name: traefik role
+    - name: Traefik role
       become: true
       ansible.builtin.import_role:
         name: traefik
       tags:
         - traefik
+
+    - name: Telegraf role
+      ansible.builtin.import_role:
+        name: telegraf
+      tags:
+        - telegraf
