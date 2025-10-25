@@ -6,8 +6,6 @@
     - name: Common role
       ansible.builtin.import_role:
         name: common
-      vars:
-        upgrade_packages: "yes"
       tags:
         - common
 
