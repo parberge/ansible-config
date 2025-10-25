@@ -1,5 +1,5 @@
 - name: Home
-  hosts: home
+  hosts: peernuc
   remote_user: peer
 
   tasks:
@@ -42,20 +42,6 @@
       tags:
         - route53-record-updater
 
-    - name: Grafana role
-      ansible.builtin.import_role:
-        name: grafana
-      tags:
-        - grafana
-
-    - name: Prometheus role
-      ansible.builtin.import_role:
-        name: prometheus
-      vars:
-        prometheus_retention_time: "730d"
-      tags:
-        - prometheus
-
     - name: Zigbee2mqtt role
       ansible.builtin.import_role:
         name: zigbee2mqtt
@@ -66,12 +52,6 @@
         zigbee2mqtt_backup_dir: /opt/backups/zigbee2mqtt
       tags:
         - zigbee2mqtt
-
-    - name: Blackbox exporter role
-      ansible.builtin.import_role:
-        name: blackbox-exporter
-      tags:
-        - blackbox-exporter
 
     - name: Traefik role
       ansible.builtin.import_role:
