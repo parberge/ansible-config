@@ -1,39 +1,43 @@
 ---
-- name: "Make sure telegraf RPM is not installed"
+
+- name: Ensure telegraf RPM is not installed
   become: true
-  yum:
+  ansible.builtin.yum:
     name: telegraf
     state: absent
 
+
 - name: Create telegraf config directory
-  become: yes
-  file:
+  become: true
+  ansible.builtin.file:
     path: /etc/telegraf/telegraf.d
     owner: root
     group: root
-    mode: 0750
+    mode: '0755'
     state: directory
 
+
 - name: Deploy the templates
-  become: yes
-  template:
+  become: true
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: root
     group: root
-    mode: 0640
-  with_items: "{{ telegraf_templates }}"
+    mode: '0644'
+  loop: "{{ telegraf_templates }}"
   notify:
     - Restart Telegraf container
 
-- name: "Ensure Telegraf Docker container is running with version {{ telegraf_agent_version }}"
-  become: yes
-  docker_container:
+
+- name: Ensure Telegraf Docker container is running with version {{ telegraf_agent_version }}
+  become: true
+  community.docker.docker_container:
     name: telegraf
     image: "telegraf:{{ telegraf_agent_version }}"
     state: started
     restart_policy: always
-    pull: True
+    pull: true
     container_default_behavior: compatibility
     command: -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d
     published_ports:
