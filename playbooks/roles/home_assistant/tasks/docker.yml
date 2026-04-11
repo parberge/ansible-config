@@ -9,6 +9,9 @@
     image_name_mismatch: recreate
     state: started
     pull: true
+    dns_servers:
+      - "1.1.1.1"
+      - "8.8.8.8"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - "{{ home_assistant_cfg_dir }}:/config"
